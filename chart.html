@@ -149,10 +149,6 @@
 	valueAxisRenderer.grid.template.strokeOpacity = 0.05;
 	
 	// series
-	for (var continent in temperatures) {
-		
-	
-	}
 	var series = chart.series.push(new am4charts.RadarColumnSeries());
 	series.columns.template.width = am4core.percent(90);
 	series.columns.template.strokeOpacity = 0;
@@ -161,12 +157,9 @@
 	series.tooltipText = "{categoryX}: {valueY.value}";
 	
 	series.columns.template.fill = am4core.color("#2A3B86");
-
-	//window.alert(series.dataFields.categoryX);
 	
 	// this makes columns to be of a different color, depending on value
 	//series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 1, min: am4core.color("#2A3B86"), max: am4core.color("#2A3B86"), dataField: "categoryX" });
-	
 	
 	// cursor
 	var cursor = new am4charts.RadarCursor();
