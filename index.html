@@ -11,29 +11,22 @@
 	  	width: 700px;
 	  	height: 700px;
 	}
+	
+	#flex-container {
+	  display: flex;
+	}
 </style>
 
-
-<div id="chartdiv">
-	
-	
-</div>
-
-<div>
-</br></br></br></br></br></br></br></br>
-</div>
+<body onresize="changeYearSize()" onload="changeYearSize()">
+	<div id="flex-container" onmouseenter="myVar=setInterval(function() {transitionData()}, 1000);this.onmouseenter = null;">
+		<div id="chartdiv"> </div>
+	</div>
+</body>
 
 <script>
 	// Themes begin
 	am4core.useTheme(am4themes_animated);
 	// Themes end
-	
-	/**
-	 * This is a copy of a chart created by Antti Lipponen: https://twitter.com/anttilip?lang=en Thanks a lot!
-	 */
-	
-	// disclaimer: this data is not accuarate, don't use it for any puroposes
-	// first temperature is average for 1973-1980 period
 	
 	var temperatures = {
 	    "ENG": [
@@ -65,16 +58,16 @@
 	
 	var startYear = 2013;
 	var endYear = 2018;
-	var currentYear = 2018;
+	var currentYear = 2013;
 	var colorSet = new am4core.ColorSet();
 	colorSet.list = ["#940049", "#ffbf3d", "#8e979d"].map(function(color) {
 	  return new am4core.color(color);
 	});
 	
+	// Create Chart
 	var chart = am4core.create("chartdiv", am4charts.RadarChart);
 	//chart.numberFormatter.numberFormat = "+#.0°C|#.0°C|0.0°C";
 	chart.hiddenState.properties.opacity = 0;
-	
 	chart.startAngle = 270 - 180;
 	chart.endAngle = 270 + 180;
 	
@@ -82,13 +75,23 @@
 	chart.radius = am4core.percent(50);
 	chart.innerRadius = am4core.percent(40);
 	
-	// year label goes in the middle
+	// Year label in middle of chart
 	var yearLabel = chart.radarContainer.createChild(am4core.Label);
 	yearLabel.horizontalCenter = "middle";
 	yearLabel.verticalCenter = "middle";
 	yearLabel.fill = am4core.color("#673AB7");
 	yearLabel.fontSize = 30;
 	yearLabel.text = String(currentYear);
+	
+	// Function used to change the year label based on window size
+	function changeYearSize() {
+		if (document.getElementById("flex-container").offsetWidth <= 500) {
+			yearLabel.fontSize = 20;
+		}
+		else {
+			yearLabel.fontSize = 30;
+		}
+	}
 	
 	// zoomout button
 	//var zoomOutButton = chart.zoomOutButton;
@@ -146,13 +149,9 @@
 	valueAxisRenderer.axisFills.template.disabled = true;
 	valueAxisRenderer.ticks.template.disabled = true;
 	valueAxisRenderer.minGridDistance = 20;
-	valueAxisRenderer.grid.template.strokeOpacity = 0.05;
+	valueAxisRenderer.grid.template.strokeOpacity = 0.1;
 	
-	// series
-	for (var continent in temperatures) {
-		
-	
-	}
+	// Create data bars and tooltip
 	var series = chart.series.push(new am4charts.RadarColumnSeries());
 	series.columns.template.width = am4core.percent(90);
 	series.columns.template.strokeOpacity = 0;
@@ -161,8 +160,6 @@
 	series.tooltipText = "{categoryX}: {valueY.value}";
 	
 	series.columns.template.fill = am4core.color("#2A3B86");
-
-	//window.alert(series.dataFields.categoryX);
 	
 	// this makes columns to be of a different color, depending on value
 	//series.heatRules.push({ target: series.columns.template, property: "fill", minValue: 0, maxValue: 1, min: am4core.color("#2A3B86"), max: am4core.color("#2A3B86"), dataField: "categoryX" });
@@ -193,8 +190,11 @@
 	    updateRadarData(startYear + Math.round(yearSlider.start * (endYear - startYear)));
 	})
 	yearSlider.orientation = "horizontal";
-	yearSlider.start = 1;
+	yearSlider.start = -1;
 	yearSlider.exportable = false;
+	yearSlider.events.on("down", function () {
+		clearInterval(myVar);
+	})
 	
 	chart.data = generateRadarData();
 	
@@ -203,10 +203,8 @@
 	    var i = 0;
 	    for (var continent in temperatures) {
 	        var continentData = temperatures[continent];
-	
 	        continentData.forEach(function (program) {
 	            var rawDataItem = { "program": program[0], area: continent}
-				//window.alert(rawDataItem);
 	            for (var y = 1; y < program.length; y++) {
 	                rawDataItem["value" + (startYear + y - 1)] = program[y];
 	            }
@@ -228,6 +226,11 @@
 	        series.dataFields.valueY = "value" + currentYear;
 	        chart.invalidateRawData();
 	    }
+	}
+	
+	
+	function transitionData() {
+		yearSlider.start+=0.2;
 	}
 	
 	function createRange(name, continentData, index) {
@@ -276,18 +279,16 @@
 	    axisLabel.fill = am4core.color("#ffffff");
 	    axisLabel.radius = 3;
 	    axisLabel.relativeRotation = 0;
-	    
 	}
+
 	//SLIDER FOR SWITCHING TO BAR GRAPH
 	//var slider = yearSliderContainer.createChild(am4core.Slider);
 	//slider.start = 1;
 	//slider.exportable = false;
 	//slider.events.on("rangechanged", function () {
-	//  var start = slider.start;
-	//
+	//	var start = slider.start;
 	//    chart.startAngle = 270 - start * 179 - 1;
 	//    chart.endAngle = 270 + start * 179 + 1;
-	//
 	//    valueAxis.renderer.axisAngle = chart.startAngle;
 	//})
 </script>
