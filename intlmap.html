@@ -50,6 +50,7 @@
 	
 	// Zoom control
 	chart.zoomControl = new am4maps.ZoomControl();
+	chart.maxZoomLevel = 7;
 	
 	var homeButton = new am4core.Button();
 	homeButton.events.on("hit", restoreView);
@@ -290,6 +291,48 @@
 	countryTemplate.events.on("hit", function(event){
 	  chart.zoomToMapObject(event.target);
 	});
+	
+	// Create image series
+	var imageSeries = chart.series.push(new am4maps.MapImageSeries());
+	
+	// Create a circle image in image series template so it gets replicated to all new images
+	var imageSeriesTemplate = imageSeries.mapImages.template;
+	var circle = imageSeriesTemplate.createChild(am4core.Circle);
+	circle.radius = 7;
+	circle.fill = am4core.color("#FFBF3D");
+	circle.stroke = am4core.color("#FFBF3D");
+	circle.strokeWidth = 2.5;
+	circle.nonScaling = true;
+	/*circle.tooltipText = "{title}";*/
+	circle.tooltipHTML = `<center><img src="https://dl.dropbox.com/s/dfvgn8bl96pr64n/mcm-logo.png?dl=0" height="55" width="100"></center>
+		<hr/><center style="color:#7a003d;">Hamilton, ON</center>`;
+	
+	imageSeries.tooltip.getFillFromObject = false;
+	imageSeries.tooltip.background.fill = am4core.color("#FFFFFF");
+	imageSeries.tooltip.background.fillOpacity = 1;
+	imageSeries.tooltip.background.stroke = am4core.color("#7A003D");
+	
+	// Could use marker code below to show a fireball instead of circle
+	/*var marker = imageSeriesTemplate.createChild(am4core.Image);
+	marker.href = "path/to/marker.svg";
+	marker.width = 20;
+	marker.height = 20;
+	marker.nonScaling = true;
+	marker.tooltipText = "{title}";
+	marker.horizontalCenter = "middle";
+	marker.verticalCenter = "bottom";*/
+	
+	
+	// Set property fields
+	imageSeriesTemplate.propertyFields.latitude = "latitude";
+	imageSeriesTemplate.propertyFields.longitude = "longitude";
+	
+	// Add data for the three cities
+	imageSeries.data = [{
+	  "latitude": 43.261130,
+	  "longitude": -79.917666,
+	  "title": "McMaster\nUniversity"
+	}];
 	
 	countriesSeries.tooltip.getFillFromObject = false;
 	countriesSeries.tooltip.background.fill = am4core.color("#999999");
