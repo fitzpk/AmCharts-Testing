@@ -57,8 +57,17 @@
 	categoryAxis.dataFields.category = "category";
 	categoryAxis.renderer.grid.template.location = 0;
 	categoryAxis.renderer.minGridDistance = 30;
+	categoryAxis.renderer.grid.template.strokeOpacity = 0;
+	
 	
 	var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+	valueAxis.renderer.grid.template.strokeOpacity = 0;
+	
+	//Used to remove y axis text
+	valueAxis.stroke = am4core.color("#673AB7");
+	valueAxis.strokeOpacity = 0;
+	valueAxis.fill = am4core.color("#673AB7");
+	valueAxis.fillOpacity = 0;
 	
 	// Create series
 	var series1 = chart.series.push(new am4charts.ColumnSeries());
