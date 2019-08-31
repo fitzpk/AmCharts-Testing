@@ -8,8 +8,8 @@
 
 	#chartdiv {
 		margin: 0 auto;
-	  	width: 700px;
-	  	height: 700px;
+	  	width: 100vw;
+	  	height: 98vh;
 	}
 	
 	#flex-container {
@@ -18,8 +18,14 @@
 </style>
 
 <body onresize="changeYearSize()" onload="changeYearSize()">
+	
 	<div id="flex-container" onmouseenter="myVar=setInterval(function() {transitionData()}, 1000);this.onmouseenter = null;">
 		<div id="chartdiv"> </div>
+	</div>
+	
+	<div>
+		</br></br></br></br>
+		</br></br></br></br>
 	</div>
 </body>
 
@@ -39,19 +45,19 @@
 	        ["Materials Science", 20, 23, 39, 37, 40, 43],
 	        ["Computer Engineering", 43, 59, 57, 54, 54, 59],
 	        ["Computer Science", 21, 25, 28, 34, 32, 38],
-	        ["Mechatronics Engineering", 78, 67, 80, 89, 85, 84],
+	        ["Mechatronics\nEngineering", 78, 67, 80, 89, 85, 84],
 	        ["Software Engineering", 78, 67, 78, 75, 74, 69],	        
 	    ],
 	    "BTECH": [
-	    	["Automotive & Vehicle Engineering Technology", 33, 30, 35, 40, 42, 46],
+	    	["Automotive & Vehicle \nEngineering Technology", 33, 30, 35, 40, 42, 46],
 	        ["Biotechnology", 43, 59, 57, 54, 54, 59],
 	        ["Automation Engineering Technology", 57, 49, 47, 53, 50, 49],
 	        ["Degree Completion Programs", 32, 38, 35, 37, 40, 39],
 		],
 	    "iBIOMED": [
-	    	["Chemical and Biomedical Engineering", 0, 0, 0, 0, 5, 7],
-	        ["Civil and Biomedical Engineering", 0, 0, 0, 0, 8, 7],
-	        ["Electrical and Biomedical Engineering", 0, 0, 0, 0, 9, 9],
+	    	["Chemical & Biomedical Engineering", 0, 0, 0, 0, 5, 7],
+	        ["Civil & Biomedical Engineering", 0, 0, 0, 0, 8, 7],
+	        ["Electrical\n& Biomedical Engineering", 0, 0, 0, 0, 9, 9],
 	        ["iBioMed B.H.Sc", 0, 0, 0, 0, 12, 15],
 		]
 	}
@@ -83,16 +89,6 @@
 	yearLabel.fontSize = 30;
 	yearLabel.text = String(currentYear);
 	
-	// Function used to change the year label based on window size
-	function changeYearSize() {
-		if (document.getElementById("flex-container").offsetWidth <= 500) {
-			yearLabel.fontSize = 20;
-		}
-		else {
-			yearLabel.fontSize = 30;
-		}
-	}
-	
 	// zoomout button
 	//var zoomOutButton = chart.zoomOutButton;
 	//zoomOutButton.dx = 0;
@@ -119,13 +115,13 @@
 	var categoryAxisRenderer = categoryAxis.renderer;
 	var categoryAxisLabel = categoryAxisRenderer.labels.template;
 	categoryAxisLabel.location = 0.5;
-	categoryAxisLabel.radius = 28;
+	categoryAxisLabel.radius = 40;
 	categoryAxisLabel.relativeRotation = 90;
 	
-	categoryAxisRenderer.fontSize = 11;
-	categoryAxisRenderer.minGridDistance = 10;
+	categoryAxisRenderer.fontSize = 12;
+	categoryAxisRenderer.minGridDistance = 20;
 	categoryAxisRenderer.grid.template.radius = -25;
-	categoryAxisRenderer.grid.template.strokeOpacity = 0.05;
+	categoryAxisRenderer.grid.template.strokeOpacity = 0;
 	categoryAxisRenderer.grid.template.interactionsEnabled = false;
 	
 	categoryAxisRenderer.ticks.template.disabled = true;
@@ -139,6 +135,10 @@
 	var valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
 	valueAxis.min = 0;
 	valueAxis.max = 150;
+	valueAxis.stroke = am4core.color("#673AB7");
+	valueAxis.strokeOpacity = 0;
+	valueAxis.fill = am4core.color("#673AB7");
+	valueAxis.fillOpacity = 0;
 	valueAxis.strictMinMax = true;
 	valueAxis.tooltip.defaultState.properties.opacity = 0;
 	valueAxis.tooltip.animationDuration = 0;
@@ -149,7 +149,7 @@
 	valueAxisRenderer.axisFills.template.disabled = true;
 	valueAxisRenderer.ticks.template.disabled = true;
 	valueAxisRenderer.minGridDistance = 20;
-	valueAxisRenderer.grid.template.strokeOpacity = 0.1;
+	valueAxisRenderer.grid.template.strokeOpacity = 0;
 	
 	// Create data bars and tooltip
 	var series = chart.series.push(new am4charts.RadarColumnSeries());
@@ -247,10 +247,11 @@
 	    axisRange.grid.disabled = true;
 	    axisRange.label.interactionsEnabled = false;
 	    axisRange.label.bent = true;
+	    axisRange.label.fontSize = 20;
 	
 	    var axisFill = axisRange.axisFill;
 	    axisFill.innerRadius = -0.001; // almost the same as 100%, we set it in pixels as later we animate this property to some pixel value
-	    axisFill.radius = -20; // negative radius means it is calculated from max radius
+	    axisFill.radius = -30; // negative radius means it is calculated from max radius
 	    axisFill.disabled = false; // as regular fills are disabled, we need to enable this one
 	    axisFill.fillOpacity = 1;
 	    axisFill.togglable = true;
@@ -272,13 +273,23 @@
 	    // hover state
 	    var hoverState = axisFill.states.create("hover");
 	    hoverState.properties.innerRadius = -10;
-	    hoverState.properties.radius = -25;
+	    hoverState.properties.radius = -35;
 	
 	    var axisLabel = axisRange.label;
 	    axisLabel.location = 0.5;
 	    axisLabel.fill = am4core.color("#ffffff");
 	    axisLabel.radius = 3;
 	    axisLabel.relativeRotation = 0;
+	}
+
+	// Function used to change the year label based on window size
+	function changeYearSize() {
+		if (document.getElementById("flex-container").offsetWidth <= 500) {
+			yearLabel.fontSize = 20;
+		}
+		else {
+			yearLabel.fontSize = 30;
+		}
 	}
 
 	//SLIDER FOR SWITCHING TO BAR GRAPH
