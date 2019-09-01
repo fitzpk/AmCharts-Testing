@@ -1,0 +1,113 @@
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<style>
+	body {
+	  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	}	
+
+	#chartdiv {
+		margin: 0 auto;
+	  	width: 100vw;
+	  	height: 98vh;
+	}
+	
+	#flex-container {
+	  display: flex;
+	}
+</style>
+
+<body>
+	
+	<div id="flex-container">
+		<div id="chartdiv"> </div>
+	</div>
+	
+	<div>
+		</br></br></br></br>
+		</br></br></br></br>
+	</div>
+</body>
+
+<script>
+	// Themes begin
+	am4core.useTheme(am4themes_animated);
+	// Themes end
+	
+	var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+	chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
+	
+	chart.data = [
+	  {
+	    source: "Federal \nTri Council",
+	    funds: 15.1,
+	    pulled: true,
+	  },
+	  {
+	    source: "Ontario \nProvincial",
+	    funds: 10,
+	    pulled: true,
+	  },
+	  {
+	  	source: "Federal \nNon-Tri Council",
+	    funds: 6.8,
+	    pulled: true,
+	  },
+	  {
+	    source: "Corporate",
+	    funds: 5.2,
+	    pulled: true,
+	  },
+	  {
+	    source: "Other Sources",
+	    funds: 3.7,
+	    pulled: true,
+	  },
+	  {
+	    source: "Not-for-Profit",
+	    funds: 1.1,
+	    pulled: true,
+	  },
+	];
+	
+	chart.innerRadius = am4core.percent(40);
+	chart.depth = 60;
+
+	var colorSet = new am4core.ColorSet();
+	colorSet.list = ["#6f1c46", "#f0b135", "#ffd001", "#016e97", "#86d1e6", "#d3d655"].map(function(color) {
+	  return new am4core.color(color);
+	});
+
+	var series = chart.series.push(new am4charts.PieSeries3D());
+	series.dataFields.value = "funds";
+	series.dataFields.depthValue = "funds";
+	series.dataFields.category = "source";
+	series.name = "{category}";
+	series.slices.template.cornerRadius = 5;
+	series.colors = colorSet;
+	series.slices.template.tooltipText = "{source}";
+	series.ticks.template.disabled = true;
+	series.alignLabels = false;
+	series.labels.template.text = "{value.percent.formatNumber('#.')}%";
+	//series.labels.template.text = "${value} M"; <- Use if you want to show amount instead of %
+	series.labels.template.radius = am4core.percent(-20);
+	series.labels.template.fill = am4core.color("white");
+	series.slices.template.stroke = am4core.color("black");
+	series.slices.template.strokeWidth = 2;
+	series.slices.template.strokeOpacity = 1;
+	
+	series.slices.template.propertyFields.isActive = "pulled";
+	
+	chart.legend = new am4charts.Legend();
+	chart.legend.position = "right";
+	chart.legend.fontSize = 14;
+	chart.legend.valueLabels.template.text = "${value.value} M";
+	
+	// Year label in middle of chart
+	var clabel = series.createChild(am4core.Label);
+	clabel.text = "${values.value.sum} M";
+	clabel.horizontalCenter = "middle";
+	clabel.verticalCenter = "middle";
+	clabel.fontSize = 40;
+
+</script>
