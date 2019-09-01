@@ -90,7 +90,7 @@
 	//series1.dataFields.value = "aValue";
 	series1.strokeWidth = 4;
 	series1.stroke = am4core.color("#6f1c46");
-	series1.name = "School of Engineering & Applied Sciences"
+	series1.name = "School of Engineering & Applied Sciences";
 	
 	var bullet1 = series1.bullets.push(new am4charts.CircleBullet());
 	series1.heatRules.push({
@@ -119,7 +119,8 @@
 	  target: bullet2.circle,
 	  min: 5,
 	  max: 20,
-	  property: "radius"
+	  property: "radius",
+	  stroke: am4core.color("#f0b135"),
 	});
 	
 	var labbullet2 = series2.bullets.push(new am4charts.LabelBullet());
