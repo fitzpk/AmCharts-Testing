@@ -5,6 +5,8 @@
 
 <a href="https://fitzpk.github.io/Repo-2/intlmap.html">World Map</a>
 
+<a href="https://fitzpk.github.io/Repo-2/intlmap2.html">World Map</a>
+
 <a href="https://fitzpk.github.io/Repo-2/courseconnect.html">Chord Chart</a>
 
 <a href="https://fitzpk.github.io/Repo-2/demogs.html">Multi-Series Line Chart</a>
