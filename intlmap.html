@@ -343,8 +343,9 @@
 	var countryHover = countryTemplate.states.create("hover");
 	countryHover.properties.fill = hoverColor;
 	countryHover.properties.fillOpacity = 0.8; // Reduce conflict with back to continents map label
-	countryHover.properties.stroke = hoverColor;
+	countryHover.properties.stroke = "000000";
 	countryHover.properties.strokeOpacity = 1;
+	countryHover.properties.strokeWidth = 1.5;
 	
 	var labelContainer = chart.chartContainer.createChild(am4core.Container);
 	labelContainer.hide();
