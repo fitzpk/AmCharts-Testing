@@ -94,17 +94,17 @@
 
 	// Add expectancy data
 	countriesSeries.data = [
-	  /*{ id: "AF", value: 0 },
-	  { id: "AL", value: 0 },
-	  { id: "DZ", value: 0 },
-	  { id: "AO", value: 0 },
-	  { id: "AR", value: 0 },
-	  { id: "AM", value: 0 },
-	  { id: "AU", value: 0 },
-	  { id: "AT", value: 0 },
-	  { id: "AZ", value: 0 },
-	  { id: "BH", value: 0 },*/
-	  { id: "BD", value: 17, perc: 1 },
+	  /*{ id: "AF", value: 0, perc: "0" },
+	  { id: "AL", value: 0, perc: "0" },
+	  { id: "DZ", value: 0, perc: "0" },
+	  { id: "AO", value: 0, perc: "0" },
+	  { id: "AR", value: 0, perc: "0" },
+	  { id: "AM", value: 0, perc: "0" },
+	  { id: "AU", value: 0, perc: "0" },
+	  { id: "AT", value: 0, perc: "0" },
+	  { id: "AZ", value: 0, perc: "0" },
+	  { id: "BH", value: 0, perc: "0" },*/
+	  { id: "BD", value: 17, perc: "1%" },
 	  /*{ id: "BY", value: 0 },
 	  { id: "BE", value: 0 },
 	  { id: "BJ", value: 0 },
@@ -284,7 +284,7 @@
 	
 	//Alternate tooltip that shows percentage
 	countryTemplate.tooltipHTML = `<center><strong>{name}</strong></center>
-		<hr/><center>{perc}%</center>`;
+		<hr/><center>{perc}</center>`;
 		
 	//Simple tooltip
 	//countryTemplate.tooltipText = "{name}\n{value}";
