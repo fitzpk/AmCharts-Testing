@@ -40,24 +40,34 @@
 	// Add data
 	chart.data = [{
 	  "x": '2014-15',
-	  "Seas": 32,
-	  "Sept": 21,
+	  "Level 1 SEAS": 21,
+	  "Upper Year SEAS": 21,
+	  "SEPT": 12,
+	  "Graduate SEAS/SEPT": 8,
 	}, {
 	  "x": '2015-16',
-	  "Seas": 38,
-	  "Sept": 23,
+	  "Level 1 SEAS": 24,
+	  "Upper Year SEAS": 21,
+	  "SEPT": 15,
+	  "Graduate SEAS/SEPT": 14,
 	}, {
 	  "x": '2016-17',
-	  "Seas": 37,
-	  "Sept": 25,
+	  "Level 1 SEAS": 24,
+	  "Upper Year SEAS": 21,
+	  "SEPT": 10,
+	  "Graduate SEAS/SEPT": 15,
 	}, {
 	  "x": '2017-18',
-	  "Seas": 41,
-	  "Sept": 24,
+	  "Level 1 SEAS": 27,
+	  "Upper Year SEAS": 21,
+	  "SEPT": 11,
+	  "Graduate SEAS/SEPT": 14,
 	}, {
 	  "x": '2018-19',
-	  "Seas": 41,
-	  "Sept": 28,
+	  "Level 1 SEAS": 35,
+	  "Upper Year SEAS": 23,
+	  "SEPT": 12,
+	  "Graduate SEAS/SEPT": 16,
 	}];
 	
 	// Create axes
@@ -77,13 +87,8 @@
 	
 	// Create value axis
 	var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
-	yAxis.min = 10;
-	yAxis.max = 50;
-	
-	// Used to hide value axis text
-	yAxis.strokeOpacity = 0;
-	yAxis.fillOpacity = 0;
-	
+	yAxis.min = 0;
+	yAxis.max = 40;
 	
 	var yAxisRenderer = yAxis.renderer;
 	yAxisRenderer.grid.template.strokeOpacity = 0.05;
@@ -91,18 +96,18 @@
 	// Create series
 	var series1 = chart.series.push(new am4charts.LineSeries());
 	series1.dataFields.categoryX = "x";
-	series1.dataFields.valueY = "Seas";
+	series1.dataFields.valueY = "Level 1 SEAS";
 	//series1.dataFields.value = "aValue";
 	series1.strokeWidth = 4;
 	series1.stroke = am4core.color("#6f1c46");
 	series1.fill = am4core.color("#6f1c46");
-	series1.name = "School of Engineering & Applied Sciences"
+	series1.name = "Level 1 SEAS"
 	
 	var bullet1 = series1.bullets.push(new am4charts.CircleBullet());
 	bullet1.stroke = am4core.color("#6f1c46");
 	bullet1.fill = am4core.color("#6f1c46");
 	
-	//bullet1.tooltipText = "{valueY}%";
+	bullet1.tooltipText = "{valueY}%";
 	
 	var labbullet1 = series1.bullets.push(new am4charts.LabelBullet());
 	labbullet1.label.text = "{valueY}%";
@@ -110,12 +115,12 @@
 	
 	var series2 = chart.series.push(new am4charts.LineSeries());
 	series2.dataFields.categoryX = "x";
-	series2.dataFields.valueY = "Sept";
+	series2.dataFields.valueY = "Upper Year SEAS";
 	//series2.dataFields.value = "bValue";
 	series2.strokeWidth = 4;
 	series2.stroke = am4core.color("#f0b135");
 	series2.fill = am4core.color("#f0b135");
-	series2.name = "School of Engineering Practice & Technology";
+	series2.name = "Upper Year SEAS";
 	
 	var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
 	bullet2.stroke = am4core.color("#f0b135");
@@ -127,13 +132,51 @@
 	
 	//bullet2.tooltipText = "{valueY}%";
 	
+	var series3 = chart.series.push(new am4charts.LineSeries());
+	series3.dataFields.categoryX = "x";
+	series3.dataFields.valueY = "SEPT";
+	//series2.dataFields.value = "bValue";
+	series3.strokeWidth = 4;
+	series3.stroke = am4core.color("#829daa");
+	series3.fill = am4core.color("#829daa");
+	series3.name = "SEPT";
+	
+	var bullet3 = series3.bullets.push(new am4charts.CircleBullet());
+	bullet3.stroke = am4core.color("#829daa");
+	bullet3.fill = am4core.color("#829daa");
+	
+	var labbullet3 = series3.bullets.push(new am4charts.LabelBullet());
+	labbullet3.label.text = "{valueY}%";
+	labbullet3.dy = -20;
+
+	//bullet2.tooltipText = "{valueY}%";
+	
+	var series4 = chart.series.push(new am4charts.LineSeries());
+	series4.dataFields.categoryX = "x";
+	series4.dataFields.valueY = "Graduate SEAS/SEPT";
+	//series4.dataFields.value = "bValue";
+	series4.strokeWidth = 4;
+	series4.stroke = am4core.color("#99b4d1");
+	series4.fill = am4core.color("#99b4d1");
+	series4.name = "Graduate SEAS/SEPT";
+	
+	var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
+	bullet4.stroke = am4core.color("#99b4d1");
+	bullet4.fill = am4core.color("#99b4d1");
+	
+	var labbullet4 = series4.bullets.push(new am4charts.LabelBullet());
+	labbullet4.label.text = "{valueY}%";
+	labbullet4.dy = -20;
+	
+	//bullet2.tooltipText = "{valueY}%";
+	
 	chart.legend = new am4charts.Legend();
 	chart.legend.useDefaultMarker = true;
 	chart.legend.fontSize = 11;
 	
 		
 	//scrollbars
-	chart.scrollbarX = new am4core.Scrollbar();
-	chart.scrollbarX.dy = -10;
+	//chart.scrollbarX = new am4core.Scrollbar();
+	//chart.scrollbarX.dy = -10;
 	//chart.scrollbarY = new am4core.Scrollbar();
 </script>
