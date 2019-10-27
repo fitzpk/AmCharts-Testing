@@ -39,6 +39,7 @@
 	
 	// Set projection
 	chart.projection = new am4maps.projections.Mercator();
+	chart.chartContainer.wheelable = false;
 	
 	var restoreView = function(){
 	  chart.goHome();
