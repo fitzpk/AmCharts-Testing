@@ -17,20 +17,6 @@
 		height: 98vh;
 		flex: 1;
 	}
-
-	/*#chartdiv {
-		margin: 0 auto;
-	  	width: 100vw;
-	  	height: 70vh;
-	  	flex: 0.4 0.4 320px;
-	}
-	
-	#chartdiv2 {
-		margin: 0 auto;
-	  	width: 100vw;
-	  	height: 70vh;
-	  	flex: 0.6 0.6 360px;
-	}*/
 	
 </style>
 <!-- Chart code -->
@@ -194,104 +180,6 @@ labbullet2.dy = -40;
 
 // Add legend
 chart.legend = new am4charts.Legend();
-
-
-
-
-/******* SIMPLE MULTI-SERIES LINE GRAPH *********/
-// Create line chart instance
-var chartL = am4core.create("chartdiv2", am4charts.XYChart);
-
-	// Add data
-	chartL.data = [{
-	  "x": '2014/15',
-	  "Undergraduate": 4000,
-	  "Graduate": 500,
-	}, {
-	  "x": '2015/16',
-	  "Undergraduate": 4400,
-	  "Graduate": 595,
-	}, {
-	  "x": '2016/17',
-	  "Undergraduate": 4860,
-	  "Graduate": 704,
-	}, {
-	  "x": '2017/18',
-	  "Undergraduate": 4790,
-	  "Graduate": 864,
-	}, {
-	  "x": '2018/19',
-	  "Undergraduate": 5000,
-	  "Graduate": 1000,
-	}];
-	
-	// Create axes
-	var categoryAxis = chartL.xAxes.push(new am4charts.CategoryAxis());
-	categoryAxis.dataFields.category = "x";
-	
-	var categoryAxisRenderer = categoryAxis.renderer;
-	
-	//Remove baseline and labels along x axis
-	//categoryAxisRenderer.line.strokeOpacity = 1;
-	//categoryAxisRenderer.line.strokeWidth = 2;
-	//categoryAxisRenderer.line.stroke = am4core.color("#FFFFFF");
-	
-	categoryAxisRenderer.tooltipLocation = 0.5;
-	categoryAxisRenderer.grid.template.location = 0;
-	categoryAxisRenderer.grid.template.stroke = am4core.color("#FFFFFF");
-	categoryAxisRenderer.grid.template.fill = am4core.color("#FFFFFF");
-	categoryAxisRenderer.grid.template.strokeOpacity = 1;
-	categoryAxis.tooltip.defaultState.properties.opacity = 0;
-	
-	// Create value axis
-	var yAxis = chartL.yAxes.push(new am4charts.ValueAxis());
-	yAxis.min = 0;
-	yAxis.max = 5500;
-	
-	var yAxisRenderer = yAxis.renderer;
-	yAxisRenderer.grid.template.strokeOpacity = 0;
-	yAxisRenderer.labels.template.disabled = true;
-	
-	// Create series
-	var series1 = chartL.series.push(new am4charts.LineSeries());
-	series1.dataFields.categoryX = "x";
-	series1.dataFields.valueY = "Undergraduate";
-	//series1.dataFields.value = "aValue";
-	series1.strokeWidth = 4;
-	series1.stroke = am4core.color("#6f1c46");
-	series1.fill = am4core.color("#6f1c46");
-	series1.name = "Undergraduate"
-	
-	var bullet1 = series1.bullets.push(new am4charts.CircleBullet());
-	bullet1.stroke = am4core.color("#6f1c46");
-	bullet1.fill = am4core.color("#6f1c46");
-	
-	bullet1.tooltipText = "{valueY}";
-	
-	var labbullet1 = series1.bullets.push(new am4charts.LabelBullet());
-	labbullet1.label.text = "{valueY}";
-	labbullet1.dy = -20;
-	
-	var series2 = chartL.series.push(new am4charts.LineSeries());
-	series2.dataFields.categoryX = "x";
-	series2.dataFields.valueY = "Graduate";
-	//series2.dataFields.value = "bValue";
-	series2.strokeWidth = 4;
-	series2.stroke = am4core.color("#f0b135");
-	series2.fill = am4core.color("#f0b135");
-	series2.name = "Graduate";
-	
-	var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
-	bullet2.stroke = am4core.color("#f0b135");
-	bullet2.fill = am4core.color("#f0b135");
-	
-	var labbullet2 = series2.bullets.push(new am4charts.LabelBullet());
-	labbullet2.label.text = "{valueY}";
-	labbullet2.dy = -20;
-
-	chartL.legend = new am4charts.Legend();
-	chartL.legend.useDefaultMarker = true;
-	chartL.legend.fontSize = 11;
 
 }); // end am4core.ready()
 </script>
