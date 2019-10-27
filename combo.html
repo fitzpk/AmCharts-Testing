@@ -111,7 +111,7 @@ categoryAxis.renderer.grid.template.strokeOpacity = 0;
 var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
 //yAxis.title.text = "FTE";
 yAxis.min = 0;
-yAxis.max = 5500;
+yAxis.max = 6000;
 	
 var yAxisRenderer = yAxis.renderer;
 yAxisRenderer.grid.template.strokeOpacity = 0;
@@ -145,17 +145,17 @@ lineSeries.strokeWidth = 4;
 lineSeries.stroke = am4core.color("#6f1c46");
 lineSeries.fill = am4core.color("#6f1c46");
 lineSeries.name = "Undergraduate"
-lineSeries.dy = -20;
+lineSeries.dy = -15;
 	
 var bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
 bullet.stroke = am4core.color("#6f1c46");
 bullet.fill = am4core.color("#6f1c46");
-bullet.dy = -20;
+bullet.dy = -15;
 bullet.tooltipText = "[b]Total Undergraduate FTE\n{valueY}[/]";
 	
 var labbullet = lineSeries.bullets.push(new am4charts.LabelBullet());
 labbullet.label.text = "{valueY}";
-labbullet.dy = -40;
+labbullet.dy = -35;
 
 var lineSeries2 = chart.series.push(new am4charts.LineSeries());
 lineSeries2.name = "Graduate";
@@ -165,17 +165,17 @@ lineSeries2.strokeWidth = 4;
 lineSeries2.stroke = am4core.color("#f0b135");
 lineSeries2.fill = am4core.color("#f0b135");
 lineSeries2.name = "Graduate"
-lineSeries2.dy = -20;
+lineSeries2.dy = -15;
 	
 var bullet2 = lineSeries2.bullets.push(new am4charts.CircleBullet());
 bullet2.stroke = am4core.color("#f0b135");
 bullet2.fill = am4core.color("#f0b135");
-bullet2.dy = -20;
+bullet2.dy = -15;
 bullet2.tooltipText = "[b]Total Graduate FTE\n{valueY}[/]";
 	
 var labbullet2 = lineSeries2.bullets.push(new am4charts.LabelBullet());
 labbullet2.label.text = "{valueY}";
-labbullet2.dy = -40;
+labbullet2.dy = -35;
 
 
 // Add legend
