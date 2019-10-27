@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+
+		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+		Remove this if you use the .htaccess -->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+		<title>Engineering 2018-19 Year in Review</title>
+		<meta name="description" content="">
+		<meta name="author" content="K F">
+
+		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+
+		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	</head>
+	<script>
+		$(document).ready(function(){
+		    $('.awesome-tooltip').tooltip({
+		        placement: 'left'
+		    });   
+		
+		    $(window).bind('scroll',function(e){
+		      dotnavigation();
+		    });
+		    
+		    function dotnavigation(){
+		             
+		        var numSections = $('section').length;
+		        
+		        $('#dot-nav li a').removeClass('active').parent('li').removeClass('active');     
+		        $('section').each(function(i,item){
+		          var ele = $(item), nextTop;
+		          
+		          console.log(ele.next().html());
+		          
+		          if (typeof ele.next().offset() != "undefined") {
+		            nextTop = ele.next().offset().top;
+		          }
+		          else {
+		            nextTop = $(document).height();
+		          }
+		          
+		          if (ele.offset() !== null) {
+		            thisTop = ele.offset().top - ((nextTop - ele.offset().top) / numSections);
+		          }
+		          else {
+		            thisTop = 0;
+		          }
+		          
+		          var docTop = $(document).scrollTop();
+		          
+		          if(docTop >= thisTop && (docTop < nextTop)){
+		            $('#dot-nav li').eq(i).addClass('active');
+		          }
+		        });   
+		    }
+		
+		    /* get clicks working */
+		    $('#dot-nav li').click(function(){
+		      
+		        var id = $(this).find('a').attr("href"),
+		          posi,
+		          ele,
+		          padding = 105;
+		      
+		        ele = $(id);
+		        posi = ($(ele).offset()||0).top - padding;
+		      
+		        $('html, body').animate({scrollTop:posi}, 'slow');
+		      
+		        return false;
+		    });
+		/* end dot nav */
+		});
+	</script>
+	
+	<style>
+		body {
+    		background: white;
+		}
+		body, html {
+		    height: 100%;    
+		}
+		#main {
+		    height: 100%;
+		    width: 100%;
+		}
+		section {
+			z-index: -1;
+			padding: 25px;
+			height: 100%;
+			width: 100%;
+			background-color: white;
+			margin-bottom: 20px;
+			margin-top: 20px;
+			/*border: 1px solid #ccc;*/
+    		box-sizing: border-box;
+    		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+		}
+		
+		#dot-nav { 
+			right: 10px;
+			top: 30%;
+			width: 120px;
+			z-index: 999;
+			position: fixed;
+		}
+		
+		#dot-nav ul {
+			list-style: none;
+			margin-left: 40px;
+		}
+		#dot-nav li {
+			position: relative;
+			background-color: #bdc3c7;
+			border:3px solid #bdc3c7;
+			border-radius: 15px 15px 15px 15px;
+			cursor: pointer;
+			padding: 5px;
+			height: 10px;
+			margin: 20px 20px 0px 0px;
+			width: 10px;
+			vertical-align:bottom;
+		}
+		#dot-nav li.active, #dot-nav li:hover {
+			background-color: rgba(122,0,60,1);
+		}
+		
+		#dot-nav a {
+			outline: 0;
+			vertical-align:top;
+			margin: 0px 0px 0px 25px;
+			position: relative;
+			top:-5px;
+		}
+		.awesome-tooltip + .tooltip > .tooltip-inner {
+		    background-color: white;
+		    color: #6f1c46; 
+		}
+		.awesome-tooltip + .tooltip.left > .tooltip-arrow{
+			/*background-color: #8e44ad;*/ 
+			opacity: 0;
+		}
+		
+		h1 {
+			background-color: #ffffff;
+			font-size: 60px;
+			color: #6f1c46;
+			margin-bottom: -40px;
+			margin-left: 20px;
+			padding-top:5px;
+			padding-left:5px;
+			padding-bottom:5px;
+			z-index: 998;
+		}
+		
+		#headertop, #headerbottom {
+			position: relative;
+			height: 50vh;
+			text-align: center;
+			background-color: #e6e6e6;
+			border-top: 20px solid white;
+			border-left: 20px solid white;
+			border-right: 20px solid white;
+		}
+		
+		#headerbottom {
+			background-color: #6f1c46;
+			border-top: 0px solid white;
+			border-bottom: 20px solid white;
+		}
+		
+		#titletext {
+			position: absolute;
+			text-align: center;
+			font-size: 60px;
+			color: #6f1c46;
+			bottom: 0;
+			width: 100%;
+		}
+		
+		#titleyear {
+			text-align: center;
+			font: 40px italic;
+			color: white;
+		}
+		
+		#arrow {
+			width: 100%;
+			color: white;
+			font-size: 30px;
+			position: absolute;
+			text-align: center;
+			margin-bottom: 10px;
+			bottom: 0;
+		}
+		
+		.rowcontainer {
+			display: -webkit-box;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: -webkit-flex;
+		  	display: flex;
+		  	flex-wrap: wrap;
+		  	height: auto;
+		}
+		
+		.item, .halfitem {
+			flex-grow: 1;
+		}
+		
+		.item + .item {
+		  	margin-left: 2%;
+		}
+		
+		.itemtext {
+			display:flex;
+			align-items: center;
+			justify-content: center;
+			height: 140%;
+		}
+
+		.subtitle {
+			background-color: white;
+			color: black;
+    		box-sizing: border-box;
+			padding: 20px 2px 5px 2px;
+    		margin: auto;
+    		text-align: center;
+    		font-size: 20px;
+    		border-bottom: 4px solid black;
+    		transition: .2s ease-in-out;
+		}
+		
+		.item:hover .subtitle{
+			background-color: rgba(204,204,204,0.2);
+			border-radius: 4px;
+			box-shadow: 0 4px 2px -2px rgba(0,0,0,0.16), 0 4px 2px -2px rgba(0,0,0,0.12)!important;
+		}
+		
+		span {
+			font-size: 24px;
+		}
+		
+		hr.innerdivide {
+			border: 1px solid #6f1c46;
+		}
+		
+	</style>
+
+	<body>
+		<div>
+			<header>
+				<div id="headertop">
+					<div id="titletext">Annual Report</div>
+				</div>
+				
+				<div id="headerbottom">
+					<div id="titleyear">2018-19</div>
+					<div id="arrow">&darr;</div>
+				</div>
+			</header>
+			<nav>
+				<br><br><br><br> <br><br><br><br>
+			</nav>
+
+	 <div data-spy="affix" id="dot-nav">
+	      <ul>
+	        <li class="awesome-tooltip active" title="Dean's Message"><a href="#message"> </a></li>
+	        <li class="awesome-tooltip" title="Where We Stand"><a href="#where"> </a></li>
+	        <li class="awesome-tooltip" title="Who We Are"><a href="#who"> </a></li>
+	        <li class="awesome-tooltip" title="Research"><a href="#research"> </a></li>
+	        <li class="awesome-tooltip" title="Recruitment"><a href="#recruit"> </a></li>
+	        <li class="awesome-tooltip" title="Co-op"><a href="#coop"> </a></li>
+	      </ul>
+	 </div>
+	 <div id="main" class="container">
+	 	
+	 		<h1>Message from The Dean</h1>
+	    	<section id="message">
+	        	<div class="rowcontainer" style="height:180px";>
+	            	<div class="item">
+	                	<p>Insert PNG file of Dean with Message Bubble</p>
+	            	</div>
+	        	</div>          
+	    	</section>
+	    	
+	    	<h1>Where We Stand</h1>
+	        <section id="where">
+
+	        	<div class="rowcontainer">
+	        	  <div class="item" style="max-width: 350px;margin-bottom: 10px;">
+	        	  	<p style="color:#c0c0c0;font-size:24px;">ARWU 2019 Subject Rankings</p>
+	        	  	<p><i>World class bibliometric ranking system wih a focus on publication output,
+	        	  	citation impact, international collaboration, and academic awards received</i></p>
+	        	  </div>
+				  <div class="item">
+				  	<div class="subtitle"><p>Civil Engineering</p></div>
+				  	<div class="rowcontainer" style="">
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">3<span>rd</span></p>
+				  		</div>
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">29<span>th</span></p>
+				  		</div>
+				  	</div>
+				  </div>
+				  
+				  
+				  <div class="item">
+				  	<div class="subtitle"><p>Metallurgical Engineering</p></div>
+				  	<div class="rowcontainer" style="">
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">2<span>nd</span></p>
+				  		</div>
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">48<span>th</span></p>
+				  		</div>
+				  	</div>
+				  </div>
+				  
+				  <div class="item">
+				  	<div class="subtitle"><p>Water Resources</p></div>
+				  	<div class="rowcontainer">
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">5<span>th</span></p>
+				  		</div>
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">79<span>th</span></p>
+				  		</div>
+				  	</div>
+				  </div>
+				</div>
+				
+				<hr class="innerdivide">
+				
+	        	<div class="rowcontainer">
+	        	  <div class="item" style="max-width: 350px;margin-bottom: 10px;">
+	        	  	<p style="color:#c0c0c0;font-size:24px;">Times Higher Education 2020 Subject Rankings</p>
+	        	  	<p><i>World class ranking system wih a focus on teaching quality,
+	        	  	citation impact, international outlook, research, and industry income</i></p>
+	        	  </div>
+				  <div class="item">
+				  	<div class="subtitle"><p>Engineering Technology</p></div>
+				  	<div class="rowcontainer" style="">
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">12<span>th</span></p>
+				  		</div>
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">301-400<span>th</span></p>
+				  		</div>
+				  	</div>
+				  </div>
+				  
+				  <div class="item">
+				  	<div class="subtitle"><p>Computer Science</p></div>
+				  	<div class="rowcontainer">
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">7<span>th</span></p>
+				  		</div>
+				  		<div class="halfitem" style="text-align:center;">
+				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
+				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">101-125<span>th</span></p>
+				  		</div>
+				  	</div>
+				  </div>
+				</div>
+	        </section>
+	    	
+	    	<h1>Who We Are</h1>
+	        <section id="who">
+	        	<p style="color:#c0c0c0;font-size:24px;">Enrolment FTE &nbsp; | &nbsp; Undergraduate and Graduate</p>
+
+	        	<div class="rowcontainer">
+	        		<div class="item">
+	        			<div class="itemtext" style="border-bottom: 4px solid #6f1c46;">
+	        				<p style="font-weight:bold;color:#6f1c46;font-size:40px;">25%</p>
+	        			</div>
+	        		</div>
+	        		<div class="item">
+	        			<div class="itemtext" style="border-bottom: 4px solid #febd3b;">
+	        				<p style="font-weight:bold;color:#febd3b;font-size:40px;">100%</p>
+	        			</div>
+	        		</div>
+	        		<div class="item">
+	        			<div class="itemtext" style="border-bottom: 4px solid #c0c0c0;">
+	        				<p style="font-weight:bold;color:#c0c0c0;font-size:40px;">70%</p>
+	        			</div>
+	        		</div>
+	        	</div>
+
+	        	<div class="rowcontainer">
+	        		<iframe style="height:85vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/combo.html" scrolling="no"></iframe>
+	        	</div>
+	        	
+	        	<hr class="innerdivide">
+	        	
+	        	<p style="color:#c0c0c0;font-size:24px;">Geographic Diversity of 2018-19 Incoming Undergraduates</p>
+	        	<div class="rowcontainer">
+	        		<iframe style="height:70vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
+	        	</div>
+	        	
+	        	<hr class="innerdivide">
+	        	
+	        	<div class="rowcontainer">
+	        		<div class="item" style="color:#c0c0c0;font-size:24px;flex:0.4 0.4 300px;min-width:175px;">
+	        			<p style="color:#c0c0c0;font-size:24px;">Women in Engineering (% of FTE)<br><i>2014/15 to 2018/19</i></p>
+	        			
+	        			<p style="color: black;font-size:14px;">McMaster Engineering has made successful strides
+	        				towards achieving gender equity for faculty members, staff members, and students. In 2018/19 our proportion
+	        				of women in level 1 engineering reached a historic high of 35%.</p>
+	        			<p style="color: black;font-size:14px;">McMaster Engineering has made successful strides
+	        				towards achieving gender equity for faculty members, staff members, and students. In 2018/19 our proportion
+	        				of women in level 1 engineering reached a historic high of 35%.</p>
+	        			
+	        		</div>
+	        		<div class="item">
+	        			<iframe style="height:70vh;width:100%;border: none;flex:0.6 0.6 300px;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
+	        		</div>
+	        	</div>
+	        </section>
+	        
+	        <h1>Research</h1>
+	        <section id="research">
+	        	<div class="rowcontainer">
+	            	<div>
+	                	<p>Insert content</p>
+	            	</div>
+	        	</div>           
+	        </section>
+	        
+	        <h1>Recruitment</h1>
+	        <section id="recruit">
+	        	<div class="rowcontainer">
+	            	<div>
+	                	<p>Insert content</p>
+	            	</div>
+	        	</div>          
+	        </section>   
+	        
+	        <h1>Co-op</h1>
+	        <section id="coop">
+	        	<div class="rowcontainer">
+	            	<div>
+	                	<p>Insert content</p>
+	            	</div>
+	        	</div>          
+	        </section>     
+	    </div>
+
+			<footer>
+				<p>
+					&copy; Copyright  by K F
+				</p>
+			</footer>
+		</div>
+	</body>
+</html>
