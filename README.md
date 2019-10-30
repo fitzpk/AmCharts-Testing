@@ -15,4 +15,4 @@
 
 <a href="https://fitzpk.github.io/Repo-2/combo.html">Column & Line Combo Chart</a>
 
-<a href="https://fitzpk.github.io/Repo-2/combo.html">Stacked Column Chart</a>
+<a href="https://fitzpk.github.io/Repo-2/stacked.html">Stacked Column Chart</a>
