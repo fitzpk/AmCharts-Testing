@@ -1,0 +1,208 @@
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+<style>
+	body {
+	  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	}	
+	
+	.flexcontainer {
+	  display: flex;
+	  flex-wrap: wrap;
+	}
+	
+	#chartdiv {
+		margin: 0 auto;
+		width: 100vw;
+		height: 98vh;
+		flex: 1;
+	}
+
+	/*#chartdiv {
+		margin: 0 auto;
+	  	width: 100vw;
+	  	height: 70vh;
+	  	flex: 0.4 0.4 320px;
+	}
+	
+	#chartdiv2 {
+		margin: 0 auto;
+	  	width: 100vw;
+	  	height: 70vh;
+	  	flex: 0.6 0.6 360px;
+	}*/
+	
+</style>
+<!-- Chart code -->
+<script>
+am4core.ready(function() {
+
+// Themes begin
+am4core.useTheme(am4themes_animated);
+// Themes end
+
+// Create chart instance
+var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+chart.colors.list = [
+	am4core.color("#E6D0DB"),
+  	am4core.color("#CEA2B8"),
+  	am4core.color("#AA5C83"),
+  	am4core.color("#7A003D"),
+  	am4core.color("#FEE7B7"),
+  	am4core.color("#FECF70"),
+  	am4core.color("#FEBD3B"),
+];
+
+// Add data
+chart.data = [ {
+  "year": "2014/15",
+  "B.ASc": 100,
+  "B.Eng": 3500,
+  "B.Tech": 400,
+  "B.Eng.BME": 0,
+  "M.Eng": 400,
+  "M.Sc": 50,
+  "Ph.D": 50,
+  "Undergraduate": 4000,
+  "Graduate": 500,
+  "none": 0,
+}, {
+  "year": "2015/16",
+  "B.ASc": 150,
+  "B.Eng": 3800,
+  "B.Tech": 350,
+  "B.Eng.BME": 0,
+  "M.Eng": 500,
+  "M.Sc": 75,
+  "Ph.D": 20,
+  "Undergraduate": 4400,
+  "Graduate": 595,
+  "none": 0,
+}, {
+  "year": "2016/17",
+  "B.ASc": 200,
+  "B.Eng": 4000,
+  "B.Tech": 660,
+  "B.Eng.BME": 0,
+  "M.Eng": 600,
+  "M.Sc": 54,
+  "Ph.D": 50,
+  "Undergraduate": 4860,
+  "Graduate": 704,
+  "none": 0,
+}, {
+  "year": "2017/18",
+  "B.ASc": 200,
+  "B.Eng": 3900,
+  "B.Tech": 590,
+  "B.Eng.BME": 100,
+  "M.Eng": 750,
+  "M.Sc": 64,
+  "Ph.D": 50,
+  "Undergraduate": 4790,
+  "Graduate": 864,
+  "none": 0,
+}, {
+  "year": "2018/19",
+  "B.ASc": 300,
+  "B.Eng": 4000,
+  "B.Tech": 600,
+  "B.Eng.BME": 100,
+  "M.Eng": 800,
+  "M.Sc": 100,
+  "Ph.D": 100,
+  "Undergraduate": 5000,
+  "Graduate": 1000,
+  "none": 0,
+}];
+
+// Create axes
+var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+categoryAxis.dataFields.category = "year";
+categoryAxis.title.text = "";
+categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.labels.template.fontSize = 11;
+categoryAxis.renderer.minGridDistance = 20;
+categoryAxis.renderer.cellStartLocation = 0.1;
+categoryAxis.renderer.cellEndLocation = 0.9;
+categoryAxis.renderer.grid.template.strokeOpacity = 0;
+
+var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+//yAxis.title.text = "FTE";
+yAxis.min = 0;
+yAxis.max = 5500;
+yAxis.calculateTotals = true;
+	
+var yAxisRenderer = yAxis.renderer;
+yAxisRenderer.grid.template.strokeOpacity = 0;
+yAxisRenderer.labels.template.disabled = true;
+
+// Create series
+function createSeries(field, name, stacked) {
+  var series = chart.series.push(new am4charts.ColumnSeries());
+  series.dataFields.valueY = field;
+  series.dataFields.categoryX = "year";
+  series.name = name;
+  series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+  series.stacked = stacked;
+  series.columns.template.width = am4core.percent(95);
+}
+
+
+createSeries("B.ASc", "B.ASc", false);
+createSeries("B.Eng", "B.Eng", true);
+createSeries("B.Tech", "B.Tech", true);
+createSeries("B.Eng.BME", "B.Eng.BME", true);
+createSeries("M.Eng", "M.Eng", false);
+createSeries("M.Sc", "M.Sc", true);
+createSeries("Ph.D", "Ph.D", true);
+
+var lineSeries = chart.series.push(new am4charts.LineSeries());
+lineSeries.name = "Undergraduate";
+lineSeries.dataFields.valueY = "Undergraduate";
+lineSeries.dataFields.categoryX = "year";
+lineSeries.strokeWidth = 0;
+lineSeries.stroke = am4core.color("#6f1c46");
+lineSeries.fill = am4core.color("#6f1c46");
+lineSeries.name = "Undergraduate"
+lineSeries.dy = -15;
+lineSeries.hiddenInLegend = true;
+	
+var labbullet = lineSeries.bullets.push(new am4charts.LabelBullet());
+labbullet.label.text = "{valueY}";
+labbullet.dy = -20;
+labbullet.dx = -45;
+
+var lineSeries2 = chart.series.push(new am4charts.LineSeries());
+lineSeries2.name = "Graduate";
+lineSeries2.dataFields.valueY = "Graduate";
+lineSeries2.dataFields.categoryX = "year";
+lineSeries2.strokeWidth = 0;
+lineSeries2.stroke = am4core.color("#f0b135");
+lineSeries2.fill = am4core.color("#f0b135");
+lineSeries2.name = "Graduate"
+lineSeries2.dy = -15;
+lineSeries2.hiddenInLegend = true;
+	
+var labbullet2 = lineSeries2.bullets.push(new am4charts.LabelBullet());
+labbullet2.label.text = "{valueY}";
+labbullet2.dy = -20;
+labbullet2.dx = 45;
+
+// Add legend
+chart.legend = new am4charts.Legend();
+chart.legend.fontSize = 11;
+chart.legend.itemContainers.template.clickable = false;
+chart.legend.itemContainers.template.cursorOverStyle = am4core.MouseCursorStyle.default;
+
+}); // end am4core.ready()
+</script>
+
+<!-- HTML -->
+
+<body>
+	<div class="flexcontainer">
+		<div id="chartdiv"></div>	
+	</div>
+</body>
