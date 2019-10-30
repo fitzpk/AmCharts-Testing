@@ -17,6 +17,20 @@
 		height: 98vh;
 		flex: 1;
 	}
+
+	/*#chartdiv {
+		margin: 0 auto;
+	  	width: 100vw;
+	  	height: 70vh;
+	  	flex: 0.4 0.4 320px;
+	}
+	
+	#chartdiv2 {
+		margin: 0 auto;
+	  	width: 100vw;
+	  	height: 70vh;
+	  	flex: 0.6 0.6 360px;
+	}*/
 	
 </style>
 <!-- Chart code -->
@@ -31,11 +45,8 @@ am4core.useTheme(am4themes_animated);
 var chart = am4core.create("chartdiv", am4charts.XYChart);
 
 chart.colors.list = [
-	am4core.color("#E6D0DB"),
-  	am4core.color("#CEA2B8"),
   	am4core.color("#AA5C83"),
   	am4core.color("#7A003D"),
-  	am4core.color("#FEE7B7"),
   	am4core.color("#FECF70"),
   	am4core.color("#FEBD3B"),
 ];
@@ -43,67 +54,52 @@ chart.colors.list = [
 // Add data
 chart.data = [ {
   "year": "2014/15",
-  "B.ASc": 100,
-  "B.Eng": 3500,
-  "B.Tech": 400,
-  "B.Eng.BME": 0,
-  "M.Eng": 400,
-  "M.Sc": 50,
-  "Ph.D": 50,
-  "Undergraduate": 4000,
-  "Graduate": 500,
+  "SEAS Male": 3500,
+  "SEAS Female": 100,
+  "SEPT Male": 200,
+  "SEPT Female": 200,
+  "% of SEAS Female": 19,
+  "% of SEPT Female": 11,
 }, {
   "year": "2015/16",
-  "B.ASc": 150,
-  "B.Eng": 3800,
-  "B.Tech": 350,
-  "B.Eng.BME": 0,
-  "M.Eng": 500,
-  "M.Sc": 75,
-  "Ph.D": 20,
-  "Undergraduate": 4400,
-  "Graduate": 595,
+  "SEAS Male": 3800,
+  "SEAS Female": 150,
+  "SEPT Male": 350,
+  "SEPT Female": 100,
+  "% of SEAS Female": 22,
+  "% of SEPT Female": 14,
 }, {
   "year": "2016/17",
-  "B.ASc": 200,
-  "B.Eng": 4000,
-  "B.Tech": 660,
-  "B.Eng.BME": 0,
-  "M.Eng": 600,
-  "M.Sc": 54,
-  "Ph.D": 50,
-  "Undergraduate": 4860,
-  "Graduate": 704,
+  "SEAS Male": 4000,
+  "SEAS Female": 200,
+  "SEPT Male": 660,
+  "SEPT Female": 330,
+  "% of SEAS Female": 25,
+  "% of SEPT Female": 15,
 }, {
   "year": "2017/18",
-  "B.ASc": 200,
-  "B.Eng": 3900,
-  "B.Tech": 590,
-  "B.Eng.BME": 100,
-  "M.Eng": 750,
-  "M.Sc": 64,
-  "Ph.D": 50,
-  "Undergraduate": 4790,
-  "Graduate": 864,
+  "SEAS Male": 3900,
+  "SEAS Female": 200,
+  "SEPT Male": 590,
+  "SEPT Female": 100,
+  "% of SEAS Female": 27,
+  "% of SEPT Female": 17,
 }, {
   "year": "2018/19",
-  "B.ASc": 300,
-  "B.Eng": 4000,
-  "B.Tech": 600,
-  "B.Eng.BME": 100,
-  "M.Eng": 800,
-  "M.Sc": 100,
-  "Ph.D": 100,
-  "Undergraduate": 5000,
-  "Graduate": 1000,
+  "SEAS Male": 4000,
+  "SEAS Female": 300,
+  "SEPT Male": 600,
+  "SEPT Female": 100,
+  "% of SEAS Female": 29,
+  "% of SEPT Female": 18,
 }];
 
 // Create axes
 var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
 categoryAxis.dataFields.category = "year";
 categoryAxis.title.text = "";
-categoryAxis.renderer.labels.template.fontSize = 11;
 categoryAxis.renderer.grid.template.location = 0;
+categoryAxis.renderer.labels.template.fontSize = 11;
 categoryAxis.renderer.minGridDistance = 20;
 categoryAxis.renderer.cellStartLocation = 0.1;
 categoryAxis.renderer.cellEndLocation = 0.9;
@@ -112,7 +108,7 @@ categoryAxis.renderer.grid.template.strokeOpacity = 0;
 var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
 //yAxis.title.text = "FTE";
 yAxis.min = 0;
-yAxis.max = 6500;
+yAxis.max = 7500;
 	
 var yAxisRenderer = yAxis.renderer;
 yAxisRenderer.grid.template.strokeOpacity = 0;
@@ -129,59 +125,74 @@ function createSeries(field, name, stacked) {
   series.columns.template.width = am4core.percent(95);
 }
 
+createSeries("SEAS Male", "SEAS Male", false);
+createSeries("SEAS Female", "SEAS Female", true);
+createSeries("SEPT Male", "SEPT Male", false);
+createSeries("SEPT Female", "SEPT Female", true);
 
-createSeries("B.ASc", "B.ASc", false);
-createSeries("B.Eng", "B.Eng", true);
-createSeries("B.Tech", "B.Tech", true);
-createSeries("B.Eng.BME", "B.Eng.BME", true);
-createSeries("M.Eng", "M.Eng", false);
-createSeries("M.Sc", "M.Sc", true);
-createSeries("Ph.D", "Ph.D", true);
 
-var lineSeries = chart.series.push(new am4charts.LineSeries());
-lineSeries.name = "Undergraduate";
-lineSeries.dataFields.valueY = "Undergraduate";
-lineSeries.dataFields.categoryX = "year";
-lineSeries.strokeWidth = 4;
-lineSeries.stroke = am4core.color("#6f1c46");
-lineSeries.fill = am4core.color("#6f1c46");
-lineSeries.name = "Undergraduate"
-lineSeries.dy = -15;
-	
-var bullet = lineSeries.bullets.push(new am4charts.CircleBullet());
-bullet.stroke = am4core.color("#6f1c46");
-bullet.fill = am4core.color("#6f1c46");
-bullet.dy = -15;
-bullet.tooltipText = "[b]Total Undergraduate FTE\n{valueY}[/]";
-	
-var labbullet = lineSeries.bullets.push(new am4charts.LabelBullet());
-labbullet.label.text = "{valueY}";
-labbullet.dy = -30;
+// Second value axis
+var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+valueAxis2.renderer.opposite = true;
+valueAxis2.min = 0;
+valueAxis2.max = 60;
 
-var lineSeries2 = chart.series.push(new am4charts.LineSeries());
-lineSeries2.name = "Graduate";
-lineSeries2.dataFields.valueY = "Graduate";
-lineSeries2.dataFields.categoryX = "year";
-lineSeries2.strokeWidth = 4;
-lineSeries2.stroke = am4core.color("#f0b135");
-lineSeries2.fill = am4core.color("#f0b135");
-lineSeries2.name = "Graduate"
-lineSeries2.dy = -15;
-	
-var bullet2 = lineSeries2.bullets.push(new am4charts.CircleBullet());
-bullet2.stroke = am4core.color("#f0b135");
-bullet2.fill = am4core.color("#f0b135");
-bullet2.dy = -15;
-bullet2.tooltipText = "[b]Total Graduate FTE\n{valueY}[/]";
-	
-var labbullet2 = lineSeries2.bullets.push(new am4charts.LabelBullet());
-labbullet2.label.text = "{valueY}";
-labbullet2.dy = -30;
+var yAxisRenderer2 = valueAxis2.renderer;
+yAxisRenderer2.grid.template.strokeOpacity = 0;
+yAxisRenderer2.labels.template.disabled = true;
 
+// % of seas female series
+var seriesSEAS = chart.series.push(new am4charts.LineSeries());
+seriesSEAS.dataFields.valueY = "% of SEAS Female";
+seriesSEAS.dataFields.categoryX = "year";
+seriesSEAS.name = "% of SEAS Female";
+seriesSEAS.tooltipText = "{name}: [bold]{valueY}%[/]";
+seriesSEAS.strokeWidth = 3;
+seriesSEAS.stroke = am4core.color("#6f1c46");
+seriesSEAS.fill = am4core.color("#6f1c46");
+seriesSEAS.yAxis = valueAxis2;
+seriesSEAS.dy = -210;
+
+var bulletSEAS = seriesSEAS.bullets.push(new am4charts.CircleBullet());
+bulletSEAS.stroke = am4core.color("#6f1c46");
+bulletSEAS.fill = am4core.color("#6f1c46");
+bulletSEAS.dy = -210;
+bulletSEAS.hiddenInLegend = true;
+bulletSEAS.tooltipText = "[b]% of SEAS Female FTE[/]";
+bulletSEAS.copyToLegendMarker = false;
+
+var labbullet = seriesSEAS.bullets.push(new am4charts.LabelBullet());
+labbullet.label.text = "{valueY}%";
+labbullet.dy = -225;
+
+// % of sept female series
+var seriesSEPT = chart.series.push(new am4charts.LineSeries());
+seriesSEPT.dataFields.valueY = "% of SEPT Female";
+seriesSEPT.dataFields.categoryX = "year";
+seriesSEPT.name = "% of SEPT Female";
+seriesSEPT.tooltipText = "{name}: [bold]{valueY}%[/]";
+seriesSEPT.strokeWidth = 3;
+seriesSEPT.stroke = am4core.color("#FEBD3B");
+seriesSEPT.fill = am4core.color("#FEBD3B");
+seriesSEPT.yAxis = valueAxis2;
+seriesSEPT.dy = -210;
+
+var bulletSEPT = seriesSEPT.bullets.push(new am4charts.CircleBullet());
+bulletSEPT.stroke = am4core.color("#FEBD3B");
+bulletSEPT.fill = am4core.color("#FEBD3B");
+bulletSEPT.dy = -210;
+bulletSEPT.hiddenInLegend = true;
+bulletSEPT.tooltipText = "[b]% of SEPT Female FTE[/]";
+bulletSEPT.copyToLegendMarker = false;
+
+var labbullet = seriesSEPT.bullets.push(new am4charts.LabelBullet());
+labbullet.label.text = "{valueY}%";
+labbullet.dy = -225;
 
 // Add legend
 chart.legend = new am4charts.Legend();
 chart.legend.fontSize = 11;
+chart.legend.useDefaultMarker = false;
 
 }); // end am4core.ready()
 </script>
@@ -193,3 +204,4 @@ chart.legend.fontSize = 11;
 		<div id="chartdiv"></div>	
 	</div>
 </body>
+
