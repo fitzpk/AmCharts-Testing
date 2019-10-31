@@ -151,19 +151,19 @@ seriesSEAS.strokeWidth = 3;
 seriesSEAS.stroke = am4core.color("#6f1c46");
 seriesSEAS.fill = am4core.color("#6f1c46");
 seriesSEAS.yAxis = valueAxis2;
-seriesSEAS.dy = -210;
+seriesSEAS.dy = -175;
 
 var bulletSEAS = seriesSEAS.bullets.push(new am4charts.CircleBullet());
 bulletSEAS.stroke = am4core.color("#6f1c46");
 bulletSEAS.fill = am4core.color("#6f1c46");
-bulletSEAS.dy = -210;
+bulletSEAS.dy = -175;
 bulletSEAS.hiddenInLegend = true;
 bulletSEAS.tooltipText = "[b]% of SEAS INTL FTE[/]";
 bulletSEAS.copyToLegendMarker = false;
 
 var labbullet = seriesSEAS.bullets.push(new am4charts.LabelBullet());
 labbullet.label.text = "{valueY}%";
-labbullet.dy = -225;
+labbullet.dy = -200;
 
 // % of sept female series
 var seriesSEPT = chart.series.push(new am4charts.LineSeries());
@@ -175,19 +175,19 @@ seriesSEPT.strokeWidth = 3;
 seriesSEPT.stroke = am4core.color("#FEBD3B");
 seriesSEPT.fill = am4core.color("#FEBD3B");
 seriesSEPT.yAxis = valueAxis2;
-seriesSEPT.dy = -210;
+seriesSEPT.dy = -175;
 
 var bulletSEPT = seriesSEPT.bullets.push(new am4charts.CircleBullet());
 bulletSEPT.stroke = am4core.color("#FEBD3B");
 bulletSEPT.fill = am4core.color("#FEBD3B");
-bulletSEPT.dy = -210;
+bulletSEPT.dy = -175;
 bulletSEPT.hiddenInLegend = true;
 bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
 bulletSEPT.copyToLegendMarker = false;
 
 var labbullet = seriesSEPT.bullets.push(new am4charts.LabelBullet());
 labbullet.label.text = "{valueY}%";
-labbullet.dy = -225;
+labbullet.dy = -200;
 
 // Add legend
 chart.legend = new am4charts.Legend();
