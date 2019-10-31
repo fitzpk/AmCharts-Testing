@@ -17,15 +17,9 @@
 	}
 </style>
 
-<body>
-	
+<body onresize="changeSize()" onload="changeSize()">
 	<div id="flex-container">
 		<div id="chartdiv"> </div>
-	</div>
-	
-	<div>
-		</br></br></br></br>
-		</br></br></br></br>
 	</div>
 </body>
 
@@ -85,30 +79,48 @@
 	series.name = "{category}";
 	series.slices.template.cornerRadius = 5;
 	series.colors = colorSet;
-	series.slices.template.tooltipText = "{source}";
+	series.slices.template.tooltipText = "{source} awarded us {value}M in 2018";
 	series.ticks.template.disabled = true;
 	series.alignLabels = false;
 	series.labels.template.text = "{value.percent.formatNumber('#.')}%";
 	//series.labels.template.text = "${value} M"; <- Use if you want to show amount instead of %
-	series.labels.template.fontSize = 18;
 	series.labels.template.radius = am4core.percent(-20);
 	series.labels.template.fill = am4core.color("white");
 	//series.slices.template.stroke = am4core.color("black");
 	//series.slices.template.strokeWidth = 2;
-	//series.slices.template.strokeOpacity = 1;
+	series.slices.template.strokeOpacity = 0;
 	
-	series.slices.template.propertyFields.isActive = "pulled";
+	//Setting used to explode chart
+	//series.slices.template.propertyFields.isActive = "pulled";
 	
 	chart.legend = new am4charts.Legend();
 	chart.legend.position = "right";
 	chart.legend.fontSize = 14;
-	chart.legend.valueLabels.template.text = "${value.value} M";
+	chart.legend.valueLabels.template.text = "${value.value}M";
 	
 	// Year label in middle of chart
 	var clabel = series.createChild(am4core.Label);
 	clabel.text = "${values.value.sum} M";
 	clabel.horizontalCenter = "middle";
 	clabel.verticalCenter = "middle";
-	clabel.fontSize = 40;
+	clabel.fontSize = 30;
+
+	// Function used to change the year label based on window size
+	function changeSize() {
+		if (document.getElementById("flex-container").offsetWidth <= 500) {
+			clabel.fontSize = 25;
+			chart.legend.position = "bottom";
+			chart.legend.fontSize = 12;
+			chart.legend.dy = -30;
+			chart.legend.dx = 0;
+		}
+		else {
+			clabel.fontSize = 30;
+			chart.legend.position = "right";
+			chart.legend.fontSize = 14;
+			chart.legend.dy = 0;
+			chart.legend.dx = -40;
+		}
+	}
 
 </script>
