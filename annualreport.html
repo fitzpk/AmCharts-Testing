@@ -68,7 +68,7 @@
 		        var id = $(this).find('a').attr("href"),
 		          posi,
 		          ele,
-		          padding = 105;
+		          padding = 80;
 		      
 		        ele = $(id);
 		        posi = ($(ele).offset()||0).top - padding;
@@ -80,7 +80,7 @@
 		/* end dot nav */
 		});
 	</script>
-	
+		
 	<style>
 		body {
     		background: white;
@@ -98,8 +98,7 @@
 			height: 100%;
 			width: 100%;
 			background-color: white;
-			margin-bottom: 20px;
-			margin-top: 20px;
+			margin-top: 60px;
 			/*border: 1px solid #ccc;*/
     		box-sizing: border-box;
     		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
@@ -165,7 +164,7 @@
 			position: relative;
 			height: 50vh;
 			text-align: center;
-			background-color: #e6e6e6;
+			background-color: white;
 			border-top: 20px solid white;
 			border-left: 20px solid white;
 			border-right: 20px solid white;
@@ -209,7 +208,7 @@
 			display: -webkit-flex;
 		  	display: flex;
 		  	flex-wrap: wrap;
-		  	height: auto;
+		  	width: 100%;
 		}
 		
 		.item, .halfitem {
@@ -224,7 +223,6 @@
 			display:flex;
 			align-items: center;
 			justify-content: center;
-			height: 140%;
 		}
 
 		.subtitle {
@@ -253,6 +251,51 @@
 			border: 1px solid #6f1c46;
 		}
 		
+		
+		/* COLLAPSIBLE CSS SETTINGS */
+		
+		.collapsible {
+		  	background-color: #ffffff;
+		  	color: #6f1c46;
+		  	cursor: pointer;
+		  	padding: 10px 18px 10px 18px;
+		  	width: 80px;
+		  	border: none;
+		  	text-align: center;
+		  	outline: none;
+		  	font-size: 15px;
+		  	font-weight: bold;
+		  	border: 2px solid #6f1c46;
+		  	border-radius: 6px;
+		}
+		
+		.active, .collapsible:hover {
+		  	background-color: #6f1c46;
+		  	color: white;
+		}
+		
+		.collapsible:after {
+		  	color: #6f1c46;
+		  	float: right;
+		  	margin-left: 5px;
+		}
+		
+		.active:after {
+		  	color: white;
+		}
+		
+		.content {
+			margin-top:2px;
+		  	padding: 0 18px;
+		  	max-height: 0;
+		  	overflow: hidden;
+		  	transition: max-height 0.2s ease-out;
+		  	background-color: #dae0e3;
+		  	box-sizing: border-box;
+    		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+		}
+		/* ************************** */
+				
 	</style>
 
 	<body>
@@ -279,6 +322,7 @@
 	        <li class="awesome-tooltip" title="Research"><a href="#research"> </a></li>
 	        <li class="awesome-tooltip" title="Recruitment"><a href="#recruit"> </a></li>
 	        <li class="awesome-tooltip" title="Co-op"><a href="#coop"> </a></li>
+	        <li class="awesome-tooltip" title="Alumni"><a href="#alumni"> </a></li>
 	      </ul>
 	 </div>
 	 <div id="main" class="container">
@@ -381,39 +425,58 @@
 				  	</div>
 				  </div>
 				</div>
+				<div class="rowcontainer">
+		        	<button class="collapsible" onclick="collapsible(this)" id="0">Notes</button>
+				</div>
 	        </section>
+	       	<div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+	    	
+	    	
+	    	
+	    	
 	    	
 	    	<h1>Who We Are</h1>
 	        <section id="who">
 	        	<p style="color:#c0c0c0;font-size:24px;">Enrolment FTE &nbsp; | &nbsp; Undergraduate and Graduate</p>
 
-	        	<div class="rowcontainer">
+	        	<div class="rowcontainer" style="z-index:100;">
 	        		<div class="item">
-	        			<div class="itemtext" style="border-bottom: 4px solid #6f1c46;">
-	        				<p style="font-weight:bold;color:#6f1c46;font-size:40px;">25%</p>
+	        			<div class="itemtext" style="border-bottom: 4px solid #6f1c46; text-align: center;">
+	        				<p style="font-weight:bold;color:#6f1c46;font-size:40px;">
+	        					22% <br> <p style="color:#6f1c46;font-size:16px;">Increase in Undergraduate FTE over 2014-15</p>
+	        				</p>
 	        			</div>
 	        		</div>
 	        		<div class="item">
-	        			<div class="itemtext" style="border-bottom: 4px solid #febd3b;">
-	        				<p style="font-weight:bold;color:#febd3b;font-size:40px;">100%</p>
-	        			</div>
-	        		</div>
-	        		<div class="item">
-	        			<div class="itemtext" style="border-bottom: 4px solid #c0c0c0;">
-	        				<p style="font-weight:bold;color:#c0c0c0;font-size:40px;">70%</p>
+	        			<div class="itemtext" style="border-bottom: 4px solid #febd3b; text-align: center;">
+	        				<p style="font-weight:bold;color:#febd3b;font-size:40px;">
+	        					11% <br> <p style="color:#febd3b;font-size:16px;">Increase in Graduate FTE over 2014-15</p>
+	        				</p>
 	        			</div>
 	        		</div>
 	        	</div>
+	        	
+	        	<div class="rowcontainer" style="">
+	        		<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/stacked.html" scrolling="no"></iframe>
+	        	</div>
+	        	
+				<div class="rowcontainer">
+		        	<button class="collapsible" onclick="collapsible(this)" id="1">Notes</button>
+				</div>
+	        </section>
+	       	<div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>	        
 
+
+
+<!------------------- 1. FIX STICKY NAV DOTS ------------------------------------->
+	        <section>
+	        	<p style="color:#c0c0c0;font-size:24px;">Undergraduate FTE with Proportion of Internationals<br>SEAS/SEPT</p>
 	        	<div class="rowcontainer">
-	        		<iframe style="height:85vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/combo.html" scrolling="no"></iframe>
-	        	</div>
-	        	
-	        	<hr class="innerdivide">
-	        	
-	        	<p style="color:#c0c0c0;font-size:24px;">Geographic Diversity of 2018-19 Incoming Undergraduates</p>
-	        	<div class="rowcontainer">
-	        		<iframe style="height:70vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
+	        		<iframe style="height:100vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/combo.html" scrolling="no"></iframe>
 	        	</div>
 	        	
 	        	<hr class="innerdivide">
@@ -434,7 +497,19 @@
 	        			<iframe style="height:70vh;width:100%;border: none;flex:0.6 0.6 300px;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
 	        		</div>
 	        	</div>
+	        	
+	        	<div class="rowcontainer">
+		        	<button class="collapsible" onclick="collapsible(this)" id="2">Notes</button>
+				</div>
 	        </section>
+	        <div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>
+	        
+	        
+	        
+	        
+	        
 	        
 	        <h1>Research</h1>
 	        <section id="research">
@@ -447,12 +522,18 @@
 	        
 	        <h1>Recruitment</h1>
 	        <section id="recruit">
+		        <p style="color:#c0c0c0;font-size:24px;">Geographic Diversity of 2018-19 Incoming Undergraduates</p>
+		        <div class="rowcontainer">
+		        	<iframe style="height:70vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
+		        </div>
+       
 	        	<div class="rowcontainer">
-	            	<div>
-	                	<p>Insert content</p>
-	            	</div>
-	        	</div>          
-	        </section>   
+		        	<button class="collapsible" onclick="collapsible(this)" id="3">Notes</button>
+				</div>
+	        </section>
+	        <div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			</div>  
 	        
 	        <h1>Co-op</h1>
 	        <section id="coop">
@@ -461,14 +542,41 @@
 	                	<p>Insert content</p>
 	            	</div>
 	        	</div>          
-	        </section>     
+	        </section>  
+	        
+	        
+	       	<h1>Alumni</h1>
+	        <section id="alumni">
+	        	<div class="rowcontainer">
+	            	<div>
+	                	<p>Insert content</p>
+	            	</div>
+	        	</div>          
+	        </section>
+	           
 	    </div>
 
-			<footer>
+			<footer style="text-align: center;">
 				<p>
-					&copy; Copyright  by K F
+					&copy; Copyright 2019 K.P.F.
 				</p>
 			</footer>
 		</div>
+		
 	</body>
+	
+	
+	<script>
+		 function collapsible(elem){
+		 	var collaps = document.getElementsByClassName("content");
+		 	selectedcollap = elem.id;
+		 	elem.classList.toggle("active");
+		 	if (collaps[selectedcollap].style.maxHeight) {
+		 		collaps[selectedcollap].style.maxHeight = null;
+		 	}
+		 	else {
+		 		collaps[selectedcollap].style.maxHeight = collaps[selectedcollap].scrollHeight + "px";
+		 	}
+		 }
+	</script>
 </html>
