@@ -54,44 +54,44 @@ chart.colors.list = [
 // Add data
 chart.data = [ {
   "year": "2014/15",
-  "SEAS Male": 3500,
-  "SEAS Female": 100,
-  "SEPT Male": 200,
-  "SEPT Female": 200,
-  "% of SEAS Female": 19,
-  "% of SEPT Female": 11,
+  "SEAS DOM": 3500,
+  "SEAS INTL": 100,
+  "SEPT DOM": 200,
+  "SEPT INTL": 200,
+  "% of SEAS INTL": 19,
+  "% of SEPT INTL": 11,
 }, {
   "year": "2015/16",
-  "SEAS Male": 3800,
-  "SEAS Female": 150,
-  "SEPT Male": 350,
-  "SEPT Female": 100,
-  "% of SEAS Female": 22,
-  "% of SEPT Female": 14,
+  "SEAS DOM": 3800,
+  "SEAS INTL": 150,
+  "SEPT DOM": 350,
+  "SEPT INTL": 100,
+  "% of SEAS INTL": 22,
+  "% of SEPT INTL": 14,
 }, {
   "year": "2016/17",
-  "SEAS Male": 4000,
-  "SEAS Female": 200,
-  "SEPT Male": 660,
-  "SEPT Female": 330,
-  "% of SEAS Female": 25,
-  "% of SEPT Female": 15,
+  "SEAS DOM": 4000,
+  "SEAS INTL": 200,
+  "SEPT DOM": 660,
+  "SEPT INTL": 330,
+  "% of SEAS INTL": 25,
+  "% of SEPT INTL": 15,
 }, {
   "year": "2017/18",
-  "SEAS Male": 3900,
-  "SEAS Female": 200,
-  "SEPT Male": 590,
-  "SEPT Female": 100,
-  "% of SEAS Female": 27,
-  "% of SEPT Female": 17,
+  "SEAS DOM": 3900,
+  "SEAS INTL": 200,
+  "SEPT DOM": 590,
+  "SEPT INTL": 100,
+  "% of SEAS INTL": 27,
+  "% of SEPT INTL": 17,
 }, {
   "year": "2018/19",
-  "SEAS Male": 4000,
-  "SEAS Female": 300,
-  "SEPT Male": 600,
-  "SEPT Female": 100,
-  "% of SEAS Female": 29,
-  "% of SEPT Female": 18,
+  "SEAS DOM": 4000,
+  "SEAS INTL": 300,
+  "SEPT DOM": 600,
+  "SEPT INTL": 100,
+  "% of SEAS INTL": 29,
+  "% of SEPT INTL": 18,
 }];
 
 // Create axes
@@ -125,10 +125,10 @@ function createSeries(field, name, stacked) {
   series.columns.template.width = am4core.percent(95);
 }
 
-createSeries("SEAS Male", "SEAS Male", false);
-createSeries("SEAS Female", "SEAS Female", true);
-createSeries("SEPT Male", "SEPT Male", false);
-createSeries("SEPT Female", "SEPT Female", true);
+createSeries("SEAS DOM", "SEAS DOM", false);
+createSeries("SEAS INTL", "SEAS INTL", true);
+createSeries("SEPT DOM", "SEPT DOM", false);
+createSeries("SEPT INTL", "SEPT INTL", true);
 
 
 // Second value axis
@@ -143,9 +143,9 @@ yAxisRenderer2.labels.template.disabled = true;
 
 // % of seas female series
 var seriesSEAS = chart.series.push(new am4charts.LineSeries());
-seriesSEAS.dataFields.valueY = "% of SEAS Female";
+seriesSEAS.dataFields.valueY = "% of SEAS INTL";
 seriesSEAS.dataFields.categoryX = "year";
-seriesSEAS.name = "% of SEAS Female";
+seriesSEAS.name = "% of SEAS INTL";
 seriesSEAS.tooltipText = "{name}: [bold]{valueY}%[/]";
 seriesSEAS.strokeWidth = 3;
 seriesSEAS.stroke = am4core.color("#6f1c46");
@@ -158,7 +158,7 @@ bulletSEAS.stroke = am4core.color("#6f1c46");
 bulletSEAS.fill = am4core.color("#6f1c46");
 bulletSEAS.dy = -210;
 bulletSEAS.hiddenInLegend = true;
-bulletSEAS.tooltipText = "[b]% of SEAS Female FTE[/]";
+bulletSEAS.tooltipText = "[b]% of SEAS INTL FTE[/]";
 bulletSEAS.copyToLegendMarker = false;
 
 var labbullet = seriesSEAS.bullets.push(new am4charts.LabelBullet());
@@ -167,9 +167,9 @@ labbullet.dy = -225;
 
 // % of sept female series
 var seriesSEPT = chart.series.push(new am4charts.LineSeries());
-seriesSEPT.dataFields.valueY = "% of SEPT Female";
+seriesSEPT.dataFields.valueY = "% of SEPT INTL";
 seriesSEPT.dataFields.categoryX = "year";
-seriesSEPT.name = "% of SEPT Female";
+seriesSEPT.name = "% of SEPT INTL";
 seriesSEPT.tooltipText = "{name}: [bold]{valueY}%[/]";
 seriesSEPT.strokeWidth = 3;
 seriesSEPT.stroke = am4core.color("#FEBD3B");
@@ -182,7 +182,7 @@ bulletSEPT.stroke = am4core.color("#FEBD3B");
 bulletSEPT.fill = am4core.color("#FEBD3B");
 bulletSEPT.dy = -210;
 bulletSEPT.hiddenInLegend = true;
-bulletSEPT.tooltipText = "[b]% of SEPT Female FTE[/]";
+bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
 bulletSEPT.copyToLegendMarker = false;
 
 var labbullet = seriesSEPT.bullets.push(new am4charts.LabelBullet());
