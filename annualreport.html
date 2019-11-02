@@ -21,7 +21,7 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	</head>
 	<script>
-		$(document).ready(function(){
+		/*$(document).ready(function(){
 		    $('.awesome-tooltip').tooltip({
 		        placement: 'left'
 		    });   
@@ -62,7 +62,7 @@
 		        });   
 		    }
 		
-		    /* get clicks working */
+		    //get clicks working
 		    $('#dot-nav li').click(function(){
 		      
 		        var id = $(this).find('a').attr("href"),
@@ -77,8 +77,8 @@
 		      
 		        return false;
 		    });
-		/* end dot nav */
-		});
+		 
+		});*/
 	</script>
 		
 	<style>
@@ -94,7 +94,7 @@
 		}
 		section {
 			z-index: -1;
-			padding: 25px;
+			padding: 20px;
 			height: 100%;
 			width: 100%;
 			background-color: white;
@@ -233,15 +233,18 @@
     		margin: auto;
     		text-align: center;
     		font-size: 20px;
-    		border-bottom: 4px solid black;
+    		border-bottom: 2px solid black;
     		transition: .2s ease-in-out;
+			background-color: rgba(204,204,204,0.2);
+			border-radius: 2px;
+			box-shadow: 0 4px 2px -2px rgba(0,0,0,0.16), 0 4px 2px -2px rgba(0,0,0,0.12)!important;
 		}
 		
-		.item:hover .subtitle{
+		/*.item:hover .subtitle{
 			background-color: rgba(204,204,204,0.2);
 			border-radius: 4px;
 			box-shadow: 0 4px 2px -2px rgba(0,0,0,0.16), 0 4px 2px -2px rgba(0,0,0,0.12)!important;
-		}
+		}*/
 		
 		span {
 			font-size: 24px;
@@ -250,12 +253,18 @@
 		hr.innerdivide {
 			border: 1px solid #6f1c46;
 		}
+	
+		hr.outerdivide {
+			margin-top:50px;
+			border: 2px solid #99b4d1;
+			
+		}
 		
 		#researchbox {
 			position:relative;
 			height:80%;
 			width:100%;
-			background-color: #c0c0c0;
+			background-color: #dfdfdf;
 			box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
 		}
 		
@@ -276,6 +285,7 @@
 		  	font-weight: bold;
 		  	border: 2px solid #6f1c46;
 		  	border-radius: 6px;
+		  	margin-top:20px;
 		}
 		
 		.collapsible:after {
@@ -333,6 +343,7 @@
 	 </div>-->
 	 <div id="main" class="container">
 	 	
+	 		<hr class="outerdivide">
 	 		<h1>Message from The Dean</h1>
 	    	<section id="message">
 	        	<div class="rowcontainer" style="height:180px";>
@@ -342,6 +353,7 @@
 	        	</div>          
 	    	</section>
 	    	
+	    	<hr class="outerdivide">
 	    	<h1>Where We Stand</h1>
 	        <section id="where">
 
@@ -442,7 +454,7 @@
 	    	
 	    	
 	    	
-	    	
+	    	<hr class="outerdivide">
 	    	<h1>Who We Are</h1>
 	        <section id="who">
 	        	<p style="color:#c0c0c0;font-size:24px;">Enrolment FTE &nbsp; | &nbsp; Undergraduate and Graduate</p>
@@ -514,7 +526,7 @@
 	        
 	        
 	        
-	        
+	        <hr class="outerdivide">
 	        <h1>Research</h1>
 	        <section id="research">
 	        	<div class="rowcontainer">
@@ -540,12 +552,13 @@
 	        	
 	        	<div class="rowcontainer">
 		        	<button class="collapsible" onclick="collapsible(this)" id="3">Notes</button>
-			</div>
+				</div>
 	        </section>
 	        <div class="content">
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-		</div>
+			</div>
 	        
+	        <hr class="outerdivide">
 	        <h1>Recruitment</h1>
 	        <section id="recruit">
 		        <p style="color:#c0c0c0;font-size:24px;">Geographic Diversity of 2018-19 Incoming Undergraduates</p>
@@ -561,6 +574,7 @@
 				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 			</div>  
 	        
+	        <hr class="outerdivide">
 	        <h1>Co-op</h1>
 	        <section id="coop">
 	        	<div class="rowcontainer">
@@ -570,7 +584,7 @@
 	        	</div>          
 	        </section>  
 	        
-	        
+	        <hr class="outerdivide">
 	       	<h1>Alumni</h1>
 	        <section id="alumni">
 	        	<div class="rowcontainer">
@@ -606,4 +620,3 @@
 		 }
 	</script>
 </html>
-
