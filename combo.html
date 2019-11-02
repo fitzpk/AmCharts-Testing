@@ -108,7 +108,7 @@ categoryAxis.renderer.grid.template.strokeOpacity = 0;
 var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
 //yAxis.title.text = "FTE";
 yAxis.min = 0;
-yAxis.max = 7500;
+yAxis.max = 7000;
 	
 var yAxisRenderer = yAxis.renderer;
 yAxisRenderer.grid.template.strokeOpacity = 0;
@@ -134,12 +134,13 @@ createSeries("SEPT INTL", "SEPT INTL", true);
 // Second value axis
 var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
 valueAxis2.renderer.opposite = true;
-valueAxis2.min = 0;
+valueAxis2.min = -120;
 valueAxis2.max = 60;
 
 var yAxisRenderer2 = valueAxis2.renderer;
 yAxisRenderer2.grid.template.strokeOpacity = 0;
 yAxisRenderer2.labels.template.disabled = true;
+yAxisRenderer2.baseGrid.disabled = true;
 
 // % of seas female series
 var seriesSEAS = chart.series.push(new am4charts.LineSeries());
@@ -151,19 +152,17 @@ seriesSEAS.strokeWidth = 3;
 seriesSEAS.stroke = am4core.color("#6f1c46");
 seriesSEAS.fill = am4core.color("#6f1c46");
 seriesSEAS.yAxis = valueAxis2;
-seriesSEAS.dy = -175;
 
 var bulletSEAS = seriesSEAS.bullets.push(new am4charts.CircleBullet());
 bulletSEAS.stroke = am4core.color("#6f1c46");
 bulletSEAS.fill = am4core.color("#6f1c46");
-bulletSEAS.dy = -175;
 bulletSEAS.hiddenInLegend = true;
 bulletSEAS.tooltipText = "[b]% of SEAS INTL FTE[/]";
 bulletSEAS.copyToLegendMarker = false;
 
 var labbullet = seriesSEAS.bullets.push(new am4charts.LabelBullet());
 labbullet.label.text = "{valueY}%";
-labbullet.dy = -200;
+labbullet.dy = -15;
 
 // % of sept female series
 var seriesSEPT = chart.series.push(new am4charts.LineSeries());
@@ -175,23 +174,21 @@ seriesSEPT.strokeWidth = 3;
 seriesSEPT.stroke = am4core.color("#FEBD3B");
 seriesSEPT.fill = am4core.color("#FEBD3B");
 seriesSEPT.yAxis = valueAxis2;
-seriesSEPT.dy = -175;
 
 var bulletSEPT = seriesSEPT.bullets.push(new am4charts.CircleBullet());
 bulletSEPT.stroke = am4core.color("#FEBD3B");
 bulletSEPT.fill = am4core.color("#FEBD3B");
-bulletSEPT.dy = -175;
 bulletSEPT.hiddenInLegend = true;
 bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
 bulletSEPT.copyToLegendMarker = false;
 
 var labbullet = seriesSEPT.bullets.push(new am4charts.LabelBullet());
 labbullet.label.text = "{valueY}%";
-labbullet.dy = -200;
+labbullet.dy = 15;
 
 // Add legend
 chart.legend = new am4charts.Legend();
-chart.legend.fontSize = 11;
+chart.legend.fontSize = 10.5;
 chart.legend.useDefaultMarker = false;
 
 }); // end am4core.ready()
