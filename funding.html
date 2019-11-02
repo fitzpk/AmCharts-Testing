@@ -28,22 +28,22 @@
 	am4core.useTheme(am4themes_animated);
 	// Themes end
 	
-	var chart = am4core.create("chartdiv", am4charts.PieChart3D);
+	var chart = am4core.create("chartdiv", am4charts.PieChart);
 	chart.hiddenState.properties.opacity = 0; // this creates initial fade-in
 	
 	chart.data = [
 	  {
-	    source: "Federal \nTri Council",
+	    source: "Federal Tri Council",
 	    funds: 15.1,
 	    pulled: true,
 	  },
 	  {
-	    source: "Ontario \nProvincial",
+	    source: "Ontario Provincial",
 	    funds: 10,
 	    pulled: true,
 	  },
 	  {
-	  	source: "Federal \nNon-Tri Council",
+	  	source: "Federal Non-Tri Council",
 	    funds: 6.8,
 	    pulled: true,
 	  },
@@ -64,60 +64,84 @@
 	  },
 	];
 	
+	chart.radius = am4core.percent(80);
 	chart.innerRadius = am4core.percent(40);
-	chart.depth = 60;
+	//chart.startAngle = 180;
+	//chart.endAngle = 360; 
 
 	var colorSet = new am4core.ColorSet();
 	colorSet.list = ["#6f1c46", "#f0b135", "#ffd001", "#016e97", "#86d1e6", "#d3d655"].map(function(color) {
 	  return new am4core.color(color);
 	});
 
-	var series = chart.series.push(new am4charts.PieSeries3D());
+	var series = chart.series.push(new am4charts.PieSeries());
 	series.dataFields.value = "funds";
-	series.dataFields.depthValue = "funds";
+	//series.dataFields.radiusValue = "funds";
+	//series.dataFields.depthValue = "funds";
 	series.dataFields.category = "source";
 	series.name = "{category}";
-	series.slices.template.cornerRadius = 5;
 	series.colors = colorSet;
+	
+	series.slices.template.cornerRadius = 8;
+	//series.slices.template.innerCornerRadius = 70;
 	series.slices.template.tooltipText = "{source} awarded us {value}M in 2018";
-	series.ticks.template.disabled = true;
-	series.alignLabels = false;
-	series.labels.template.text = "{value.percent.formatNumber('#.')}%";
-	//series.labels.template.text = "${value} M"; <- Use if you want to show amount instead of %
-	series.labels.template.radius = am4core.percent(-20);
-	series.labels.template.fill = am4core.color("white");
-	//series.slices.template.stroke = am4core.color("black");
-	//series.slices.template.strokeWidth = 2;
-	series.slices.template.strokeOpacity = 0;
+	series.slices.template.stroke = am4core.color("white");
+	series.slices.template.strokeWidth = 1;
+	series.slices.template.strokeOpacity = 1;
 	
 	//Setting used to explode chart
 	//series.slices.template.propertyFields.isActive = "pulled";
 	
+	series.ticks.template.disabled = true;
+	series.alignLabels = false;
+	
+	series.labels.template.text = "{value.percent.formatNumber('#.')}%";
+	//series.labels.template.text = "${value} M"; <- Use if you want to show amount instead of %
+	series.labels.template.radius = am4core.percent(-20);
+	series.labels.template.fill = am4core.color("white");
+
+	series.hiddenState.properties.startAngle = 90;
+	series.hiddenState.properties.endAngle = 90;
+	
 	chart.legend = new am4charts.Legend();
 	chart.legend.position = "right";
 	chart.legend.fontSize = 14;
+	//chart.legend.labels.template.text = "[bold ${value.value}M[/] - {source}";
 	chart.legend.valueLabels.template.text = "${value.value}M";
+	chart.legend.itemContainers.template.paddingTop = 4;
+	chart.legend.itemContainers.template.paddingBottom = 4;
+	chart.legend.labels.template.truncate = true;
+	//chart.legend.labels.template.wrap = true;
+	chart.legend.labels.template.width = 150;
+	chart.legend.valueLabels.template.width = 40;
 	
 	// Year label in middle of chart
 	var clabel = series.createChild(am4core.Label);
 	clabel.text = "${values.value.sum} M";
 	clabel.horizontalCenter = "middle";
 	clabel.verticalCenter = "middle";
-	clabel.fontSize = 30;
+	clabel.fontSize = 25;
 
 	// Function used to change the year label based on window size
 	function changeSize() {
-		if (document.getElementById("flex-container").offsetWidth <= 500) {
-			clabel.fontSize = 25;
+		if (document.getElementById("flex-container").offsetWidth <= 500 && document.getElementById("flex-container").offsetWidth > 250) {
+			clabel.fontSize = 20;
 			chart.legend.position = "bottom";
-			chart.legend.fontSize = 12;
+			chart.legend.fontSize = 10;
+			chart.legend.dy = -30;
+			chart.legend.dx = 0;
+		}
+		else if (document.getElementById("flex-container").offsetWidth <= 250) {
+			clabel.fontSize = 20;
+			chart.legend.position = "bottom";
+			chart.legend.fontSize = 8;
 			chart.legend.dy = -30;
 			chart.legend.dx = 0;
 		}
 		else {
-			clabel.fontSize = 30;
+			clabel.fontSize = 25;
 			chart.legend.position = "right";
-			chart.legend.fontSize = 14;
+			chart.legend.fontSize = 10;
 			chart.legend.dy = 0;
 			chart.legend.dx = -40;
 		}
