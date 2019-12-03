@@ -17,4 +17,4 @@
 
 <a href="https://fitzpk.github.io/Repo-2/stacked.html">Stacked Column Chart</a>
 
-<a href="https://fitzpk.github.io/Repo-2/stacked.html">Dynamic Chart</a>
+<a href="https://fitzpk.github.io/Repo-2/dynamic.html">Dynamic Chart</a>
