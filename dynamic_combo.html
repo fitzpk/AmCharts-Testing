@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic amChart</title>
+</head>
+
+<style>
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+        }
+        .flexcontainer {
+          display: flex;
+          flex-wrap: wrap;
+    flex-direction: column;
+        }
+        #chartdiv {
+                margin: 0 auto;
+                width: 100vw;
+                height: 70vh;
+                flex: 1;
+        }
+  #flexinner {
+    margin: 0 auto;
+    width: 100vw;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .optionbox {
+    flex: 1;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 75%;
+    height: 60px;
+    background-color: white;
+    transition: 0.2s ease-in-out;
+    border: 0.1px solid rgba(129,129,129,0.2);
+    text-align: center;
+    margin: 20px;
+  }
+  .optionbox:hover{
+    background-color: #E2EDF4;
+    border: 1px solid #ccc;
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+  }
+  input[name='option']{
+    display: none;
+  }
+  label[class="optionLab"]{
+    flex: 1 0 0;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+    border: 2px solid rgba(156,156,156,0);
+  }
+  .active{
+    background-color: #E2EDF4;
+    border: 1px solid #ccc;
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+  }
+        /*#chartdiv {
+                margin: 0 auto;
+                  width: 100vw;
+                  height: 70vh;
+                  flex: 0.4 0.4 320px;
+        }
+        #chartdiv2 {
+                margin: 0 auto;
+                  width: 100vw;
+                  height: 70vh;
+                  flex: 0.6 0.6 360px;
+        }*/
+</style>
+
+<body>
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script>
+  //FUNCTION IS USED TO HIGHLIGHT SELECTED OPTION BOX BY GIVING IT THE ACTIVE CSS CLASS
+  function highlightOpt(elem) {
+    var x = document.getElementsByClassName("optionbox");
+    x[0].className = 'optionbox';
+    x[1].className = 'optionbox';
+    //x[2].className = 'optionbox';
+    elem.className += ' active';
+  }
+</script>
+
+<div class="flexcontainer">
+  <div id="flexinner">
+
+    <div class="optionbox active" onclick="selectDataset(document.getElementById('IO1').value);highlightOpt(this);clearLegend();">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">Undergraduate</p>
+        <input id='IO1' value='set1' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <div class="optionbox" onclick="selectDataset(document.getElementById('IO2').value);highlightOpt(this);clearLegend();">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">Graduate</p>
+        <input id='IO2' value='set2' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <!--<div class="optionbox" onclick="selectDataset(document.getElementById('IO3').value);highlightOpt(this);">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">iBioMed</p>
+        <input id='IO3' value='set3' class='option' name='option' type='radio'/>
+      </label>
+    </div>-->
+
+  </div>
+
+  <div id="chartdiv"></div>
+</div>
+
+<!--<script  src="./script.js"></script>-->
+
+<script>
+  am4core.useTheme(am4themes_animated);
+  // Create chart instance
+
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+  chart.colors.list = [
+         am4core.color("#AA5C83"),
+         am4core.color("#7A003D"),
+         am4core.color("#FECF70"),
+         am4core.color("#FEBD3B"),
+  ];
+
+  var data = {
+   "set1": [{
+     "year": "2014/15",
+     "SEAS DOM": 3500,
+     "SEAS INTL": 100,
+     "SEPT DOM": 200,
+     "SEPT INTL": 200,
+     "% of SEAS INTL": 19,
+     "% of SEPT INTL": 11,
+   }, {
+     "year": "2015/16",
+     "SEAS DOM": 3800,
+     "SEAS INTL": 150,
+     "SEPT DOM": 350,
+     "SEPT INTL": 100,
+     "% of SEAS INTL": 22,
+     "% of SEPT INTL": 14,
+   }, {
+     "year": "2016/17",
+     "SEAS DOM": 4000,
+     "SEAS INTL": 200,
+     "SEPT DOM": 660,
+     "SEPT INTL": 330,
+     "% of SEAS INTL": 25,
+     "% of SEPT INTL": 15,
+   }, {
+     "year": "2017/18",
+     "SEAS DOM": 3900,
+     "SEAS INTL": 200,
+     "SEPT DOM": 590,
+     "SEPT INTL": 100,
+     "% of SEAS INTL": 27,
+     "% of SEPT INTL": 17,
+   }, {
+     "year": "2018/19",
+     "SEAS DOM": 4000,
+     "SEAS INTL": 300,
+     "SEPT DOM": 600,
+     "SEPT INTL": 100,
+     "% of SEAS INTL": 29,
+     "% of SEPT INTL": 18,
+   }],
+   "set2": [{
+     "year": "2014/15",
+     "SEAS DOM": 300,
+     "SEAS INTL": 260,
+     "SEPT DOM": 100,
+     "SEPT INTL": 75,
+     "% of SEAS INTL": 19,
+     "% of SEPT INTL": 11,
+   }, {
+     "year": "2015/16",
+     "SEAS DOM": 290,
+     "SEAS INTL": 300,
+     "SEPT DOM": 100,
+     "SEPT INTL": 120,
+     "% of SEAS INTL": 22,
+     "% of SEPT INTL": 14,
+   }, {
+     "year": "2016/17",
+     "SEAS DOM": 310,
+     "SEAS INTL": 300,
+     "SEPT DOM": 120,
+     "SEPT INTL": 130,
+     "% of SEAS INTL": 25,
+     "% of SEPT INTL": 15,
+   }, {
+     "year": "2017/18",
+     "SEAS DOM": 300,
+     "SEAS INTL": 305,
+     "SEPT DOM": 117,
+     "SEPT INTL": 145,
+     "% of SEAS INTL": 27,
+     "% of SEPT INTL": 17,
+   }, {
+     "year": "2018/19",
+     "SEAS DOM": 310,
+     "SEAS INTL": 327,
+     "SEPT DOM": 123,
+     "SEPT INTL": 156,
+     "% of SEAS INTL": 29,
+     "% of SEPT INTL": 18,
+   }],
+   //"set3": [{
+   //  "category": "Research",
+   //  "value": 300
+   //}, {
+   //  "category": "Marketing",
+   //  "value": 489
+   //}, {
+   //  "category": "Distribution",
+   //  "value": 100
+   //}],
+  }
+  // Add data
+  chart.data = data.set1;
+
+  // Create function used to toggle datasets
+  function selectDataset(set) {
+   chart.data = data[set];
+  }
+
+  function clearLegend(){
+    seriesSEAS.hidden = false;
+    seriesSEPT.hidden = false;
+  }
+
+  // Create axes
+  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "year";
+  categoryAxis.title.text = "";
+  categoryAxis.renderer.grid.template.location = 0;
+  categoryAxis.renderer.labels.template.fontSize = 11;
+  categoryAxis.renderer.minGridDistance = 20;
+  categoryAxis.renderer.cellStartLocation = 0.1;
+  categoryAxis.renderer.cellEndLocation = 0.9;
+  categoryAxis.renderer.grid.template.strokeOpacity = 0;
+
+  var yAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  //yAxis.title.text = "FTE";
+  yAxis.min = 0;
+  yAxis.max = 7000;
+
+  var yAxisRenderer = yAxis.renderer;
+  yAxisRenderer.grid.template.strokeOpacity = 0;
+  yAxisRenderer.labels.template.disabled = true;
+
+  // Create series
+  function createSeries(field, name, stacked) {
+    var series = chart.series.push(new am4charts.ColumnSeries());
+    series.dataFields.valueY = field;
+    series.dataFields.categoryX = "year";
+    series.name = name;
+    series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+    series.stacked = stacked;
+    series.columns.template.width = am4core.percent(95);
+  }
+
+  createSeries("SEAS DOM", "SEAS DOM", false);
+  createSeries("SEAS INTL", "SEAS INTL", true);
+  createSeries("SEPT DOM", "SEPT DOM", false);
+  createSeries("SEPT INTL", "SEPT INTL", true);
+
+  // Second value axis
+  var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+  valueAxis2.renderer.opposite = true;
+  valueAxis2.min = -100;
+  valueAxis2.max = 40;
+  var yAxisRenderer2 = valueAxis2.renderer;
+  yAxisRenderer2.grid.template.strokeOpacity = 0;
+  yAxisRenderer2.labels.template.disabled = true;
+  yAxisRenderer2.baseGrid.disabled = true;
+
+  // % of seas female series
+  var seriesSEAS = chart.series.push(new am4charts.LineSeries());
+  seriesSEAS.dataFields.valueY = "% of SEAS INTL";
+  seriesSEAS.dataFields.categoryX = "year";
+  seriesSEAS.name = "% of SEAS INTL";
+  seriesSEAS.tooltipText = "{name}: [bold]{valueY}%[/]";
+  seriesSEAS.strokeWidth = 3;
+  seriesSEAS.stroke = am4core.color("#6f1c46");
+  seriesSEAS.fill = am4core.color("#6f1c46");
+  seriesSEAS.yAxis = valueAxis2;
+  var bulletSEAS = seriesSEAS.bullets.push(new am4charts.CircleBullet());
+  bulletSEAS.stroke = am4core.color("#6f1c46");
+  bulletSEAS.fill = am4core.color("#6f1c46");
+  bulletSEAS.hiddenInLegend = true;
+  bulletSEAS.tooltipText = "[b]% of SEAS INTL FTE[/]";
+  bulletSEAS.copyToLegendMarker = false;
+  var labbullet = seriesSEAS.bullets.push(new am4charts.LabelBullet());
+  labbullet.label.text = "{valueY}%";
+  labbullet.dy = -15;
+  // % of sept female series
+  var seriesSEPT = chart.series.push(new am4charts.LineSeries());
+  seriesSEPT.dataFields.valueY = "% of SEPT INTL";
+  seriesSEPT.dataFields.categoryX = "year";
+  seriesSEPT.name = "% of SEPT INTL";
+  seriesSEPT.tooltipText = "{name}: [bold]{valueY}%[/]";
+  seriesSEPT.strokeWidth = 3;
+  seriesSEPT.stroke = am4core.color("#FEBD3B");
+  seriesSEPT.fill = am4core.color("#FEBD3B");
+  seriesSEPT.yAxis = valueAxis2;
+  var bulletSEPT = seriesSEPT.bullets.push(new am4charts.CircleBullet());
+  bulletSEPT.stroke = am4core.color("#FEBD3B");
+  bulletSEPT.fill = am4core.color("#FEBD3B");
+  bulletSEPT.hiddenInLegend = true;
+  bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
+  bulletSEPT.copyToLegendMarker = false;
+  var labbullet = seriesSEPT.bullets.push(new am4charts.LabelBullet());
+  labbullet.label.text = "{valueY}%";
+  labbullet.dy = 15;
+
+  // Add legend
+  chart.legend = new am4charts.Legend();
+  chart.legend.fontSize = 10.5;
+  chart.legend.useDefaultMarker = false;
+
+</script>
+
+</body>
+</html>
