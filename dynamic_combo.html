@@ -242,8 +242,12 @@
   }
 
   function clearLegend(){
-    seriesSEAS.hidden = false;
-    seriesSEPT.hidden = false;
+    series_seasDOM.show();
+    series_seasINTL.show();
+    series_septDOM.show();
+    series_septINTL.show();
+    series_seasPERC.show();
+    series_septPERC.show();
   }
 
   // Create axes
@@ -266,70 +270,72 @@
   yAxisRenderer.grid.template.strokeOpacity = 0;
   yAxisRenderer.labels.template.disabled = true;
 
-  // Create series
-  function createSeries(field, name, stacked) {
-    var series = chart.series.push(new am4charts.ColumnSeries());
-    series.dataFields.valueY = field;
-    series.dataFields.categoryX = "year";
-    series.name = name;
-    series.columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
-    series.stacked = stacked;
-    series.columns.template.width = am4core.percent(95);
-  }
-
-  createSeries("SEAS DOM", "SEAS DOM", false);
-  createSeries("SEAS INTL", "SEAS INTL", true);
-  createSeries("SEPT DOM", "SEPT DOM", false);
-  createSeries("SEPT INTL", "SEPT INTL", true);
-
   // Second value axis
-  var valueAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
-  valueAxis2.renderer.opposite = true;
-  valueAxis2.min = -100;
-  valueAxis2.max = 40;
-  var yAxisRenderer2 = valueAxis2.renderer;
+  var yAxis2 = chart.yAxes.push(new am4charts.ValueAxis());
+  yAxis2.renderer.opposite = true;
+  yAxis2.min = -100;
+  yAxis2.max = 40;
+  var yAxisRenderer2 = yAxis2.renderer;
   yAxisRenderer2.grid.template.strokeOpacity = 0;
   yAxisRenderer2.labels.template.disabled = true;
   yAxisRenderer2.baseGrid.disabled = true;
 
-  // % of seas female series
-  var seriesSEAS = chart.series.push(new am4charts.LineSeries());
-  seriesSEAS.dataFields.valueY = "% of SEAS INTL";
-  seriesSEAS.dataFields.categoryX = "year";
-  seriesSEAS.name = "% of SEAS INTL";
-  seriesSEAS.tooltipText = "{name}: [bold]{valueY}%[/]";
-  seriesSEAS.strokeWidth = 3;
-  seriesSEAS.stroke = am4core.color("#6f1c46");
-  seriesSEAS.fill = am4core.color("#6f1c46");
-  seriesSEAS.yAxis = valueAxis2;
-  var bulletSEAS = seriesSEAS.bullets.push(new am4charts.CircleBullet());
-  bulletSEAS.stroke = am4core.color("#6f1c46");
-  bulletSEAS.fill = am4core.color("#6f1c46");
-  bulletSEAS.hiddenInLegend = true;
-  bulletSEAS.tooltipText = "[b]% of SEAS INTL FTE[/]";
-  bulletSEAS.copyToLegendMarker = false;
-  var labbullet = seriesSEAS.bullets.push(new am4charts.LabelBullet());
-  labbullet.label.text = "{valueY}%";
-  labbullet.dy = -15;
-  // % of sept female series
-  var seriesSEPT = chart.series.push(new am4charts.LineSeries());
-  seriesSEPT.dataFields.valueY = "% of SEPT INTL";
-  seriesSEPT.dataFields.categoryX = "year";
-  seriesSEPT.name = "% of SEPT INTL";
-  seriesSEPT.tooltipText = "{name}: [bold]{valueY}%[/]";
-  seriesSEPT.strokeWidth = 3;
-  seriesSEPT.stroke = am4core.color("#FEBD3B");
-  seriesSEPT.fill = am4core.color("#FEBD3B");
-  seriesSEPT.yAxis = valueAxis2;
-  var bulletSEPT = seriesSEPT.bullets.push(new am4charts.CircleBullet());
-  bulletSEPT.stroke = am4core.color("#FEBD3B");
-  bulletSEPT.fill = am4core.color("#FEBD3B");
-  bulletSEPT.hiddenInLegend = true;
-  bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
-  bulletSEPT.copyToLegendMarker = false;
-  var labbullet = seriesSEPT.bullets.push(new am4charts.LabelBullet());
-  labbullet.label.text = "{valueY}%";
-  labbullet.dy = 15;
+  // Create series function
+  function createSeries(field, name, stacked, varID, chartType) {
+
+    /* CREATE PERCENTAGE LINES */
+    if (chartType == "line") {
+      if (name.includes("SEPT")) {
+        linecolour = "#FEBD3B";
+      }
+      else {
+        linecolour = "#6F1C46";
+      }
+      var variableName = "series_"+varID;
+      window[variableName] = chart.series.push(new am4charts.LineSeries());
+      window[variableName].dataFields.valueY = field;
+      window[variableName].dataFields.categoryX = "year";
+      window[variableName].name = name;
+      window[variableName].tooltipText = "{name}: [bold]{valueY}%[/]";
+      window[variableName].strokeWidth = 3;
+      window[variableName].stroke = am4core.color(linecolour);
+      window[variableName].fill = am4core.color(linecolour);
+      window[variableName].yAxis = yAxis2;
+
+      var bulletSEPT = window[variableName].bullets.push(new am4charts.CircleBullet());
+      bulletSEPT.stroke = am4core.color(linecolour);
+      bulletSEPT.fill = am4core.color(linecolour);
+      bulletSEPT.hiddenInLegend = true;
+      bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
+      bulletSEPT.copyToLegendMarker = false;
+
+      var labbullet = window[variableName].bullets.push(new am4charts.LabelBullet());
+      labbullet.label.text = "{valueY}%";
+      labbullet.dy = 15;
+    }
+
+    /* CREATE STACKED BARS */
+    else {
+      // variableName and window are used to create unique variable names
+      // which we can then reference in the clearLegend function
+      var variableName = "series_"+varID;
+      window[variableName] = chart.series.push(new am4charts.ColumnSeries());
+      window[variableName].dataFields.valueY = field;
+      window[variableName].dataFields.categoryX = "year";
+      window[variableName].name = name;
+      window[variableName].columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+      window[variableName].stacked = stacked;
+      window[variableName].columns.template.width = am4core.percent(95);
+
+    }
+  }
+
+  createSeries("SEAS DOM", "SEAS DOM", false, "seasDOM", "column");
+  createSeries("SEAS INTL", "SEAS INTL", true, "seasINTL", "column");
+  createSeries("SEPT DOM", "SEPT DOM", false, "septDOM", "column");
+  createSeries("SEPT INTL", "SEPT INTL", true, "septINTL", "column");
+  createSeries("% of SEAS INTL", "% of SEAS INTL", true, "seasPERC", "line");
+  createSeries("% of SEPT INTL", "% of SEPT INTL", true, "septPERC", "line");
 
   // Add legend
   chart.legend = new am4charts.Legend();
