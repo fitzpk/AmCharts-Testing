@@ -19,4 +19,4 @@
 
 <a href="https://fitzpk.github.io/Repo-2/dynamic.html">Dynamic Chart</a>
 
-<a href="https://fitzpk.github.io/Repo-2/dynamic_combo.html">Dynamic Combo CHart</a>
+<a href="https://fitzpk.github.io/Repo-2/dynamic_combo.html">Dynamic Combo Chart</a>
