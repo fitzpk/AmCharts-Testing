@@ -302,16 +302,22 @@
       window[variableName].fill = am4core.color(linecolour);
       window[variableName].yAxis = yAxis2;
 
-      var bulletSEPT = window[variableName].bullets.push(new am4charts.CircleBullet());
-      bulletSEPT.stroke = am4core.color(linecolour);
-      bulletSEPT.fill = am4core.color(linecolour);
-      bulletSEPT.hiddenInLegend = true;
-      bulletSEPT.tooltipText = "[b]% of SEPT INTL FTE[/]";
-      bulletSEPT.copyToLegendMarker = false;
+      var bullet = window[variableName].bullets.push(new am4charts.CircleBullet());
+      bullet.stroke = am4core.color(linecolour);
+      bullet.fill = am4core.color(linecolour);
+      bullet.hiddenInLegend = true;
+      bullet.tooltipText = "[b]% of SEPT INTL FTE[/]";
+      bullet.copyToLegendMarker = false;
 
       var labbullet = window[variableName].bullets.push(new am4charts.LabelBullet());
       labbullet.label.text = "{valueY}%";
-      labbullet.dy = 15;
+      
+      if (name.includes("SEPT")) {
+        labbullet.dy = 15;
+      }
+      else {
+        labbullet.dy = -15;
+      }
     }
 
     /* CREATE STACKED BARS */
