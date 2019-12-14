@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Dynamic amChart</title>
+</head>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  .flexcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  #chartdiv {
+          margin: 0 auto;
+          width: 100vw;
+          height: 85vh;
+          flex: 1;
+  }
+  #flexinner {
+    margin: 0 auto;
+    width: 100vw;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .optionbox {
+    flex: 1;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 75%;
+    height: 60px;
+    background-color: rgba(233,233,233,0.5);
+    transition: 0.2s ease-in-out;
+    border: 2px solid rgba(111,28,70,0.8);
+    /*border: 0.1px solid rgba(129,129,129,0.2);*/
+    text-align: center;
+    font-size: 18px;
+    margin: 20px;
+  }
+  .optionbox:hover{
+    background-color: rgba(142,151,157,0.8);
+    border: 2px solid #6F1C46;
+    color: white;
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+  }
+  input[name='option']{
+    display: none;
+  }
+  label[class="optionLab"]{
+    flex: 1 0 0;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+    border: 2px solid rgba(156,156,156,0);
+  }
+  .active{
+    background-color: rgba(142,151,157,0.8);
+    border: 2px solid #6F1C46;
+    color: white;
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+  }
+  /*#chartdiv {
+          margin: 0 auto;
+            width: 100vw;
+            height: 70vh;
+            flex: 0.4 0.4 320px;
+  }
+  #chartdiv2 {
+          margin: 0 auto;
+            width: 100vw;
+            height: 70vh;
+            flex: 0.6 0.6 360px;
+  }*/
+</style>
+
+<body>
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script>
+  //FUNCTION IS USED TO HIGHLIGHT SELECTED OPTION BOX BY GIVING IT THE ACTIVE CSS CLASS
+  function highlightOpt(elem) {
+    var x = document.getElementsByClassName("optionbox");
+    x[0].className = 'optionbox';
+    x[1].className = 'optionbox';
+    //x[2].className = 'optionbox';
+    elem.className += ' active';
+  }
+</script>
+
+<div class="flexcontainer">
+  <div id="flexinner">
+
+    <div id="OB1" class="optionbox active" onclick="selectDataset(document.getElementById('IO1').value);highlightOpt(this);clearLegend();">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">Undergraduate</p>
+        <input id='IO1' value='set1' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <div id="OB2" class="optionbox" onclick="selectDataset(document.getElementById('IO2').value);highlightOpt(this);clearLegend();">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">Graduate</p>
+        <input id='IO2' value='set2' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <!--<div class="optionbox" onclick="selectDataset(document.getElementById('IO3').value);highlightOpt(this);">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">iBioMed</p>
+        <input id='IO3' value='set3' class='option' name='option' type='radio'/>
+      </label>
+    </div>-->
+  </div>
+  <div id="chartdiv"></div>
+</div>
+
+<!--<script  src="./script.js"></script>-->
+
+<script>
+  am4core.useTheme(am4themes_animated);
+  // Create chart instance
+
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+  var data = {
+   "set1": [{
+     "year": "2014-15",
+     "B.Eng. (Incl. Mgmt & Society)": 3522.7,
+     "B.A.Sc.": 220.3,
+     "B.Eng. BME": 0,
+     "B.Tech.": 834,
+     "none": 0
+   }, {
+     "year": "2015-16",
+     "B.Eng. (Incl. Mgmt & Society)": 3034,
+     "B.A.Sc.": 709,
+     "B.Eng. BME": 0,
+     "B.Tech.": 103,
+     "none": 0
+   }, {
+     "year": "2016-17",
+     "B.Eng. (Incl. Mgmt & Society)": 3034,
+     "B.A.Sc.": 709,
+     "B.Eng. BME": 0,
+     "B.Tech.": 103,
+     "none": 0
+   }, {
+     "year": "2017-18",
+     "B.Eng. (Incl. Mgmt & Society)": 3034,
+     "B.A.Sc.": 709,
+     "B.Eng. BME": 121.4,
+     "B.Tech.": 103,
+     "none": 0
+   }, {
+     "year": "2018-19",
+     "B.Eng. (Incl. Mgmt & Society)": 3605.2,
+     "B.A.Sc.": 237.7,
+     "B.Eng. BME": 232.1,
+     "B.Tech.": 1021.2,
+     "none": 0
+   }],
+   "set2": [{
+     "year": "2014-15",
+     "Ph.D.": 385.7,
+     "M.Eng.": 159.7,
+     "M.A.Sc.": 282.5,
+     "none": 0
+   }, {
+     "year": "2015-16",
+     "Ph.D.": 385.7,
+     "M.Eng.": 159.7,
+     "M.A.Sc.": 282.5,
+     "none": 0
+   }, {
+     "year": "2016-17",
+     "Ph.D.": 385.7,
+     "M.Eng.": 159.7,
+     "M.A.Sc.": 282.5,
+     "none": 0
+   }, {
+     "year": "2017-18",
+     "Ph.D.": 385.7,
+     "M.Eng.": 159.7,
+     "M.A.Sc.": 282.5,
+     "none": 0
+   }, {
+     "year": "2018-19",
+     "Ph.D.": 440.1,
+     "M.Eng.": 260.9,
+     "M.A.Sc.": 313.0,
+     "none": 0
+   }],
+  }
+  // Add data
+  chart.data = data.set1;
+  chart.zoomOutButton.disabled = true;
+
+  // X Axis Setup
+  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "year";
+  categoryAxis.title.text = "";
+  categoryAxis.renderer.grid.template.location = 0;
+  categoryAxis.renderer.labels.template.fontSize = 11;
+  categoryAxis.renderer.minGridDistance = 20;
+  categoryAxis.renderer.cellStartLocation = 0.1;
+  categoryAxis.renderer.cellEndLocation = 0.9;
+  categoryAxis.renderer.grid.template.strokeOpacity = 0;
+
+  // Left Y Axis Setup
+  var LyAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  LyAxis.extraMax = 0.1;
+  LyAxis.calculateTotals = true;
+  var LyAxisRenderer = LyAxis.renderer;
+  LyAxisRenderer.grid.template.strokeOpacity = 0;
+  LyAxisRenderer.labels.template.disabled = true;
+
+  // Function used to toggle datasets and adjust settings
+  function selectDataset(set) {
+   chart.data = data[set];
+
+   if (set == "set1") {
+     series_beng.hiddenInLegend = false;
+     series_basc.hiddenInLegend = false;
+     series_bengBME.hiddenInLegend = false;
+     series_btech.hiddenInLegend = false;
+     series_phd.hiddenInLegend = true;
+     series_meng.hiddenInLegend = true;
+     series_masc.hiddenInLegend = true;
+   }
+
+   if (set == "set2") {
+     series_beng.hiddenInLegend = true;
+     series_basc.hiddenInLegend = true;
+     series_bengBME.hiddenInLegend = true;
+     series_btech.hiddenInLegend = true;
+     series_phd.hiddenInLegend = false;
+     series_meng.hiddenInLegend = false;
+     series_masc.hiddenInLegend = false;
+   }
+
+  }
+
+  // Function used to reset legend when the academic career is changed
+  function clearLegend(){
+    series_beng.show();
+    series_basc.show();
+    series_bengBME.show();
+    series_btech.show();
+    series_phd.show();
+    series_meng.show();
+    series_masc.show();
+  }
+
+  // Create series function
+  // (variable name in JSON, text name, stcaked property, ID name, chart type)
+  function createSeries(field, name, stacked, varID, chartType, hidden, colour) {
+
+    /* CREATE PERCENTAGE LINES */
+    if (chartType == "line") {
+      if (name.includes("SEPT")) {
+        linecolour = "#FEBD3B";
+      }
+      else {
+        linecolour = "#6F1C46";
+      }
+      // variableName and window are used to create unique variable names
+      // which we can then reference in the clearLegend function
+      var variableName = "series_"+varID;
+      window[variableName] = chart.series.push(new am4charts.LineSeries());
+      window[variableName].dataFields.valueY = field;
+      window[variableName].dataFields.categoryX = "year";
+      window[variableName].name = name;
+      window[variableName].tooltipText = "{name}: [bold]{valueY}%[/]";
+      window[variableName].strokeWidth = 3;
+      window[variableName].stroke = am4core.color(linecolour);
+      window[variableName].fill = am4core.color(linecolour);
+      window[variableName].yAxis = RyAxis;
+
+      var bulletName = "bullet_"+varID;
+      window[bulletName] = window[variableName].bullets.push(new am4charts.CircleBullet());
+      window[bulletName].stroke = am4core.color(linecolour);
+      window[bulletName].fill = am4core.color(linecolour);
+      window[bulletName].hiddenInLegend = true;
+
+      nameSub = varID.substring(0,4).toUpperCase();
+      window[bulletName].tooltipText = "[b]% of " + nameSub + " FEMALE FTE[/]";
+      window[bulletName].copyToLegendMarker = false;
+
+      var labbulletName = "labbullet_"+varID;
+      window[labbulletName] = window[variableName].bullets.push(new am4charts.LabelBullet());
+      window[labbulletName].label.text = "{valueY}%";
+
+      if (name.includes("SEPT")) {
+          window[labbulletName].dy = 15;
+      }
+      else {
+        window[labbulletName].dy = -15;
+      }
+    }
+
+    /* CREATE STACKED BARS */
+    else {
+      // variableName and window are used to create unique variable names
+      // which we can then reference in the clearLegend function
+      var variableName = "series_"+varID;
+      window[variableName] = chart.series.push(new am4charts.ColumnSeries());
+      window[variableName].dataFields.valueY = field;
+      window[variableName].dataFields.categoryX = "year";
+      window[variableName].name = name;
+      window[variableName].columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+      window[variableName].stacked = stacked;
+      window[variableName].hiddenInLegend = hidden;
+      window[variableName].columns.template.width = am4core.percent(95);
+      window[variableName].fill = am4core.color(colour);
+      window[variableName].stroke = am4core.color(colour);
+
+    }
+  }
+
+  createSeries("B.Eng. (Incl. Mgmt & Society)", "B.Eng. (Incl. Mgmt & Society)", true, "beng", "column", false, "#7A003D");
+  createSeries("B.A.Sc.", "B.A.Sc.", true, "basc", "column", false, "#FECF70");
+  createSeries("B.Eng. BME", "B.Eng. BME", true, "bengBME", "column", false, "#DBDBDD");
+  createSeries("B.Tech.", "B.Tech.", true, "btech", "column", false, "#8BD3E6");
+
+  createSeries("Ph.D.", "Ph.D.", true, "phd", "column", true, "#7A003D");
+  createSeries("M.Eng.", "M.Eng.", true, "meng", "column", true, "#FECF70");
+  createSeries("M.A.Sc.", "M.A.Sc.", true, "masc", "column", true, "#DBDBDD");
+
+  // Create series for total
+  var totalSeries = chart.series.push(new am4charts.ColumnSeries());
+  totalSeries.dataFields.valueY = "none";
+  totalSeries.dataFields.categoryX = "year";
+  totalSeries.stacked = true;
+  totalSeries.hiddenInLegend = true;
+  totalSeries.columns.template.strokeOpacity = 0;
+
+  var totalBullet = totalSeries.bullets.push(new am4charts.LabelBullet());
+  totalBullet.dy = -20;
+  totalBullet.label.text = "{valueY.total}";
+  totalBullet.label.fontSize = 18;
+  totalBullet.label.truncate = false;
+  totalBullet.label.background.fill = totalSeries.stroke;
+  totalBullet.label.background.fillOpacity = 0;
+  totalBullet.label.padding(5, 10, 5, 10);
+
+  // Add legend
+  chart.legend = new am4charts.Legend();
+  chart.legend.fontSize = 10.5;
+  chart.legend.useDefaultMarker = false;
+
+</script>
+
+</body>
+</html>
