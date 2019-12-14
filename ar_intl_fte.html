@@ -269,16 +269,16 @@
      LyAxis.max = 7000;
      RyAxis.min = -40;
      RyAxis.max = 20;
-     labbullet_seasPERC.dy = -15;
-     labbullet_septPERC.dy = 15;
+     labbullet_seasPERC.dy = -20;
+     labbullet_septPERC.dy = 20;
    }
    else if (set == "set2") {
      LyAxis.min = 0;
      LyAxis.max = 1600;
      RyAxis.min = -80;
      RyAxis.max = 85;
-     labbullet_seasPERC.dy = 15;
-     labbullet_septPERC.dy = -15;
+     labbullet_seasPERC.dy = 20;
+     labbullet_septPERC.dy = -20;
    }
 
   }
@@ -326,16 +326,18 @@
       window[bulletName].tooltipText = "[b]% of " + nameSub + " INTL FTE[/]";
       window[bulletName].copyToLegendMarker = false;
 
+      var shadow = window[bulletName].filters.push(new am4core.DropShadowFilter);
+
       var labbulletName = "labbullet_"+varID;
       window[labbulletName] = window[variableName].bullets.push(new am4charts.LabelBullet());
       window[labbulletName].label.text = "{valueY}%";
       //labbullet.dy = 15;
 
       if (name.includes("SEPT")) {
-        window[labbulletName].dy = 15;
+        window[labbulletName].dy = 20;
       }
       else {
-        window[labbulletName].dy = -15;
+        window[labbulletName].dy = -20;
       }
     }
 

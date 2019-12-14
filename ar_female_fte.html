@@ -273,13 +273,13 @@
      // Adapter functions used to customize specific bullets
      labbullet_seasPERC.adapter.add("dy", function(dy, target) {
         if (target.dataItem) {
-          dy = -15;
+          dy = -20;
           return dy;
         }
      });
      labbullet_septPERC.adapter.add("dy", function(dy, target) {
         if (target.dataItem) {
-          dy = 15;
+          dy = 20;
           return dy;
         }
      });
@@ -295,20 +295,20 @@
      labbullet_seasPERC.adapter.add("dy", function(dy, target) {
         if (target.dataItem) {
           if (target.dataItem.valueY == 33.6 || target.dataItem.valueY == 25.9) {
-            dy = -15;
+            dy = -20;
             return dy;
           }
-          dy = 15;
+          dy = 20;
           return dy;
         }
      });
      labbullet_septPERC.adapter.add("dy", function(dy, target) {
         if (target.dataItem) {
           if (target.dataItem.valueY == 32.3 || target.dataItem.valueY == 36.7 || target.dataItem.valueY == 29.6) {
-            dy = -15;
+            dy = -20;
             return dy;
           }
-          dy = 15;
+          dy = 20;
           return dy;
         }
      });
@@ -361,15 +361,17 @@
       window[bulletName].tooltipText = "[b]% of " + nameSub + " FEMALE FTE[/]";
       window[bulletName].copyToLegendMarker = false;
 
+      var shadow = window[bulletName].filters.push(new am4core.DropShadowFilter);
+
       var labbulletName = "labbullet_"+varID;
       window[labbulletName] = window[variableName].bullets.push(new am4charts.LabelBullet());
       window[labbulletName].label.text = "{valueY}%";
 
       if (name.includes("SEPT")) {
-          window[labbulletName].dy = 15;
+          window[labbulletName].dy = 20;
       }
       else {
-        window[labbulletName].dy = -15;
+        window[labbulletName].dy = -20;
       }
     }
 
