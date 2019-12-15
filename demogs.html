@@ -103,8 +103,9 @@
 	var bullet1 = series1.bullets.push(new am4charts.CircleBullet());
 	bullet1.stroke = am4core.color("#6f1c46");
 	bullet1.fill = am4core.color("#6f1c46");
-	
 	bullet1.tooltipText = "{valueY}%";
+	
+	var shadow = bullet1.filters.push(new am4core.DropShadowFilter);
 	
 	var labbullet1 = series1.bullets.push(new am4charts.LabelBullet());
 	labbullet1.label.text = "{valueY}%";
@@ -122,6 +123,8 @@
 	var bullet2 = series2.bullets.push(new am4charts.CircleBullet());
 	bullet2.stroke = am4core.color("#f0b135");
 	bullet2.fill = am4core.color("#f0b135");
+	
+	var shadow = bullet2.filters.push(new am4core.DropShadowFilter);
 	
 	var labbullet2 = series2.bullets.push(new am4charts.LabelBullet());
 	labbullet2.label.text = "{valueY}%";
@@ -142,6 +145,8 @@
 	bullet3.stroke = am4core.color("#829daa");
 	bullet3.fill = am4core.color("#829daa");
 	
+	var shadow = bullet3.filters.push(new am4core.DropShadowFilter);
+	
 	var labbullet3 = series3.bullets.push(new am4charts.LabelBullet());
 	labbullet3.label.text = "{valueY}%";
 	labbullet3.dy = -20;
@@ -160,6 +165,8 @@
 	var bullet4 = series4.bullets.push(new am4charts.CircleBullet());
 	bullet4.stroke = am4core.color("#99b4d1");
 	bullet4.fill = am4core.color("#99b4d1");
+	
+	var shadow = bullet4.filters.push(new am4core.DropShadowFilter);
 	
 	var labbullet4 = series4.bullets.push(new am4charts.LabelBullet());
 	labbullet4.label.text = "{valueY}%";
