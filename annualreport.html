@@ -1,622 +1,505 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
+<html>
+<head>
+<meta charset="utf-8">
+<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+Remove this if you use the .htaccess -->
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>Engineering 2018-19 Year in Review</title>
+<meta name="description" content="">
+<meta name="author" content="K F">
+<meta name="viewport" content="width=device-width; initial-scale=1.0">
+<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<style>
+body {
+		background: white;
+}
+body, html {
+		height: 100%;
+}
+/* ~~~~~~~  HEADER SETTINGS ~~~~~~~~ */
+header {
+	text-align: center;
+}
+#headertop, #headerbottom {
+	position: relative;
+	height: 50vh;
+	text-align: center;
+	background-color: white;
+	border-top: 20px solid white;
+	border-left: 20px solid white;
+	border-right: 20px solid white;
+}
+#headerbottom {
+	background-color: #6f1c46;
+	border-top: 0px solid white;
+	border-bottom: 20px solid white;
+}
+#titletext {
+	position: absolute;
+	text-align: center;
+	font-size: 60px;
+	color: #6f1c46;
+	bottom: 0;
+	width: 100%;
+}
+#titleyear {
+	text-align: center;
+	font: 40px italic;
+	color: white;
+}
+#arrow {
+	width: 100%;
+	color: white;
+	font-size: 30px;
+	position: absolute;
+	text-align: center;
+	margin-bottom: 10px;
+	bottom: 0;
+	animation: bounce 1s infinite alternate;
+	-webkit-animation: bounce 1s infinite alternate;
+}
+@keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+@-webkit-keyframes bounce {
+  from {
+    transform: translateY(0px);
+  }
+  to {
+    transform: translateY(-20px);
+  }
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-		<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
-		Remove this if you use the .htaccess -->
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+/* ~~~~~~~  CONTENT SETTINGS ~~~~~~~~ */
+section {
+		z-index: -1;
+		padding: 10px;
+		width: 100%;
+		/*background-color: orange;
+		border: 1px solid #ccc;*/
+}
+h1 {
+	background-color: white;
+	font-size: 40px;
+	color: #6f1c46;
+	margin-bottom: -40px;
+	margin-left: 20px;
+	padding-top:5px;
+	padding-left:5px;
+	padding-bottom:5px;
+	z-index: 998;
+}
+hr.innerdivide {
+	border: 1px solid #6f1c46;
+}
+hr.upperdivide {
+	margin-top:50px;
+	border: 2px solid #99b4d1;
+}
+hr.lowerdivide {
+	margin-right: 85%;
+	border: 2px solid #99b4d1;
+}
+.flex-row {
+		display: flex;
+    flex-direction: row;
+    /*background-color: DodgerBlue;*/
+    margin: 10px;
+}
+.flex-col {
+  	display: flex;
+  	flex-direction: column;
+  	/*background-color: DodgerBlue;*/
+  	width: 100%;
+}
+.flex-col > div {
+  	background-color: white;
+  	margin: 10px;
+  	text-align: center;
+  	line-height: 60px;
+  	font-size: 30px;
+		height: 100%;
+		background-color: #f5f5f5;
+		box-sizing: border-box;
+		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
+.flex-row-sub, .flex-row-sub-sm, .flex-row-sub-lg, .flex-row-top {
+		height: 100%;
+		width: 100%;
+  	margin: 10px;
+  	text-align: center;
+  	line-height: 75px;
+  	font-size: 30px;
+    flex: 100%;
+}
+.flex-row-top {
+	flex: 100%;
+	text-align: left;
+}
 
-		<title>Engineering 2018-19 Year in Review</title>
-		<meta name="description" content="">
-		<meta name="author" content="K F">
+.flex-row-sub-sm {
+	flex: 40%;
+	line-height: 1.6;
+}
 
-		<meta name="viewport" content="width=device-width; initial-scale=1.0">
+.flex-row-sub-lg {
+	flex: 60%;
+	background-color: #f5f5f5;
+	box-sizing: border-box;
+	box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
+}
+.subject {
+	color: #0071c6;
+	text-align: center;
+	font-size: 22px;
+	font-weight: bold;
+	border-top: 6px solid #0071c6;
+	transition: .2s ease-in-out;
+}
+.region {
+	font-size: 28px;
+}
+.rank {
+	font-size: 42px;
+}
 
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico">
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	</head>
-	<script>
-		/*$(document).ready(function(){
-		    $('.awesome-tooltip').tooltip({
-		        placement: 'left'
-		    });   
-		
-		    $(window).bind('scroll',function(e){
-		      dotnavigation();
-		    });
-		    
-		    function dotnavigation(){
-		             
-		        var numSections = $('section').length;
-		        
-		        $('#dot-nav li a').removeClass('active').parent('li').removeClass('active');     
-		        $('section').each(function(i,item){
-		          var ele = $(item), nextTop;
-		          
-		          console.log(ele.next().html());
-		          
-		          if (typeof ele.next().offset() != "undefined") {
-		            nextTop = ele.next().offset().top;
-		          }
-		          else {
-		            nextTop = $(document).height();
-		          }
-		          
-		          if (ele.offset() !== null) {
-		            thisTop = ele.offset().top - ((nextTop - ele.offset().top) / numSections);
-		          }
-		          else {
-		            thisTop = 0;
-		          }
-		          
-		          var docTop = $(document).scrollTop();
-		          
-		          if(docTop >= thisTop && (docTop < nextTop)){
-		            $('#dot-nav li').eq(i).addClass('active');
-		          }
-		        });   
-		    }
-		
-		    //get clicks working
-		    $('#dot-nav li').click(function(){
-		      
-		        var id = $(this).find('a').attr("href"),
-		          posi,
-		          ele,
-		          padding = 80;
-		      
-		        ele = $(id);
-		        posi = ($(ele).offset()||0).top - padding;
-		      
-		        $('html, body').animate({scrollTop:posi}, 'slow');
-		      
-		        return false;
-		    });
-		 
-		});*/
-	</script>
-		
-	<style>
-		body {
-    		background: white;
-		}
-		body, html {
-		    height: 100%;    
-		}
-		#main {
-		    height: 100%;
-		    width: 100%;
-		}
-		section {
-			z-index: -1;
-			padding: 20px;
-			height: 100%;
-			width: 100%;
-			background-color: white;
-			margin-top: 60px;
-			/*border: 1px solid #ccc;*/
-    		box-sizing: border-box;
-    		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
-		}
-		/*
-		#dot-nav { 
-			right: 10px;
-			top: 30%;
-			width: 120px;
-			z-index: 999;
-			position: fixed;
-		}
-		
-		#dot-nav ul {
-			list-style: none;
-			margin-left: 40px;
-		}
-		#dot-nav li {
-			position: relative;
-			background-color: #bdc3c7;
-			border:3px solid #bdc3c7;
-			border-radius: 15px 15px 15px 15px;
-			cursor: pointer;
-			padding: 5px;
-			height: 10px;
-			margin: 20px 20px 0px 0px;
-			width: 10px;
-			vertical-align:bottom;
-		}
-		#dot-nav li.active, #dot-nav li:hover {
-			background-color: rgba(122,0,60,1);
-		}
-		
-		#dot-nav a {
-			outline: 0;
-			vertical-align:top;
-			margin: 0px 0px 0px 25px;
-			position: relative;
-			top:-5px;
-		}
-		.awesome-tooltip + .tooltip > .tooltip-inner {
-		    background-color: white;
-		    color: #6f1c46; 
-		}
-		.awesome-tooltip + .tooltip.left > .tooltip-arrow{
-			background-color: #8e44ad; 
-			opacity: 0;
-		}*/
-		
-		h1 {
-			background-color: #ffffff;
-			font-size: 40px;
-			color: #6f1c46;
-			margin-bottom: -40px;
-			margin-left: 20px;
-			padding-top:5px;
-			padding-left:5px;
-			padding-bottom:5px;
-			z-index: 998;
-		}
-		
-		#headertop, #headerbottom {
-			position: relative;
-			height: 50vh;
-			text-align: center;
-			background-color: white;
-			border-top: 20px solid white;
-			border-left: 20px solid white;
-			border-right: 20px solid white;
-		}
-		
-		#headerbottom {
-			background-color: #6f1c46;
-			border-top: 0px solid white;
-			border-bottom: 20px solid white;
-		}
-		
-		#titletext {
-			position: absolute;
-			text-align: center;
-			font-size: 40px;
-			color: #6f1c46;
-			bottom: 0;
-			width: 100%;
-		}
-		
-		#titleyear {
-			text-align: center;
-			font: 40px italic;
-			color: white;
-		}
-		
-		#arrow {
-			width: 100%;
-			color: white;
-			font-size: 30px;
-			position: absolute;
-			text-align: center;
-			margin-bottom: 10px;
-			bottom: 0;
-		}
-		
-		.rowcontainer {
-			display: -webkit-box;
-			display: -moz-box;
-			display: -ms-flexbox;
-			display: -webkit-flex;
-		  	display: flex;
-		  	flex-wrap: wrap;
-		  	width: 100%;
-		}
-		
-		.item, .halfitem {
-			flex-grow: 1;
-		}
-		
-		.item + .item {
-		  	margin-left: 2%;
-		}
-		
-		.itemtext {
-			display:flex;
-			align-items: center;
-			justify-content: center;
-		}
+.downloadbtn {
+	background-color: #6f1c46;
+	color: #ffffff;
+	cursor: pointer;
+	padding: 10px 18px 10px 18px;
+	width: 300px;
+	border: none;
+	text-align: center;
+	outline: none;
+	font-size: 15px;
+	font-weight: bold;
+	border: 2px solid #6f1c46;
+	border-radius: 6px;
+	margin-top:20px;
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
 
-		.subtitle {
-			background-color: white;
-			color: black;
-    		box-sizing: border-box;
-			padding: 20px 2px 5px 2px;
-    		margin: auto;
-    		text-align: center;
-    		font-size: 20px;
-    		border-bottom: 2px solid black;
-    		transition: .2s ease-in-out;
-			background-color: rgba(204,204,204,0.2);
-			border-radius: 2px;
-			box-shadow: 0 4px 2px -2px rgba(0,0,0,0.16), 0 4px 2px -2px rgba(0,0,0,0.12)!important;
-		}
-		
-		/*.item:hover .subtitle{
-			background-color: rgba(204,204,204,0.2);
-			border-radius: 4px;
-			box-shadow: 0 4px 2px -2px rgba(0,0,0,0.16), 0 4px 2px -2px rgba(0,0,0,0.12)!important;
-		}*/
-		
-		span {
-			font-size: 24px;
-		}
-		
-		hr.innerdivide {
-			border: 1px solid #6f1c46;
-		}
-	
-		hr.outerdivide {
-			margin-top:50px;
-			border: 2px solid #99b4d1;
-			
-		}
-		
-		#researchbox {
-			position:relative;
-			height:80%;
-			width:100%;
-			background-color: #dfdfdf;
-			box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
-		}
-		
-		
-		
-		/* COLLAPSIBLE CSS SETTINGS */
-		
-		.collapsible {
-		  	background-color: #ffffff;
-		  	color: #6f1c46;
-		  	cursor: pointer;
-		  	padding: 10px 18px 10px 18px;
-		  	width: 100px;
-		  	border: none;
-		  	text-align: center;
-		  	outline: none;
-		  	font-size: 15px;
-		  	font-weight: bold;
-		  	border: 2px solid #6f1c46;
-		  	border-radius: 6px;
-		  	margin-top:20px;
-		}
-		
-		.collapsible:after {
-		  	color: #6f1c46;
-		  	content: '\002B';
-		  	float: right;
-		  	margin-left: 5px;
-		}
-		
-		.active:after {
-		  	color: #6f1c46;
-		  	content: "\2212";
-		}
-		
-		.content {
-			margin-top:2px;
-		  	padding: 0 18px;
-		  	max-height: 0;
-		  	overflow: hidden;
-		  	transition: max-height 0.2s ease-out;
-		  	background-color: #dae0e3;
-		  	box-sizing: border-box;
-    		box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;
-		}
-		/* ************************** */
-				
-	</style>
+/* ~~~~~~~  COLLAPSIBLE CSS SETTINGS ~~~~~~~~ */
+.collapsible {
+		background-color: #ffffff;
+		color: #6f1c46;
+		cursor: pointer;
+		padding: 10px 18px 10px 18px;
+		width: 100px;
+		border: none;
+		text-align: center;
+		outline: none;
+		font-size: 15px;
+		font-weight: bold;
+		border: 2px solid #6f1c46;
+		border-radius: 6px;
+		margin-top:20px;
+}
 
-	<body>
-		<div>
-			<header>
-				<div id="headertop">
-					<div id="titletext">Annual Report</div>
-				</div>
-				
-				<div id="headerbottom">
-					<div id="titleyear">2018-19</div>
-					<div id="arrow">&darr;</div>
-				</div>
-			</header>
-			<!--<nav>
-				<br><br><br><br> <br><br><br><br>
-			</nav>
+.collapsible:after {
+		color: #6f1c46;
+		content: '\002B';
+		float: right;
+		margin-left: 5px;
+}
 
-	 <div data-spy="affix" id="dot-nav">
-	      <ul>
-	        <li class="awesome-tooltip active" title="Dean's Message"><a href="#message"> </a></li>
-	        <li class="awesome-tooltip" title="Where We Stand"><a href="#where"> </a></li>
-	        <li class="awesome-tooltip" title="Who We Are"><a href="#who"> </a></li>
-	        <li class="awesome-tooltip" title="Research"><a href="#research"> </a></li>
-	        <li class="awesome-tooltip" title="Recruitment"><a href="#recruit"> </a></li>
-	        <li class="awesome-tooltip" title="Co-op"><a href="#coop"> </a></li>
-	        <li class="awesome-tooltip" title="Alumni"><a href="#alumni"> </a></li>
-	      </ul>
-	 </div>-->
-	 <div id="main" class="container">
-	 	
-	 		<hr class="outerdivide">
-	 		<h1>Message from The Dean</h1>
-	    	<section id="message">
-	        	<div class="rowcontainer" style="height:180px";>
-	            	<div class="item">
-	                	<p>Insert PNG file of Dean with Message Bubble</p>
-	            	</div>
-	        	</div>          
-	    	</section>
-	    	
-	    	<hr class="outerdivide">
-	    	<h1>Where We Stand</h1>
-	        <section id="where">
+.active:after {
+		color: #6f1c46;
+		content: "\2212";
+}
 
-	        	<div class="rowcontainer">
-	        	  <div class="item" style="max-width: 350px;margin-bottom: 10px;">
-	        	  	<p style="color:#c0c0c0;font-size:24px;">ARWU 2019 Subject Rankings</p>
-	        	  	<p><i>World class bibliometric ranking system wih a focus on publication output,
-	        	  	citation impact, international collaboration, and academic awards received</i></p>
-	        	  </div>
-				  <div class="item">
-				  	<div class="subtitle"><p>Civil Engineering</p></div>
-				  	<div class="rowcontainer" style="">
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">3<span>rd</span></p>
-				  		</div>
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">29<span>th</span></p>
-				  		</div>
-				  	</div>
-				  </div>
-				  
-				  
-				  <div class="item">
-				  	<div class="subtitle"><p>Metallurgical Engineering</p></div>
-				  	<div class="rowcontainer" style="">
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">2<span>nd</span></p>
-				  		</div>
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">48<span>th</span></p>
-				  		</div>
-				  	</div>
-				  </div>
-				  
-				  <div class="item">
-				  	<div class="subtitle"><p>Water Resources</p></div>
-				  	<div class="rowcontainer">
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">5<span>th</span></p>
-				  		</div>
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">79<span>th</span></p>
-				  		</div>
-				  	</div>
-				  </div>
-				</div>
-				
-				<hr class="innerdivide">
-				
-	        	<div class="rowcontainer">
-	        	  <div class="item" style="max-width: 350px;margin-bottom: 10px;">
-	        	  	<p style="color:#c0c0c0;font-size:24px;">Times Higher Education 2020 Subject Rankings</p>
-	        	  	<p><i>World class ranking system wih a focus on teaching quality,
-	        	  	citation impact, international outlook, research, and industry income</i></p>
-	        	  </div>
-				  <div class="item">
-				  	<div class="subtitle"><p>Engineering Technology</p></div>
-				  	<div class="rowcontainer" style="">
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">12<span>th</span></p>
-				  		</div>
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">301-400<span>th</span></p>
-				  		</div>
-				  	</div>
-				  </div>
-				  
-				  <div class="item">
-				  	<div class="subtitle"><p>Computer Science</p></div>
-				  	<div class="rowcontainer">
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#ff0000;margin-top:10px;">Canada</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#ff0000;margin-top:-10px;">7<span>th</span></p>
-				  		</div>
-				  		<div class="halfitem" style="text-align:center;">
-				  			<p style="font-weight:bold;color:#99b4d1;margin-top:10px;">World</p>
-				  			<p style="font-weight:bold;font-size:42px;color:#99b4d1;margin-top:-10px;">101-125<span>th</span></p>
-				  		</div>
-				  	</div>
-				  </div>
-				</div>
-				<div class="rowcontainer">
-		        	<button class="collapsible" onclick="collapsible(this)" id="0">Notes</button>
-				</div>
-	        </section>
-	       	<div class="content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+.content {
+		width: 100%;
+		padding: 0 18px;
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.2s ease-out;
+		background-color: white;
+		box-sizing: border-box;
+		/*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+/* ~~~~~~~  SMALL SCREEN SETTINGS ~~~~~~~~ */
+@media only screen and (max-width: 760px) {
+  /* For desktop: */
+	.subject {font-size:20px;}
+	.region {font-size: 26px;}
+  .rank {font-size: 30px;}
+	.flex-row-sub {flex-wrap:wrap;}
+	.flex-row-sub-sm {order:1;min-width:95%;}
+	.flex-row-sub-lg {order:2;min-width:95%;}
+}
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+</style>
+</head>
+  <body>
+
+		<header>
+			<div id="headertop">
+				<div id="titletext">Annual Report</div>
 			</div>
-	    	
-	    	
-	    	
-	    	
-	    	<hr class="outerdivide">
-	    	<h1>Who We Are</h1>
-	        <section id="who">
-	        	<p style="color:#c0c0c0;font-size:24px;">Enrolment FTE &nbsp; | &nbsp; Undergraduate and Graduate</p>
 
-	        	<div class="rowcontainer" style="z-index:100;">
-	        		<div class="item">
-	        			<div class="itemtext" style="border-bottom: 4px solid #6f1c46; text-align: center;">
-	        				<p style="font-weight:bold;color:#6f1c46;font-size:40px;">
-	        					22% <br> <p style="color:#6f1c46;font-size:16px;">Increase in Undergraduate FTE over 2014-15</p>
-	        				</p>
-	        			</div>
-	        		</div>
-	        		<div class="item">
-	        			<div class="itemtext" style="border-bottom: 4px solid #febd3b; text-align: center;">
-	        				<p style="font-weight:bold;color:#febd3b;font-size:40px;">
-	        					11% <br> <p style="color:#febd3b;font-size:16px;">Increase in Graduate FTE over 2014-15</p>
-	        				</p>
-	        			</div>
-	        		</div>
-	        	</div>
-	        	
-	        	<div class="rowcontainer" style="width:100%;">
-	        		<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/stacked.html" scrolling="no"></iframe>
-	        	</div>
-	        	
-				<div class="rowcontainer">
-		        	<button class="collapsible" onclick="collapsible(this)" id="1">Notes</button>
-				</div>
-	        </section>
-	       	<div class="content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>	        
-
-
-	        <section>
-	        	<p style="color:#c0c0c0;font-size:24px;">SEAS/SEPT FTE with Proportion of Internationals</p>
-	        	<div class="rowcontainer">
-	        		<iframe style="height:70vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/dynamic_combo.html" scrolling="no"></iframe>
-	        	</div>
-	        	
-	        	<hr class="innerdivide">
-	        	
-	        	<div class="rowcontainer">
-	        		<div class="item" style="color:#c0c0c0;font-size:24px;flex:0.4 0.4 300px;min-width:175px;">
-	        			<p style="color:#c0c0c0;font-size:24px;">Women in Engineering (% of FTE)<br><i>2014/15 to 2018/19</i></p>
-	        			
-	        			<p style="color: black;font-size:14px;">McMaster Engineering has made successful strides
-	        				towards achieving gender equity for faculty members, staff members, and students. In 2018/19 our proportion
-	        				of women in level 1 engineering reached a historic high of 35%.</p>
-	        			<p style="color: black;font-size:14px;">McMaster Engineering has made successful strides
-	        				towards achieving gender equity for faculty members, staff members, and students. In 2018/19 our proportion
-	        				of women in level 1 engineering reached a historic high of 35%.</p>
-	        			
-	        		</div>
-	        		<div class="item">
-	        			<iframe style="height:70vh;width:100%;border: none;flex:0.6 0.6 300px;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
-	        		</div>
-	        	</div>
-	        	
-	        	<div class="rowcontainer">
-		        	<button class="collapsible" onclick="collapsible(this)" id="2">Notes</button>
-				</div>
-	        </section>
-	        <div class="content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+			<div id="headerbottom">
+				<div id="titleyear">2018-19</div>
+				<div id="arrow">&darr;</div>
 			</div>
-	        
-	        
-	        
-	        
-	        
-	        <hr class="outerdivide">
-	        <h1>Research</h1>
-	        <section id="research">
-	        	<div class="rowcontainer">
-	        		<div class="item" style="height:70vh;color:#c0c0c0;font-size:24px;flex:0.4 0.4 0.4;">
-	        			<div class="innercontainer" style="position:relative;height:20%;width:100%;">
-	        				<p style="color:#c0c0c0;font-size:24px;">Research Awards Sources<br><i>2018/19</i></p>
-	        			</div>
-	        			<div class="innercontainer" id="researchbox">
-	        				<p style="color: black;font-size:14px;">Test paragraph</p>
-	        			</div>
+		</header>
 
-	        		</div>
-	        		<div class="item">
-	        			<iframe style="height:70vh;width:100%;border: none;flex:0.6 0.6 0.6;" src="funding.html" scrolling="no"></iframe>
-	        		</div>
-	        	</div>
-	        	
-	        	<div class="rowcontainer">
-	        		<div class="item">
-	        			<iframe style="height:70vh;width:100%;border: none;flex:0.6 0.6 300px;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
-	        		</div>
-	        	</div>
-	        	
-	        	<div class="rowcontainer">
-		        	<button class="collapsible" onclick="collapsible(this)" id="3">Notes</button>
-				</div>
-	        </section>
-	        <div class="content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-	        
-	        <hr class="outerdivide">
-	        <h1>Recruitment</h1>
-	        <section id="recruit">
-		        <p style="color:#c0c0c0;font-size:24px;">Geographic Diversity of 2018-19 Incoming Undergraduates</p>
-		        <div class="rowcontainer">
-		        	<iframe style="height:70vh;width:100%;border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
-		        </div>
-       
-	        	<div class="rowcontainer">
-		        	<button class="collapsible" onclick="collapsible(this)" id="4">Notes</button>
-				</div>
-	        </section>
-	        <div class="content">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>  
-	        
-	        <hr class="outerdivide">
-	        <h1>Co-op</h1>
-	        <section id="coop">
-	        	<div class="rowcontainer">
-	            	<div>
-	                	<p>Insert content</p>
-	            	</div>
-	        	</div>          
-	        </section>  
-	        
-	        <hr class="outerdivide">
-	       	<h1>Alumni</h1>
-	        <section id="alumni">
-	        	<div class="rowcontainer">
-	            	<div>
-	                	<p>Insert content</p>
-	            	</div>
-	        	</div>          
-	        </section>
-	           
-	    </div>
-
-			<footer style="text-align: center;">
-				<p>
-					&copy; Copyright 2019 K.P.F.
-				</p>
-			</footer>
+	<section id="message">
+		<hr class="upperdivide">
+		<div class="flex-row" style="text-align:left;">
+			<div class="flex-row-top" style="font-weight:bold;">Message from the Dean</div>
 		</div>
-		
-	</body>
-	
-	
+		<hr class="lowerdivide">
+	  <div class="flex-row">
+	  	<div class="flex-row-sub-sm" style="height:400px;">Message Content</div>
+			<div class="flex-row-sub-lg" style="height:400px;">Image and Branding</div>
+	  </div>
+	</section>
+
+	<section id="where">
+		<hr class="upperdivide">
+		<div class="flex-row" style="text-align:left;">
+			<div class="flex-row-top" style="font-weight:bold;">Where We Stand</div>
+		</div>
+		<hr class="lowerdivide">
+
+		<div class="flex-row" style="text-align:left;">
+			<div class="flex-row-top" style="line-height:1.6;">
+				McMaster has steadily climbed into the top international ranks. Two world class ranking systems that are
+				commonly used to guage the quality of an institution include Shanghai or Academic Rankings of World Universities (ARWU)
+				and the Times Higher Education rankings.
+			</div>
+		</div>
+		<div class="flex-row">
+				<div class="flex-row-sub" style="margin-bottom:-20px;"><img src="/Users/kevin/Desktop/ARWUlogo.jpg" height="200px" width="240px"></div>
+				<div class="flex-row-sub" style="margin-bottom:-20px;"><img src="/Users/kevin/Desktop/THElogo.jpg" height="160px" width="200px"></div>
+		</div>
+
+		<div class="flex-row">
+			<div class="flex-col">
+				<div>
+					<div class="subject"><p>Civil Engineering</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">3<span>rd</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">29<span>th</span></p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="subject"><p>Metallurgical Engineering</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">2<span>nd</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">48<span>th</span></p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="subject"><p>Water Resources</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">5<span>th</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">79<span>th</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="flex-col">
+				<div>
+					<div class="subject" style="border-top: 6px solid #b41c8d;color:#b41c8d;"><p>Overall</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">4<span>th</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">72<span>nd</span></p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="subject" style="border-top: 6px solid #b41c8d;color:#b41c8d;"><p>Engineering Technology</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">12<span>th</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">301-400<span>th</span></p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="subject" style="border-top: 6px solid #b41c8d;color:#b41c8d;"><p>Computer Science</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">7<span>th</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">101-125<span>th</span></p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+		<div class="flex-row">
+					<button class="collapsible" onclick="collapsible(this)" id="0">Notes</button>
+		</div>
+		<div class="flex-row">
+			<div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="who">
+		<hr class="upperdivide">
+		<div class="flex-row" style="text-align:left;">
+			<div class="flex-row-top" style="font-weight:bold;">Who We Are</div>
+		</div>
+		<hr class="lowerdivide">
+
+		<div class="flex-row">
+			<div class="flex-row-sub" style="color:#b4b4b4;font-size:28px;">Sub-title</div>
+		</div>
+		<div class="flex-row">
+			<div class="flex-row-sub" style="flex:1 1 400px;background-color:#f5f5f5;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
+				<iframe style="height:90vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/index.html" scrolling="no"></iframe>
+			</div>
+		</div>
+
+		<div class="flex-row">
+			<div class="flex-row-sub" style="color:#b4b4b4;font-size:28px;">Sub-title</div>
+		</div>
+		<div class="flex-row" style="flex-wrap:wrap;">
+	  	<div class="flex-row-sub-sm" style="flex:0.3 0.3 300px;height:auto;">
+					TEXT DESCRIBING MCMASTER OVER THE PAST 5 YEARS
+			</div>
+	    <div class="flex-row-sub-lg" style="flex:0.7 0.7 400px;">
+				<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/ar_degree_fte.html" scrolling="no"></iframe>
+			</div>
+	  </div>
+
+		<div class="flex-row">
+			<div class="flex-row-sub" style="color:#b4b4b4;font-size:28px;">Sub-title</div>
+		</div>
+		<div class="flex-row" style="flex-wrap:wrap;">
+			<div class="flex-row-sub-lg" style="flex:0.7 0.7 400px;">
+				<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
+			</div>
+			<div class="flex-row-sub-sm" style="flex:0.3 0.3 300px;height:auto;">
+				TEXT DESCRIBING MCMASTER'S GROWTH IN FEMALE FTE OVER THE PAST 5 YEARS
+			</div>
+		</div>
+
+		<div class="flex-row">
+			<div class="flex-row-sub" style="color:#b4b4b4;font-size:28px;">Sub-title</div>
+		</div>
+		<div class="flex-row" style="flex-wrap:wrap;">
+			<div class="flex-row-sub-sm" style="flex:0.3 0.3 300px;height:auto;">
+				TEXT DESCRIBING MCMASTER'S GROWTH IN INTL FTE OVER THE PAST 5 YEARS
+			</div>
+			<div class="flex-row-sub-lg" style="flex:0.7 0.7 400px;">
+				<iframe style="height:80vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/ar_intl_fte.html" scrolling="no"></iframe>
+			</div>
+		</div>
+
+		<div class="flex-row">
+					<button class="collapsible" onclick="collapsible(this)" id="1">Notes</button>
+		</div>
+		<div class="flex-row">
+			<div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+			</div>
+		</div>
+	</section>
+
+	<section id="map">
+		<hr class="upperdivide">
+		<div class="flex-row" style="text-align:left;">
+			<div class="flex-row-top" style="font-weight:bold;">Recruitment</div>
+		</div>
+		<hr class="lowerdivide">
+
+		<div class="flex-row">
+			<div class="flex-row-sub" style="color:#b4b4b4;font-size:28px;">Sub-title</div>
+		</div>
+		<div class="flex-row">
+			<div class="flex-row-sub" style="flex:1 1 400px;background-color:#f5f5f5;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
+				<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
+			</div>
+		</div>
+
+		<div class="flex-row">
+					<button class="collapsible" onclick="collapsible(this)" id="2">Notes</button>
+		</div>
+		<div class="flex-row">
+			<div class="content">
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+			</div>
+		</div>
+	</section>
+
+	<hr class="upperdivide" style="width:50%;">
+	<footer style="text-align:center;margin:20px 0px 30px 0px;">
+		<button class="downloadbtn">View Full Report</button>
+	</footer>
+
+  </body>
+
 	<script>
 		 function collapsible(elem){
-		 	var collaps = document.getElementsByClassName("content");
-		 	selectedcollap = elem.id;
-		 	elem.classList.toggle("active");
-		 	if (collaps[selectedcollap].style.maxHeight) {
-		 		collaps[selectedcollap].style.maxHeight = null;
-		 	}
-		 	else {
-		 		collaps[selectedcollap].style.maxHeight = collaps[selectedcollap].scrollHeight + "px";
-		 	}
+			var collaps = document.getElementsByClassName("content");
+			selectedcollap = elem.id;
+			elem.classList.toggle("active");
+			if (collaps[selectedcollap].style.maxHeight) {
+				collaps[selectedcollap].style.maxHeight = null;
+			}
+			else {
+				collaps[selectedcollap].style.maxHeight = collaps[selectedcollap].scrollHeight + "px";
+			}
 		 }
 	</script>
 </html>
