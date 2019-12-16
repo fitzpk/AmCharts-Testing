@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>Degrees Awarded</title>
+</head>
+
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  .flexcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+  }
+  #chartdiv {
+          margin: 0 auto;
+          width: 100vw;
+          height: 85vh;
+          flex: 1;
+  }
+  #flexinner {
+    margin: 0 auto;
+    width: 100vw;
+    flex: 1;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+  }
+  .optionbox {
+    flex: 1;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 75%;
+    height: 60px;
+    background-color: rgba(233,233,233,0.5);
+    transition: 0.2s ease-in-out;
+    border: 2px solid rgba(111,28,70,0.8);
+    /*border: 0.1px solid rgba(129,129,129,0.2);*/
+    text-align: center;
+    font-size: 18px;
+    margin: 20px;
+  }
+  .optionbox:hover{
+    background-color: rgba(142,151,157,0.8);
+    border: 2px solid #6F1C46;
+    color: white;
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+  }
+  input[name='option']{
+    display: none;
+  }
+  label[class="optionLab"]{
+    flex: 1 0 0;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+    border: 2px solid rgba(156,156,156,0);
+  }
+  .active{
+    background-color: rgba(142,151,157,0.8);
+    border: 2px solid #6F1C46;
+    color: white;
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+  }
+  /*#chartdiv {
+          margin: 0 auto;
+            width: 100vw;
+            height: 70vh;
+            flex: 0.4 0.4 320px;
+  }
+  #chartdiv2 {
+          margin: 0 auto;
+            width: 100vw;
+            height: 70vh;
+            flex: 0.6 0.6 360px;
+  }*/
+  /* ~~~~~~~  SMALL SCREEN SETTINGS ~~~~~~~~ */
+  @media only screen and (max-width: 760px) {
+    /* For desktop: */
+  	.optionbox {font-size:12px;}
+  }
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+</style>
+
+<body>
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script>
+  //FUNCTION IS USED TO HIGHLIGHT SELECTED OPTION BOX BY GIVING IT THE ACTIVE CSS CLASS
+  function highlightOpt(elem) {
+    var x = document.getElementsByClassName("optionbox");
+    x[0].className = 'optionbox';
+    x[1].className = 'optionbox';
+    //x[2].className = 'optionbox';
+    elem.className += ' active';
+  }
+</script>
+
+<div class="flexcontainer">
+  <div id="flexinner">
+
+    <div id="OB1" class="optionbox active" onclick="selectDataset(document.getElementById('IO1').value);highlightOpt(this);clearLegend();">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">Undergraduate</p>
+        <input id='IO1' value='set1' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <div id="OB2" class="optionbox" onclick="selectDataset(document.getElementById('IO2').value);highlightOpt(this);clearLegend();">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">Graduate</p>
+        <input id='IO2' value='set2' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <!--<div class="optionbox" onclick="selectDataset(document.getElementById('IO3').value);highlightOpt(this);">
+      <label class='optionLab'>
+        <p style="position:absolute; top:20px; bottom:0; left:0; right:0; margin:auto;">iBioMed</p>
+        <input id='IO3' value='set3' class='option' name='option' type='radio'/>
+      </label>
+    </div>-->
+  </div>
+  <div id="chartdiv"></div>
+</div>
+
+<!--<script  src="./script.js"></script>-->
+
+<script>
+  am4core.useTheme(am4themes_animated);
+  // Create chart instance
+
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+  var data = {
+   "set1": [{
+     "year": "2014-15",
+     "B.A.Sc.": 31,
+     "B.Eng.": 430,
+     "B.Eng. & Mgmt": 113,
+     "B.Eng. & Society": 29,
+     "B.Tech.": 169,
+     "Intl UG": 8,
+     "Female UG": 13.9,
+     "none": 0
+   }, {
+     "year": "2015-16",
+     "B.A.Sc.": 41,
+     "B.Eng.": 494,
+     "B.Eng. & Mgmt": 123,
+     "B.Eng. & Society": 36,
+     "B.Tech.": 182,
+     "Intl UG": 10,
+     "Female UG": 14.6,
+     "none": 0
+   }, {
+     "year": "2016-17",
+     "B.A.Sc.": 33,
+     "B.Eng.": 505,
+     "B.Eng. & Mgmt": 102,
+     "B.Eng. & Society": 37,
+     "B.Tech.": 213,
+     "Intl UG": 9,
+     "Female UG": 16.6,
+     "none": 0
+   }, {
+     "year": "2017-18",
+     "B.A.Sc.": 55,
+     "B.Eng.": 558,
+     "B.Eng. & Mgmt": 124,
+     "B.Eng. & Society": 35,
+     "B.Tech.": 207,
+     "Intl UG": 9.7,
+     "Female UG": 17.6,
+     "none": 0
+   }, {
+     "year": "2018-19",
+     "B.A.Sc.": 48,
+     "B.Eng.": 521,
+     "B.Eng. & Mgmt": 124,
+     "B.Eng. & Society": 35,
+     "B.Tech.": 226,
+     "Intl UG": 10,
+     "Female UG": 19.7,
+     "none": 0
+   }],
+   "set2": [{
+     "year": "2014-15",
+     "M.A.Sc.": 97,
+     "SEAS M.Eng.": 57,
+     "SEPT M.Eng.": 65,
+     "Ph.D.": 54,
+     "Intl GS": 37,
+     "Female GS": 31.1,
+     "none": 0
+   }, {
+     "year": "2015-16",
+     "M.A.Sc.": 119,
+     "SEAS M.Eng.": 61,
+     "SEPT M.Eng.": 68,
+     "Ph.D.": 63,
+     "Intl GS": 41.2,
+     "Female GS": 27.0,
+     "none": 0
+   }, {
+     "year": "2016-17",
+     "M.A.Sc.": 101,
+     "SEAS M.Eng.": 51,
+     "SEPT M.Eng.": 66,
+     "Ph.D.": 74,
+     "Intl GS": 40.8,
+     "Female GS": 23.3,
+     "none": 0
+   }, {
+     "year": "2017-18",
+     "M.A.Sc.": 113,
+     "SEAS M.Eng.": 27,
+     "SEPT M.Eng.": 86,
+     "Ph.D.": 81,
+     "Intl GS": 50.8,
+     "Female GS": 27.7,
+     "none": 0
+   }, {
+     "year": "2018-19",
+     "M.A.Sc.": 103,
+     "SEAS M.Eng.": 45,
+     "SEPT M.Eng.": 104,
+     "Ph.D.": 74,
+     "Intl GS": 58.3,
+     "Female GS": 29.1,
+     "none": 0
+   }],
+  }
+  // Add data
+  chart.data = data.set1;
+  chart.zoomOutButton.disabled = true;
+
+  // X Axis Setup
+  var categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+  categoryAxis.dataFields.category = "year";
+  categoryAxis.title.text = "";
+  categoryAxis.renderer.grid.template.location = 0;
+  categoryAxis.renderer.labels.template.fontSize = 11;
+  categoryAxis.renderer.minGridDistance = 20;
+  categoryAxis.renderer.cellStartLocation = 0.1;
+  categoryAxis.renderer.cellEndLocation = 0.9;
+  categoryAxis.renderer.grid.template.strokeOpacity = 0;
+
+  // Left Y Axis Setup
+  var LyAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  LyAxis.extraMax = 0.1;
+  LyAxis.calculateTotals = true;
+  var LyAxisRenderer = LyAxis.renderer;
+  LyAxisRenderer.grid.template.strokeOpacity = 0;
+  LyAxisRenderer.labels.template.disabled = true;
+
+  // Right Y Axis Setup
+  var RyAxis = chart.yAxes.push(new am4charts.ValueAxis());
+  RyAxis.renderer.opposite = true;
+  var RyAxisRenderer = RyAxis.renderer;
+  RyAxisRenderer.grid.template.strokeOpacity = 0;
+  RyAxisRenderer.labels.template.disabled = true;
+  RyAxisRenderer.baseGrid.disabled = true;
+
+  // Pre-set axis values
+  LyAxis.min = 0;
+  LyAxis.max = 1600;
+  RyAxis.min = -30;
+  RyAxis.max = 25;
+
+  // Function used to toggle datasets and adjust settings
+  function selectDataset(set) {
+   chart.data = data[set];
+
+   if (set == "set1") {
+     LyAxis.min = 0;
+     LyAxis.max = 1600;
+     RyAxis.min = -30;
+     RyAxis.max = 25;
+
+     /*// Adapter functions used to customize specific bullets
+     labbullet_intlug.adapter.add("dy", function(dy, target) {
+        if (target.dataItem) {
+          dy = -20;
+          return dy;
+        }
+     });
+     labbullet_intlug.adapter.add("dy", function(dy, target) {
+        if (target.dataItem) {
+          dy = 20;
+          return dy;
+        }
+     });*/
+
+     series_basc.hiddenInLegend = false;
+     series_beng.hiddenInLegend = false;
+     series_bengs.hiddenInLegend = false;
+     series_bengm.hiddenInLegend = false;
+     series_btech.hiddenInLegend = false;
+     series_intlug.hiddenInLegend = false;
+     series_femaleug.hiddenInLegend = false;
+     series_masc.hiddenInLegend = true;
+     series_seasmeng.hiddenInLegend = true;
+     series_septmeng.hiddenInLegend = true;
+     series_phd.hiddenInLegend = true;
+     series_intlgs.hiddenInLegend = true;
+     series_femalegs.hiddenInLegend = true;
+   }
+
+   if (set == "set2") {
+     LyAxis.min = 0;
+     LyAxis.max = 600;
+     RyAxis.min = -50;
+     RyAxis.max = 70;
+
+    // Adapter functions used to customize specific bullets
+    /* labbullet_intlug.adapter.add("dy", function(dy, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueY == 33.6 || target.dataItem.valueY == 25.9) {
+            dy = -20;
+            return dy;
+          }
+          dy = 20;
+          return dy;
+        }
+     });
+     labbullet_intlug.adapter.add("dy", function(dy, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueY == 32.3 || target.dataItem.valueY == 36.7 || target.dataItem.valueY == 29.6) {
+            dy = -20;
+            return dy;
+          }
+          dy = 20;
+          return dy;
+        }
+     });*/
+
+     series_basc.hiddenInLegend = true;
+     series_beng.hiddenInLegend = true;
+     series_bengs.hiddenInLegend = true;
+     series_bengm.hiddenInLegend = true;
+     series_btech.hiddenInLegend = true;
+     series_intlug.hiddenInLegend = true;
+     series_femaleug.hiddenInLegend = true;
+     series_masc.hiddenInLegend = false;
+     series_seasmeng.hiddenInLegend = false;
+     series_septmeng.hiddenInLegend = false;
+     series_phd.hiddenInLegend = false;
+     series_intlgs.hiddenInLegend = false;
+     series_femalegs.hiddenInLegend = false;
+   }
+
+  }
+
+  // Function used to reset legend when the academic career is changed
+  function clearLegend(){
+    series_basc.show();
+    series_beng.show();
+    series_bengs.show();
+    series_bengm.show();
+    series_btech.show();
+    series_intlug.show();
+    series_femaleug.show();
+    series_phd.show();
+    series_seasmeng.show();
+    series_septmeng.show();
+    series_masc.show();
+    series_intlgs.show();
+    series_femalegs.show();
+  }
+
+  // Create series function
+  // (JSON variable, text name, stacked, ID name, chart type, hidden in legend, colour)
+  function createSeries(field, name, stacked, varID, chartType, hidden, colour) {
+
+    /* CREATE PERCENTAGE LINES */
+    if (chartType == "line") {
+      // variableName and window are used to create unique variable names
+      // which we can then reference in the clearLegend function
+      var variableName = "series_"+varID;
+      window[variableName] = chart.series.push(new am4charts.LineSeries());
+      window[variableName].dataFields.valueY = field;
+      window[variableName].dataFields.categoryX = "year";
+      window[variableName].name = name;
+      window[variableName].tooltipText = "{name}: [bold]{valueY}%[/]";
+      window[variableName].strokeWidth = 3;
+      window[variableName].stroke = am4core.color(colour);
+      window[variableName].fill = am4core.color(colour);
+      window[variableName].yAxis = RyAxis;
+      window[variableName].hiddenInLegend = hidden;
+
+      var bulletName = "bullet_"+varID;
+      window[bulletName] = window[variableName].bullets.push(new am4charts.CircleBullet());
+      window[bulletName].stroke = am4core.color(colour);
+      window[bulletName].fill = am4core.color(colour);
+      window[bulletName].hiddenInLegend = true;
+
+      if (name.includes("Female")) {
+          nameSub = varID.substring(0,6).toUpperCase();
+      }
+      else {
+          nameSub = varID.substring(0,4).toUpperCase();
+      }
+      window[bulletName].tooltipText = "[b]% of " + nameSub + " FTE[/]";
+      window[bulletName].copyToLegendMarker = false;
+
+      var shadow = window[bulletName].filters.push(new am4core.DropShadowFilter);
+
+      var labbulletName = "labbullet_"+varID;
+      window[labbulletName] = window[variableName].bullets.push(new am4charts.LabelBullet());
+      window[labbulletName].label.text = "{valueY}%";
+
+      if (name.includes("SEPT")) {
+          window[labbulletName].dy = 15;
+      }
+      else {
+        window[labbulletName].dy = -15;
+      }
+    }
+
+    /* CREATE STACKED BARS */
+    else {
+      // variableName and window are used to create unique variable names
+      // which we can then reference in the clearLegend function
+      var variableName = "series_"+varID;
+      window[variableName] = chart.series.push(new am4charts.ColumnSeries());
+      window[variableName].dataFields.valueY = field;
+      window[variableName].dataFields.categoryX = "year";
+      window[variableName].name = name;
+      window[variableName].columns.template.tooltipText = "{name}: [bold]{valueY}[/]";
+      window[variableName].stacked = stacked;
+      window[variableName].hiddenInLegend = hidden;
+      window[variableName].columns.template.width = am4core.percent(95);
+      window[variableName].fill = am4core.color(colour);
+      window[variableName].stroke = am4core.color(colour);
+
+    }
+  }
+  createSeries("B.A.Sc.", "B.A.Sc.", true, "basc", "column", false, "#FECF70");
+  createSeries("B.Eng.", "B.Eng.", true, "beng", "column", false, "#7A003D");
+  createSeries("B.Eng. & Society", "B.Eng. & Society", true, "bengs", "column", false, "#D2D755");
+  createSeries("B.Eng. & Mgmt", "B.Eng. & Mgmt", true, "bengm", "column", false, "#DBDBDD");
+  createSeries("B.Tech.", "B.Tech.", true, "btech", "column", false, "#8BD3E6");
+  createSeries("Intl UG", "% of INTL", true, "intlug", "line", false, "#000000");
+  createSeries("Female UG", "% of Female", true, "femaleug", "line", false, "#007096");
+
+  createSeries("M.A.Sc.", "M.A.Sc.", true, "masc", "column", true, "#FECF70");
+  createSeries("SEAS M.Eng.", "SEAS M.Eng.", true, "seasmeng", "column", true, "#7A003D");
+  createSeries("SEPT M.Eng.", "SEPT M.Eng.", true, "septmeng", "column", true, "#DBDBDD");
+  createSeries("Ph.D.", "Ph.D.", true, "phd", "column", true, "#8BD3E6");
+  createSeries("Intl GS", "% of INTL", true, "intlgs", "line", true, "#000000");
+  createSeries("Female GS", "% of Female", true, "femalegs", "line", true, "#007096");
+
+  //createSeries("Ph.D.", "Ph.D.", true, "phd", "column", true, "#8BD3E6");
+
+  // Create series for total
+  var totalSeries = chart.series.push(new am4charts.ColumnSeries());
+  totalSeries.dataFields.valueY = "none";
+  totalSeries.dataFields.categoryX = "year";
+  totalSeries.stacked = true;
+  totalSeries.hiddenInLegend = true;
+  totalSeries.columns.template.strokeOpacity = 0;
+
+  var totalBullet = totalSeries.bullets.push(new am4charts.LabelBullet());
+  totalBullet.dy = -20;
+  totalBullet.label.text = "{valueY.total}";
+  totalBullet.label.fontSize = 18;
+  totalBullet.label.truncate = false;
+  totalBullet.label.background.fill = totalSeries.stroke;
+  totalBullet.label.background.fillOpacity = 0;
+  totalBullet.label.padding(5, 10, 5, 10);
+
+  // Add legend
+  chart.legend = new am4charts.Legend();
+  chart.legend.fontSize = 10.5;
+  chart.legend.useDefaultMarker = false;
+
+</script>
+
+</body>
+</html>
