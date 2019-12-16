@@ -1,5 +1,5 @@
 # Amcharts
-<a href="https://fitzpk.github.io/Repo-2/index.html">Radial Timeline</a>
+<a href="https://fitzpk.github.io/Repo-2/ar_degree_radial.html">Radial Timeline</a>
 
 <a href="https://fitzpk.github.io/Repo-2/admissionchart.html">Staggered Bar Chart</a>
 
