@@ -175,6 +175,11 @@ hr.lowerdivide {
 	font-size: 42px;
 }
 
+.imgdivide {
+	 object-fit:cover;
+	 max-height:600px;
+}
+
 .downloadbtn {
 	background-color: #6f1c46;
 	color: #ffffff;
@@ -266,11 +271,20 @@ hr.lowerdivide {
 			<div class="flex-row-top" style="font-weight:bold;">Message from the Dean</div>
 		</div>
 		<hr class="lowerdivide">
-	  <div class="flex-row">
-	  	<div class="flex-row-sub-sm" style="height:400px;">Message Content</div>
-			<div class="flex-row-sub-lg" style="height:400px;">Image and Branding</div>
+	  <div class="flex-row" style="flex-wrap:wrap;">
+	  	<div class="flex-row-sub-sm" style="height:400px; flex:0.4 0.4 300px;">Message Content</div>
+			<div class="flex-row-sub-lg" style="height:400px; flex:0.6 0.6 400px;">Image and Branding</div>
 	  </div>
 	</section>
+
+	<div style="height:100px;width:100%;"></div>
+	<hr class="upperdivide" style="margin:10px 80px 10px 80px;border:2px solid #dfdfdf;">
+	<div class="flex-row">
+		<div class="flex-row-sub" style="flex:1 1 400px;background-color:#f5f5f5;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
+			<img class="imgdivide" src="https://dl.dropbox.com/s/4du3vp40risn04i/campus5.jpg?dl=0" height="100%" width="100%">
+		</div>
+	</div>
+	<hr class="upperdivide" style="margin:10px 80px 10px 80px;border:2px solid #dfdfdf;">
 
 	<section id="where">
 		<hr class="upperdivide">
@@ -281,7 +295,9 @@ hr.lowerdivide {
 
 		<div class="flex-row" style="text-align:left;">
 			<div class="flex-row-top" style="line-height:1.6;">
-				TEXT DESCRIBING RANKINGS SYSTEMS
+				McMaster has steadily climbed into the top international ranks. Two world class ranking systems that are
+				commonly used to guage the quality of an institution include Shanghai or Academic Rankings of World Universities (ARWU)
+				and the Times Higher Education rankings.
 			</div>
 		</div>
 		<div class="flex-row">
@@ -350,20 +366,6 @@ hr.lowerdivide {
 				</div>
 
 				<div>
-					<div class="subject" style="border-top: 6px solid #b41c8d;color:#b41c8d;"><p>Computer Science</p></div>
-					<div class="flex-row" style="flex-wrap:wrap;">
-						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
-							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
-							<p class="rank" style="font-weight:bold;color:#ff0000;">7<span>th</span></p>
-						</div>
-						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
-							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
-							<p class="rank" style="font-weight:bold;color:#7592b1;">101-125<span>th</span></p>
-						</div>
-					</div>
-				</div>
-				
-				<div>
 					<div class="subject" style="border-top: 6px solid #b41c8d;color:#b41c8d;"><p>Engineering Technology</p></div>
 					<div class="flex-row" style="flex-wrap:wrap;">
 						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
@@ -373,6 +375,20 @@ hr.lowerdivide {
 						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
 							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
 							<p class="rank" style="font-weight:bold;color:#7592b1;">301-400<span>th</span></p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<div class="subject" style="border-top: 6px solid #b41c8d;color:#b41c8d;"><p>Computer Science</p></div>
+					<div class="flex-row" style="flex-wrap:wrap;">
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#e45b5b;margin-bottom:-20px;">Canada</p>
+							<p class="rank" style="font-weight:bold;color:#ff0000;">7<span>th</span></p>
+						</div>
+						<div class="flex-row-sub" style="text-align:center;flex: 1 1 200px;line-height:60px;">
+							<p class="region" style="font-weight:bold;color:#99b4d1;margin-bottom:-20px;">World</p>
+							<p class="rank" style="font-weight:bold;color:#7592b1;">101-125<span>th</span></p>
 						</div>
 					</div>
 				</div>
@@ -398,6 +414,11 @@ hr.lowerdivide {
 		<hr class="lowerdivide">
 
 		<div class="flex-row">
+			<div class="flex-row-sub" style="flex:1 1 400px;background-color:#f5f5f5;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
+			</div>
+		</div>
+
+		<div class="flex-row">
 			<div class="flex-row-sub" style="color:#b4b4b4;font-size:28px;">Sub-title</div>
 		</div>
 		<div class="flex-row" style="flex-wrap:wrap;">
@@ -405,7 +426,7 @@ hr.lowerdivide {
 					TEXT DESCRIBING MCMASTER OVER THE PAST 5 YEARS
 			</div>
 	    <div class="flex-row-sub-lg" style="flex:0.7 0.7 400px;">
-				<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/ar_degree_fte.html" scrolling="no"></iframe>
+				<iframe style="height:70vh; width:100%; min-width: 100%; border: none;" src="https://fitzpk.github.io/Repo-2/ar_degree_fte.html" scrolling="no"></iframe>
 			</div>
 	  </div>
 
@@ -414,7 +435,7 @@ hr.lowerdivide {
 		</div>
 		<div class="flex-row" style="flex-wrap:wrap;">
 			<div class="flex-row-sub-lg" style="flex:0.7 0.7 400px;">
-				<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
+				<iframe style="height:70vh; width:100%; min-width: 100%; border: none;" src="https://fitzpk.github.io/Repo-2/demogs.html" scrolling="no"></iframe>
 			</div>
 			<div class="flex-row-sub-sm" style="flex:0.3 0.3 300px;height:auto;">
 				TEXT DESCRIBING MCMASTER'S GROWTH IN FEMALE FTE OVER THE PAST 5 YEARS
@@ -429,7 +450,7 @@ hr.lowerdivide {
 				TEXT DESCRIBING MCMASTER'S GROWTH IN INTL FTE OVER THE PAST 5 YEARS
 			</div>
 			<div class="flex-row-sub-lg" style="flex:0.7 0.7 400px;">
-				<iframe style="height:80vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/ar_intl_fte.html" scrolling="no"></iframe>
+				<iframe style="height:80vh; width:100%; min-width: 100%; border: none;" src="https://fitzpk.github.io/Repo-2/ar_intl_fte.html" scrolling="no"></iframe>
 			</div>
 		</div>
 
@@ -456,7 +477,7 @@ hr.lowerdivide {
 		</div>
 		<div class="flex-row">
 			<div class="flex-row-sub" style="flex:1 1 400px;background-color:#f5f5f5;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
-				<iframe style="height:70vh; width:100%; border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
+				<iframe style="height:70vh; width:100%; min-width: 100%; border: none;" src="https://fitzpk.github.io/Repo-2/intlmap.html" scrolling="no"></iframe>
 			</div>
 		</div>
 
@@ -470,8 +491,15 @@ hr.lowerdivide {
 			</div>
 		</div>
 	</section>
+	<div style="height:100px;width:100%;"></div>
+	<hr class="upperdivide" style="margin:10px 80px 10px 80px;border:2px solid #dfdfdf;">
+	<div class="flex-row">
+		<div class="flex-row-sub" style="flex:1 1 400px;background-color:#f5f5f5;box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;">
+			<img class="imgdivide" src="https://dl.dropbox.com/s/ajs1qs9mh2721w0/campus2.jpg?dl=0" height="100%" width="100%">
+		</div>
+	</div>
+	<hr class="upperdivide" style="margin:10px 80px 10px 80px;border:2px solid #dfdfdf;">
 
-	<hr class="upperdivide" style="width:50%;">
 	<footer style="text-align:center;margin:20px 0px 30px 0px;">
 		<button class="downloadbtn">View Full Report</button>
 	</footer>
