@@ -1,48 +1,48 @@
-﻿Source,Target,Distance
-McMaster University,Massachusetts Institute of Technology (MIT),47
-McMaster University,Stanford University,46
-McMaster University,"University of California, Berkeley (UCB)",45
-McMaster University,Harvard University,44
-McMaster University,Georgia Institute of Technology,43
-McMaster University,California Institute of Technology (Caltech),42
-McMaster University,Carnegie Mellon University,41
-McMaster University,"University of California, Los Angeles (UCLA)",40
-McMaster University,University of Toronto,39
-McMaster University,University of Illinois at Urbana-Champaign,38
-McMaster University,University of Texas at Austin,37
-McMaster University,Princeton University,36
-McMaster University,University of British Columbia,35
-McMaster University,Purdue University,35
-McMaster University,Cornell University,35
-McMaster University,University of Michigan-Ann Arbor,32
-McMaster University,University of Waterloo,31
-McMaster University,McGill University,30
-McMaster University,Columbia University,29
-McMaster University,Northwestern University,28
-McMaster University,"University of California, San Diego (UCSD)",27
-McMaster University,Yale University,26
-McMaster University,University of Washington,25
-McMaster University,Pennsylvania State University,25
-McMaster University,University of Pennsylvania,25
-McMaster University,University of Chicago,22
-McMaster University,Texas A&M University,21
-McMaster University,University of Wisconsin-Madison,20
-McMaster University,New York University (NYU),19
-McMaster University,Virginia Polytechnic Institute and State University,18
-McMaster University,Université de Montréal,17
-McMaster University,University of Alberta,16
-McMaster University,University of Southern California,16
-McMaster University,Duke University,14
-McMaster University,Rice University,13
-McMaster University,"University of Maryland, College Park",12
-McMaster University,"University of California, Santa Barbara (UCSB)",11
-McMaster University,Johns Hopkins University,10
-McMaster University,The Ohio State University,9
-McMaster University,"University of California, Davis",8
-McMaster University,University of Minnesota Twin Cities,8
-McMaster University,Michigan State University,6
-McMaster University,Boston University,5
-McMaster University,Queen's University at Kingston,4
-McMaster University,Brown University,3
-McMaster University,North Carolina State University,2
-McMaster University,University of Florida,1
+﻿source,scolor,target,tcolor,distance
+McMaster University,peru,Massachusetts Institute of Technology (MIT),peru,47
+McMaster University,peru,Stanford University,peru,46
+McMaster University,peru,"University of California, Berkeley (UCB)",peru,45
+McMaster University,peru,Harvard University,peru,44
+McMaster University,peru,Georgia Institute of Technology,peru,43
+McMaster University,peru,California Institute of Technology (Caltech),peru,42
+McMaster University,peru,Carnegie Mellon University,peru,41
+McMaster University,peru,"University of California, Los Angeles (UCLA)",peru,40
+McMaster University,peru,University of Toronto,peru,39
+McMaster University,peru,University of Illinois at Urbana-Champaign,peru,38
+McMaster University,peru,University of Texas at Austin,peru,37
+McMaster University,peru,Princeton University,peru,36
+McMaster University,peru,University of British Columbia,peru,35
+McMaster University,peru,Purdue University,peru,35
+McMaster University,peru,Cornell University,peru,35
+McMaster University,peru,University of Michigan-Ann Arbor,peru,32
+McMaster University,peru,University of Waterloo,peru,31
+McMaster University,peru,McGill University,peru,30
+McMaster University,peru,Columbia University,peru,29
+McMaster University,peru,Northwestern University,peru,28
+McMaster University,peru,"University of California, San Diego (UCSD)",peru,27
+McMaster University,peru,Yale University,peru,26
+McMaster University,peru,University of Washington,peru,25
+McMaster University,peru,Pennsylvania State University,peru,25
+McMaster University,peru,University of Pennsylvania,peru,25
+McMaster University,peru,University of Chicago,peru,22
+McMaster University,peru,Texas A&M University,peru,21
+McMaster University,peru,University of Wisconsin-Madison,peru,20
+McMaster University,peru,New York University (NYU),peru,19
+McMaster University,peru,Virginia Polytechnic Institute and State University,peru,18
+McMaster University,peru,Université de Montréal,peru,17
+McMaster University,peru,University of Alberta,peru,16
+McMaster University,peru,University of Southern California,peru,16
+McMaster University,peru,Duke University,peru,14
+McMaster University,peru,Rice University,peru,13
+McMaster University,peru,"University of Maryland, College Park",peru,12
+McMaster University,peru,"University of California, Santa Barbara (UCSB)",peru,11
+McMaster University,peru,Johns Hopkins University,peru,10
+McMaster University,peru,The Ohio State University,peru,9
+McMaster University,peru,"University of California, Davis",peru,8
+McMaster University,peru,University of Minnesota Twin Cities,peru,8
+McMaster University,peru,Michigan State University,peru,6
+McMaster University,peru,Boston University,peru,5
+McMaster University,peru,Queen's University at Kingston,peru,4
+McMaster University,peru,Brown University,peru,3
+McMaster University,peru,North Carolina State University,peru,2
+McMaster University,peru,University of Florida,peru,1
