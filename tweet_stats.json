@@ -1,0 +1,10 @@
+[
+    {
+        "sentiment": "Positive",
+        "tweets": 362
+    },
+    {
+        "sentiment": "Negative",
+        "tweets": 189
+    }
+]
