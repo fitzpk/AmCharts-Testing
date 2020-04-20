@@ -1,10 +1,10 @@
 [
     {
         "sentiment": "Positive",
-        "tweets": 362
+        "tweets": 420
     },
     {
         "sentiment": "Negative",
-        "tweets": 189
+        "tweets": 143
     }
 ]
