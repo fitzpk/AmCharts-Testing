@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>QS Subject Rankings</title>
+</head>
+
+<style>
+  body {
+    margin-left: 20px;
+    margin-right: 30px;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+  .flexcontainer {
+    display: flex;
+    flex-direction: row;
+  }
+  .flexitem {
+    margin: 0 auto;
+
+  }
+  #chartdiv {
+          margin: 0 auto;
+          width: 80vw;
+          height: 90vh;
+          flex: 1;
+  }
+  .flexinner {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    text-align: center;
+  }
+  .subjectbox,.valuebox,.yearbox {
+    flex: 1;
+    flex-basis: 18%;
+    position: relative;
+    box-sizing: border-box;
+    margin: 0px 10px 0px 10px;
+    max-height: 100px;
+    transition: 0.2s ease-in-out;
+    background-color: rgba(233,233,233,0);
+    border-top: 2px solid rgba(111,28,70,0.2);
+    text-align: center;
+    font-size: 12px;
+  }
+  .subjectbox:hover,.valuebox:hover,.yearbox:hover{
+    background-color: rgba(142,151,157,0.8);
+    border: 1px solid rgba(111,28,70,0.6);
+    color: white;
+  }
+  input[name='option']{
+    display: none;
+  }
+  label[class="optionLab"]{
+    flex: 1 0 0;
+    position: relative;
+    height: 100%;
+    display: inline-block;
+    cursor: pointer;
+    margin: 5px;
+    border: 2px solid rgba(156,156,156,0);
+  }
+  .active{
+    background-color: rgba(142,151,157,0.8);
+    border: 1px solid rgba(111,28,70,0.6);
+    webkit-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    -moz-box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    box-shadow: -3px 3px 5px 0px rgba(0,0,0,0.12)!important;
+    color: white;
+  }
+  #title {
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 20px;
+  }
+  hr {
+    width: 50%;
+  }
+  /* ~~~~~~~  COLLAPSIBLE CSS SETTINGS ~~~~~~~~ */
+  .collapsible {
+  		background-color: #dbdbdb;
+  		color: #6f1c46;
+  		cursor: pointer;
+  		padding: 10px 18px 10px 18px;
+  		width: 100%;
+  		border: none;
+  		text-align: left;
+  		outline: none;
+  		font-size: 15px;
+  		font-weight: bold;
+  		border: 1px solid #6f1c46;
+  		border-radius: 6px;
+  		margin-top:20px;
+  }
+
+  .collapsible:after {
+  		color: #6f1c46;
+  		content: '\002B';
+  		float: right;
+  }
+
+  .active2:after {
+  		color: #6f1c46;
+  		content: "\2212";
+  }
+
+  .content {
+  		width: 100%;
+  		padding: 0 18px;
+  		max-height: 0;
+  		overflow: hidden;
+  		transition: max-height 0.2s ease-out;
+  		background-color: #ececec;
+  		box-sizing: border-box;
+      border: 1px solid #6f1c46;
+      border-radius: 6px;
+      margin-top:-20px;
+  		/*box-shadow: 0 2px 4px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)!important;*/
+  }
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+  /* ~~~~~~~  SMALL SCREEN SETTINGS ~~~~~~~~ */
+  @media only screen and (max-width: 760px) {
+  	.subjectbox {font-size:10px;}
+  }
+  /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ */
+
+</style>
+
+<body>
+
+<script src="https://www.amcharts.com/lib/4/core.js"></script>
+<script src="https://www.amcharts.com/lib/4/charts.js"></script>
+<script src="https://www.amcharts.com/lib/4/themes/animated.js"></script>
+
+<script>
+  //FUNCTION IS USED TO HIGHLIGHT SELECTED OPTION BOX BY GIVING IT THE ACTIVE CSS CLASS
+  function highlightOpt(elem) {
+    var x = document.getElementsByClassName("subjectbox");
+    // Reset style of all option boxes
+    for (var i = 0; i < x.length; i++) {
+       x.item(i).className = 'subjectbox';
+    }
+    // Apply active style to clicked element
+    elem.className += ' active';
+  }
+  function highlightVal(elem) {
+    var x = document.getElementsByClassName("valuebox");
+    // Reset style of all option boxes
+    for (var i = 0; i < x.length; i++) {
+       x.item(i).className = 'valuebox';
+    }
+    // Apply active style to clicked element
+    elem.className += ' active';
+  }
+  function highlightYear(elem) {
+    var x = document.getElementsByClassName("yearbox");
+    // Reset style of all option boxes
+    for (var i = 0; i < x.length; i++) {
+       x.item(i).className = 'yearbox';
+    }
+    // Apply active style to clicked element
+    elem.className += ' active';
+  }
+  function collapsible(elem){
+   var collaps = document.getElementsByClassName("content");
+   selectedcollap = elem.id;
+   elem.classList.toggle("active2");
+   if (collaps[selectedcollap].style.maxHeight) {
+     collaps[selectedcollap].style.maxHeight = null;
+   }
+   else {
+     collaps[selectedcollap].style.maxHeight = collaps[selectedcollap].scrollHeight + "px";
+   }
+  }
+
+  //************************************************
+</script>
+<!--
+<div id="title">
+  <span style="">QS 2020 Subject Rankings</span><br>
+  <span style="font-size:20px;font-weight:normal">North American Institutions</span>
+  <hr></hr>
+</div>
+-->
+
+<div class="flexcontainer">
+  <div class="flexitem" style="flex: 0.3 0.3 0.3;background-color:rgba(188,206,213,1);border-radius:4px;padding:40px;height:auto;margin-top:20px;">
+  <div class="flexinner">
+    <p style="font-size:12px;">
+      <b>Filter by Subject</b>
+    </p>
+    <div id="OB1" class="subjectbox active" onclick="highlightOpt(this);selectDataset(document.getElementById('IO1').value);">
+      <label class='optionLab'>
+        Engineering<br>& Technology
+        <input id='IO1' value='ENGTECH' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <div id="OB2" class="subjectbox" onclick="highlightOpt(this);selectDataset(document.getElementById('IO2').value)">
+      <label class='optionLab'>
+        Chemical<br>Engineering
+        <input id='IO2' value='CHEMICAL' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <div id="OB3" class="subjectbox" onclick="highlightOpt(this);selectDataset(document.getElementById('IO3').value)">
+      <label class='optionLab'>
+        <p style="margin:auto;">Civil</br>Engineering</p>
+        <input id='IO3' value='CIVIL' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <br>
+    <p style="font-size:12px;">
+      <b>Analyze by Indicator</b>
+    </p>
+
+    <div id="VO1" class="valuebox active" onclick="highlightVal(this);selectValue();">
+      <label class='optionLab'>
+        <p style="margin:auto;">Academic</br>Reputation</p>
+        <input id='VB1' value='acad_rep' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+    <div id="VO2" class="valuebox" onclick="highlightVal(this);selectValue();">
+      <label class='optionLab'>
+        <p style="margin:auto;">Employer</br>Reputation</p>
+        <input id='VB2' value='emp_rep' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+    <div id="VO3" class="valuebox" onclick="highlightVal(this);selectValue();">
+      <label class='optionLab'>
+        <p style="margin:auto;">CPP</p>
+        <input id='VB3' value='cpp' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+    <div id="VO4" class="valuebox" onclick="highlightVal(this);selectValue();">
+      <label class='optionLab'>
+        <p style="margin:auto;">H-Index</p>
+        <input id='VB4' value='hindex' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+    <br>
+    <p style="font-size:12px;">
+      <b>Rankings Year</b>
+    </p>
+
+    <div id="YO1" class="yearbox active" onclick="highlightYear(this);selectValue();">
+      <label class='optionLab'>
+        <p style="margin:auto;">2019</p>
+        <input id='YB1' value='2019_' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+    <div id="YO2" class="yearbox" onclick="highlightYear(this);selectValue();">
+      <label class='optionLab'>
+        <p style="margin:auto;">2018</p>
+        <input id='YB2' value='2018_' class='option' name='option' type='radio'/>
+      </label>
+    </div>
+
+  </div>
+  </div>
+
+  <div class="flexitem" style="flex: 0.7 0.7 0.7;">
+    <div id="chartdiv"></div>
+  </div>
+</div>
+
+<div class="flexcontainer">
+  <button class="collapsible" onclick="collapsible(this)" id="0" style="margin-bottom:10px;">Notes</button>
+</div>
+<div class="content">
+  <p style="font-size:11px;padding-top:2px;padding-bottom:2px;">
+    1) Data Source: QS Subject Rankings (https://www.topuniversities.com/subject-rankings/2020)<br>
+    2) Dark blue region captures institutions that are within +/-10 ranking spots of McMaster<br>
+    3) Light blue region captures institutions that are within +/-20 ranking spots of McMaster<br>
+    4) Civil engineering dataset is from 2019 QS rankings instead of 2020 because no ranking was given<br>
+    5) Institutions that were ranked outside the top 70 in North America are not displayed.
+  </p>
+</div>
+
+<!--<script  src="./script.js"></script>-->
+
+<script>
+  am4core.useTheme(am4themes_animated);
+  // Create chart instance
+
+  var chart = am4core.create("chartdiv", am4charts.XYChart);
+
+  var data = {
+    "ENGTECH": [{
+        "subject": "Engineering Technology",
+        "institution": "Massachusetts Institute of Technology (MIT)",
+        "colour": "#5a6264",
+        "2019_inst_num": 1,
+        "2019_na_rank": 1,
+        "2019_overall": 98.1,
+        "2019_acad_rep": 100.0,
+        "2019_emp_rep": 98.1,
+        "2019_cpp": 95.1,
+        "2019_hindex": 95.9,
+        "2018_inst_num": 3,
+        "2018_na_rank": 3,
+        "2018_overall": 96.1,
+        "2018_acad_rep": 980.0,
+        "2018_emp_rep": 96.1,
+        "2018_cpp": 92.1,
+        "2018_hindex": 91.9
+    },{
+        "subject": "Engineering Technology",
+        "institution": "Stanford University",
+        "colour": "#5a6264",
+        "2019_inst_num": 2,
+        "2019_na_rank": 2,
+        "2019_overall": 96.3,
+        "2019_acad_rep": 97.0,
+        "2019_emp_rep": 94.7,
+        "2019_cpp": 99.9,
+        "2019_hindex": 93.8,
+        "2018_inst_num": 1,
+        "2018_na_rank": 1,
+        "2018_overall": 99.3,
+        "2018_acad_rep": 98.0,
+        "2018_emp_rep": 93.7,
+        "2018_cpp": 92.9,
+        "2018_hindex": 99.8,
+    },{
+        "subject": "Engineering Technology",
+        "institution": "Never Heard of It State",
+        "colour": "#5a6264",
+        "2019_inst_num": 3,
+        "2019_na_rank": 3,
+        "2019_overall": 93.5,
+        "2019_acad_rep": 96.0,
+        "2019_emp_rep": 88.4,
+        "2019_cpp": 97.8,
+        "2019_hindex": 92.5,
+        "2018_inst_num": 2,
+        "2018_na_rank": 2,
+        "2018_overall": 99.0,
+        "2018_acad_rep": 99.0,
+        "2018_emp_rep": 85.4,
+        "2018_cpp": 91.8,
+        "2018_hindex": 98.5,
+    }],
+    "CHEMICAL": [{
+        "subject": "Chemical Engineering",
+        "institution": "Massachusetts Institute of Technology (MIT)",
+        "colour": "#5a6264",
+        "2019_inst_num": 1,
+        "2019_na_rank": 1,
+        "2019_overall": 98.1,
+        "2019_acad_rep": 100.0,
+        "2019_emp_rep": 98.1,
+        "2019_cpp": 95.1,
+        "2019_hindex": 95.9,
+        "2018_inst_num": 3,
+        "2018_na_rank": 3,
+        "2018_overall": 96.1,
+        "2018_acad_rep": 980.0,
+        "2018_emp_rep": 96.1,
+        "2018_cpp": 92.1,
+        "2018_hindex": 91.9
+    },{
+        "subject": "Chemical Engineering",
+        "institution": "Super Not Real Institute",
+        "colour": "#5a6264",
+        "2019_inst_num": 3,
+        "2019_na_rank": 3,
+        "2019_overall": 93.5,
+        "2019_acad_rep": 96.0,
+        "2019_emp_rep": 88.4,
+        "2019_cpp": 97.8,
+        "2019_hindex": 92.5,
+        "2018_inst_num": 2,
+        "2018_na_rank": 2,
+        "2018_overall": 99.0,
+        "2018_acad_rep": 99.0,
+        "2018_emp_rep": 85.4,
+        "2018_cpp": 91.8,
+        "2018_hindex": 98.5,
+    },{
+        "subject": "Chemical Engineering",
+        "institution": "University of California, Berkeley (UCB)",
+        "colour": "#5a6264",
+        "2019_inst_num": 2,
+        "2019_na_rank": 2,
+        "2019_overall": 96.3,
+        "2019_acad_rep": 97.0,
+        "2019_emp_rep": 94.7,
+        "2019_cpp": 99.9,
+        "2019_hindex": 93.8,
+        "2018_inst_num": 1,
+        "2018_na_rank": 1,
+        "2018_overall": 99.3,
+        "2018_acad_rep": 98.0,
+        "2018_emp_rep": 93.7,
+        "2018_cpp": 92.9,
+        "2018_hindex": 99.8,
+    }],
+    "CIVIL": [{
+        "subject": "Civil & Structural Engineering",
+        "institution": "Made Up University",
+        "colour": "#5a6264",
+        "2019_inst_num": 3,
+        "2019_na_rank": 3,
+        "2019_overall": 93.5,
+        "2019_acad_rep": 96.0,
+        "2019_emp_rep": 88.4,
+        "2019_cpp": 97.8,
+        "2019_hindex": 92.5,
+        "2018_inst_num": 6,
+        "2018_na_rank": 6,
+        "2018_overall": 99.0,
+        "2018_acad_rep": 99.0,
+        "2018_emp_rep": 85.4,
+        "2018_cpp": 91.8,
+        "2018_hindex": 98.5,
+    },{
+        "subject": "Civil & Structural Engineering",
+        "institution": "University of California, Berkeley (UCB)",
+        "colour": "#5a6264",
+        "2019_inst_num": 13,
+        "2019_na_rank": 3,
+        "2019_overall": 93.5,
+        "2019_acad_rep": 96.0,
+        "2019_emp_rep": 88.4,
+        "2019_cpp": 97.8,
+        "2019_hindex": 92.5,
+        "2018_inst_num": 28,
+        "2018_na_rank": 28,
+        "2018_overall": 99.0,
+        "2018_acad_rep": 99.0,
+        "2018_emp_rep": 85.4,
+        "2018_cpp": 91.8,
+        "2018_hindex": 98.5,
+    },{
+        "subject": "Civil & Structural Engineering",
+        "institution": "Stanford University",
+        "colour": "#5a6264",
+        "2019_inst_num": 2,
+        "2019_na_rank": 2,
+        "2019_overall": 96.3,
+        "2019_acad_rep": 97.0,
+        "2019_emp_rep": 94.7,
+        "2019_cpp": 20,
+        "2019_hindex": 93.8,
+        "2018_inst_num": 1,
+        "2018_na_rank": 1,
+        "2018_overall": 99.3,
+        "2018_acad_rep": 40,
+        "2018_emp_rep": 93.7,
+        "2018_cpp": 92.9,
+        "2018_hindex": 99.8,
+    }]
+   }
+  // Add data
+  chart.data = data.ENGTECH;
+  chart.zoomOutButton.disabled = false;
+  chart.scrollbarX = new am4core.Scrollbar();
+  chart.cursor = new am4charts.XYCursor();
+  chart.cursor.lineY.disabled = true;
+  chart.cursor.lineX.disabled = true;
+
+  var valueAxisX = chart.xAxes.push(new am4charts.ValueAxis());
+  valueAxisX.renderer.ticks.template.disabled = true;
+  valueAxisX.renderer.axisFills.template.disabled = true;
+  valueAxisX.renderer.labels.template.disabled = true;
+
+  var valueAxisY = chart.yAxes.push(new am4charts.ValueAxis());
+  valueAxisY.renderer.ticks.template.disabled = true;
+  valueAxisY.renderer.axisFills.template.disabled = true;
+  valueAxisY.title.text = "Overall Score";
+  valueAxisY.min = 55;
+  valueAxisY.max = 100;
+
+  let range = valueAxisX.axisRanges.create();
+  range.value = 38;
+  range.endValue = 58;
+  range.axisFill.fill = am4core.color("#2b8cbe");
+  range.axisFill.fillOpacity = 0.4
+  range.grid.disabled = true;
+
+  let outer_range_l = valueAxisX.axisRanges.create();
+  outer_range_l.value = 28;
+  outer_range_l.endValue = 38;
+  outer_range_l.axisFill.fill = am4core.color("#a6bddb");
+  outer_range_l.axisFill.fillOpacity = 0.4
+  outer_range_l.grid.disabled = true;
+
+  let outer_range_r = valueAxisX.axisRanges.create();
+  outer_range_r.value = 58;
+  outer_range_r.endValue = 68;
+  outer_range_r.axisFill.fill = am4core.color("#a6bddb");
+  outer_range_r.axisFill.fillOpacity = 0.4
+  outer_range_r.grid.disabled = true;
+
+  let farouter_range_l = valueAxisX.axisRanges.create();
+  farouter_range_l.value = 0;
+  farouter_range_l.endValue = 28;
+  farouter_range_l.axisFill.fill = am4core.color("#ece7f2");
+  farouter_range_l.axisFill.fillOpacity = 0.4
+  farouter_range_l.grid.disabled = true;
+
+  let farouter_range_r = valueAxisX.axisRanges.create();
+  farouter_range_r.value = 58;
+  farouter_range_r.endValue = 100;
+  farouter_range_r.axisFill.fill = am4core.color("#ece7f2");
+  farouter_range_r.axisFill.fillOpacity = 0.4
+  farouter_range_r.grid.disabled = true;
+
+  // Function used to toggle datasets and adjust settings
+  function selectDataset(subject) {
+   chart.data = data[subject];
+
+   if (subject == "ENGTECH") {
+
+     // Settings for colouring the background ranges
+     range.value = 38;
+     range.endValue = 58;
+
+     outer_range_l.value = 28;
+     outer_range_l.endValue = 38;
+     outer_range_r.value = 58;
+     outer_range_r.endValue = 68;
+
+     farouter_range_l.value = 0;
+     farouter_range_l.endValue = 28;
+     farouter_range_r.value = 58;
+     farouter_range_r.endValue = 100;
+
+
+     // Adapter functions used to customize McMaster bullets
+     bullet.adapter.add("fillOpacity", function(fillOpacity, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueX == 48){
+            fillOpacity = 1;
+            return fillOpacity;
+          }
+          else {
+            fillOpacity = 0.5;
+            return fillOpacity;
+          }
+        }
+     });
+
+     /*
+     bullet.adapter.add("radius", function(radius, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueX == 48) {
+            radius = 20;
+            return radius;
+          }
+          else {
+            radius = 10;
+            return radius;
+          }
+        }
+     });
+     */
+
+   }
+
+   if (subject == "CHEMICAL") {
+     range.value = 30;
+     range.endValue = 50;
+
+     outer_range_l.value = 20;
+     outer_range_l.endValue = 30;
+     outer_range_r.value = 50;
+     outer_range_r.endValue = 60;
+
+     farouter_range_l.value = 0;
+     farouter_range_l.endValue = 20;
+     farouter_range_r.value = 60;
+     farouter_range_r.endValue = 100;
+
+     // Adapter functions used to customize specific bullets
+     bullet.adapter.add("fillOpacity", function(fillOpacity, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueX == 40){
+            fillOpacity = 1;
+            return fillOpacity;
+          }
+          else {
+            fillOpacity = 0.5;
+            return fillOpacity;
+          }
+        }
+     });
+     /*
+     bullet.adapter.add("radius", function(radius, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueX == 40) {
+            radius = 20;
+            return radius;
+          }
+          else {
+            radius = 10;
+            return radius;
+          }
+        }
+     });
+     */
+
+
+   }
+   if (subject == "CIVIL") {
+     range.value = 34;
+     range.endValue = 54;
+
+     outer_range_l.value = 24;
+     outer_range_l.endValue = 34;
+     outer_range_r.value = 54;
+     outer_range_r.endValue = 64;
+
+     farouter_range_l.value = 0;
+     farouter_range_l.endValue = 34;
+     farouter_range_r.value = 64;
+     farouter_range_r.endValue = 100;
+
+     // Adapter functions used to customize specific bullets
+     bullet.adapter.add("fillOpacity", function(fillOpacity, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueX == 44) {
+            fillOpacity = 1;
+            return fillOpacity;
+          }
+          else {
+            fillOpacity = 0.5
+            return fillOpacity;
+          }
+        }
+     });
+     /*
+     bullet.adapter.add("radius", function(radius, target) {
+        if (target.dataItem) {
+          if (target.dataItem.valueX == 44) {
+            radius = 20;
+            return radius;
+          }
+          else {
+            radius = 10;
+            return radius;
+          }
+        }
+     });
+     */
+   }
+  }
+
+  var series = chart.series.push(new am4charts.LineSeries());
+  series.dataFields.valueX = "2019_inst_num";
+  series.dataFields.valueY = "2019_overall";
+  series.dataFields.value = "2019_acad_rep";
+  series.strokeOpacity = 0;
+  series.sequencedInterpolation = true;
+  series.tooltip.pointerOrientation = "vertical";
+
+  // --------------------------------------
+  // Example of native amcharts button!
+  /*let button = chart.chartContainer.createChild(am4core.Button);
+  button.label.text = "...";
+  button.padding(5, 5, 5, 5);
+  button.width = 20;
+  button.align = "right";
+  button.marginRight = 15;
+  button.events.on("hit", function() {
+    button.width = 60;
+  });*/
+  // --------------------------------------
+
+  var bullet = series.bullets.push(new am4core.Circle());
+  bullet.fill = am4core.color("#ff0000");
+  bullet.propertyFields.fill = "colour";
+  bullet.strokeOpacity = 0;
+  bullet.strokeWidth = 2;
+  bullet.fillOpacity = 0.5;
+  bullet.stroke = am4core.color("#ffffff");
+  bullet.hiddenState.properties.opacity = 0;
+  bullet.tooltipText = "[bold]{institution}[/]\nNorth America Rank: {2019_na_rank}\n\nOverall: {2019_overall}\n----------------\nAcademic Reputation: {2019_acad_rep}\nEmployer Reputation: {2019_emp_rep}\nCitations per Paper: {2019_cpp}\nH-Index: {2019_hindex}";
+  //bullet.width = 20;
+  //bullet.height = 20;
+
+  // Function used to toggle value field and adjust settings
+  function selectValue() {
+    var activediv = document.getElementsByClassName("yearbox active")[0].children[0].children[1].value;
+    var value = document.getElementsByClassName("valuebox active")[0].children[0].children[1].value;
+    var year_sizeVal = activediv.concat(value);
+    var year_valueX = activediv.concat("inst_num");
+    var year_valueY = activediv.concat("overall");
+    var year_rank = activediv.concat("na_rank");
+    var year_acadrep = activediv.concat("acad_rep");
+    var year_emprep = activediv.concat("emp_rep");
+    var year_cpp = activediv.concat("cpp");
+    var year_hindex = activediv.concat("hindex");
+    series.dataFields.valueX = year_valueX;
+    series.dataFields.valueY = year_valueY;
+    series.dataFields.value = year_sizeVal;
+    bullet.tooltipText = "[bold]{institution}[/]\nNorth America Rank: {"+year_rank+"}\n\nOverall: {"+year_valueY+"}\n----------------\nAcademic Reputation: {"+year_acadrep+"}\nEmployer Reputation: {"+year_emprep+"}\nCitations per Paper: {"+year_cpp+"}\nH-Index: {"+year_hindex+"}";
+    chart.invalidateData();
+  }
+
+  // *** THIS SECTION IS USED TO HIGHLIGHT RANGES WITHIN THE CHART ***
+  var outline = chart.plotContainer.createChild(am4core.Circle);
+  outline.fillOpacity = 0;
+  outline.strokeOpacity = 0.8;
+  outline.stroke = am4core.color("#ff0000");
+  outline.strokeWidth = 2;
+  outline.hide(0);
+
+  var blurFilter = new am4core.BlurFilter();
+  outline.filters.push(blurFilter);
+
+  bullet.events.on("over", function(event) {
+      var target = event.target;
+      chart.cursor.triggerMove({ x: target.pixelX, y: target.pixelY }, "hard");
+      chart.cursor.lineX.y = target.pixelY;
+      chart.cursor.lineY.x = target.pixelX - chart.plotContainer.pixelWidth;
+      valueAxisX.tooltip.disabled = true;
+      valueAxisY.tooltip.disabled = true;
+
+      outline.radius = target.pixelRadius + 2;
+      outline.x = target.pixelX;
+      outline.y = target.pixelY;
+      outline.show();
+
+  })
+
+  bullet.events.on("out", function(event) {
+      chart.cursor.triggerMove(event.pointer.point, "none");
+      chart.cursor.lineX.y = 0;
+      chart.cursor.lineY.x = 0;
+      valueAxisX.tooltip.disabled = true;
+      valueAxisY.tooltip.disabled = true;
+      outline.hide();
+
+  })
+
+  //var hoverState = bullet.states.create("hover");
+  //hoverState.properties.fillOpacity = 1;
+  //hoverState.properties.strokeOpacity = 1;
+/*
+  // Adapter functions used to customize specific bullets
+  bullet.adapter.add("fillOpacity", function(fillOpacity, target) {
+     if (target.dataItem) {
+       if (target.dataItem.valueX == 48){
+         fillOpacity = 1;
+         return fillOpacity;
+       }
+       else {
+         fillOpacity = 0.5;
+         return fillOpacity;
+       }
+     }
+  });
+  bullet.adapter.add("radius", function(radius, target) {
+     if (target.dataItem) {
+       if (target.dataItem.valueX == 48) {
+         radius = 20;
+         return radius;
+       }
+       else {
+         radius = 10;
+         return radius;
+       }
+     }
+  });
+*/
+  series.heatRules.push({ target: bullet, min: 2, max: 20, property: "radius" });
+
+  // ***************************************************
+
+</script>
+
+</body>
+</html>
