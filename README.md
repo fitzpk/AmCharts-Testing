@@ -21,4 +21,4 @@
 
 <a href="https://fitzpk.github.io/Repo-2/dynamic_combo.html">Dynamic Combo Chart</a>
 
-<a href="https://fitzpk.github.io/Repo-2/dynamic_combo.html">Multi-Filter Example</a>
+<a href="https://fitzpk.github.io/Repo-2/multi-filter.html">Multi-Filter Example</a>
